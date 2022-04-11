@@ -15,12 +15,24 @@
 
 #ifndef __strbuf_include__
 #define __strbuf_include__
+#include <stddef.h>
+
 
 class Stringbuffer {
-private:
+protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
+	char buffer[16];
+	size_t size = sizeof(buffer);
+	char* buf_end;
+
 /* Add your code here */ 
+public:
+	Stringbuffer();
+
+	void put (char c);
+
+	virtual void flush() = 0;
 };
 
 #endif
