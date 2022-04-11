@@ -23,11 +23,11 @@ Stringbuffer::Stringbuffer() {
 
 void Stringbuffer::put(char c) {
     if(buf_end >= buffer + size){
-        Stringbuffer::flush();
+//        Stringbuffer::flush();
         buf_end = buffer;
     }
 
     *buf_end = c;
-    buf_end++;
+    ++buf_end;
 }
 

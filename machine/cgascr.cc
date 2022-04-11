@@ -11,11 +11,21 @@
 /*****************************************************************************/
 
 #include "machine/cgascr.h"
+#include "machine/io_port.h"
 
 /* Add your code here */ 
 /* PRIVATE METHODS */
-char* get_addr(int x, int y) {
+char* CGA_Screen::get_addr(int x, int y) {
     return (char *)CGA_START + 2 * (x + y * 80);
+}
+
+void copy(char *desti) {
+    char *tmp = desti;
+    while(desti <= tmp + 158) {
+        *desti = *(desti + 160);
+        *(desti + 1) = *(desti + 161);
+        desti += 2; 
+    }
 }
 
 /* PUBLIC METHODS */
@@ -27,14 +37,56 @@ void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
 }
 
 void CGA_Screen::setpos(int x, int y) {
-    cur_x = x;
-    cur_y = y;
+    IO_Port index(INDEXREGITSER);
+    IO_Port data(DATAREGISTER);
+
+    Cursor cur;
+    cur.high_reg = x + y * 80;
+    index.outb(14);
+    data.outb(cur.high_reg);
+    index.outb(15);
+    data.outb(cur.high_reg + 1);
 }
 
 void CGA_Screen::getpos(int &x, int &y) {
-    x = cur_x;
-    y = cur_y;
+    IO_Port index(INDEXREGITSER);
+    IO_Port data(DATAREGISTER);
+
+    Cursor cur;
+    index.outb(15);
+    cur.low_reg = data.inb();
+    index.outb(14);
+    cur.high_reg = data.inb();
+
+    x = cur.high_reg % 80;
+    y = cur.high_reg / 80;
 }
 
-void CGA_Screen::print(char* text, int length, unsigned char attrib) {}
+void CGA_Screen::print(char* text, int length, unsigned char attrib) {
+    int x, y;
+    getpos(x, y);
+    for(int i = 0; i < length; ++i)
+	{
+		if(x > 79) {
+			x =  0;
+			if(y == 24)
+				scroll();
+		 	else
+				++y;
+		}
+		show(x, y, text[i], attrib);
+		++x;
+	}
+	setpos(x,y);
+}
+
+void CGA_Screen::scroll() {
+    for(int i = 0; i < 24; ++i){
+        copy((char *)CGA_START + i * 160);
+    }
+    for(int i = 0; i<80; i++){
+		*((char *)CGA_START + 24*160+i*2) = ' ';
+	}
+
+}
 

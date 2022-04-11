@@ -16,6 +16,10 @@
 #include "machine/io_port.h"
 
 #define CGA_START 0xb8000
+
+#define INDEXREGITSER 0x3d4
+#define DATAREGISTER 0x3d5
+
 #define BLACK 0x00
 #define BLUE 0x01
 #define GREEN 0x02
@@ -37,13 +41,13 @@ class CGA_Screen {
 private:
 /* Add your code here */ 
 	unsigned char attrib;
-	int cur_x, cur_y;
 	char *pos;
 	
 	char* get_posion(int x, int y);
 	void set_attrib();
+	char* get_addr(int x, int y);
 
-//	CGA_Screen(const CGA_Screen &copy); // prevent copying
+	CGA_Screen(const CGA_Screen &copy); // prevent copying
 public:
 	CGA_Screen() {}
 /* Add your code here */ 
@@ -55,10 +59,17 @@ public:
 
 	void print (char* text, int length, unsigned char attrib);
 
+	void scroll();
 
 /* Add your code here */ 
 };
 
 /* Add your code here */ 
+struct Cursor
+{
+	char high_reg;
+	char low_reg;
+};
+
 
 #endif
