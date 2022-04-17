@@ -4,30 +4,61 @@
 #include "object/o_stream.h"
 
 
-int main()
-{
-/* Add your code here */ 
 CGA_Screen scr;
-scr.show(0, 0, 'q', 0x0f);
-
 CGA_Stream kout;
 
-int a = 2147483647;
+void test_PrintAChar() {
+	char c = 'a';
+	scr.print(&c, 1, WHITE);
+}
 
-kout << "a = " << dec << a << " ist hexadezimal " << hex << a << endl;
+void test_PrintString() {
+	char* text = "in order to test the print funktion, i must write a sentence with more than 80 characters, and now i think that's enough.";
+	scr.print(text, 119, WHITE);
 
-int b = -1;
+}
 
-kout << "b = " << oct << b << " ist hexadezimal " << hex << b << endl;
+void test_SetCursor() {
+	scr.setpos(0, 4);
+}
 
-kout.flush();
+void test_blick() {
+	scr.show(0,0,'a',WHITE);
+}
 
+void test_StrBuf() {
+	int a = 7;
+	kout << "a = " << bin << a;
+	scr.print(kout.buffer,65, WHITE);
+}
 
-char* text = "abcdefghijklmnopqrstuvwxyz";
+void test_O_Stream() {
+	unsigned short unsign = 65535;
 
-//scr.print(text, 27, 0x0f);
+	kout << "unsigned number: (bin)" << bin << unsign << endl;
+	kout << "(oct)" << oct << unsign << endl;
+	kout << "(dec)" << dec << unsign << endl;
+	// // scr.print(kout.buffer,3, WHITE);
+	// kout << 'a' << endl;
+	// kout << "(hex)" << hex << unsign << endl;
+}
 
+void test_signedNumber() {
+	signed long a = -1;
+
+	kout << "a = " << oct << a << endl;
+}
+
+int main()
+{
+	// test_SetCursor();
+	//test_PrintString();
+	// test_PrintAChar();
+	// test_StrBuf();
+	test_O_Stream();
+	// test_signedNumber();
 
 
 	return 0;
 }
+

@@ -21,28 +21,28 @@ void CGA_Stream::flush()
 	char* pointer=buffer;
 	int x,y;
 	char out;
-	while(start != buf_end)
+	while(pointer < buf_end)
 	{
-		out = *start; 	
+		out = *pointer; 	
 
 		if(out == '\n')
 		{
-			print(pointer,start - pointer,WHITE);
+			print(start,pointer - start,WHITE);
 			getpos(x,y);
 			x = 0;
-			y++;
-			if(y>24)
+			++ y;
+			if(y > 24)
 			{
 				y = 24;
 				scroll();
 			}
 			setpos(x,y);
-			pointer = start;
+			start = pointer;
 		}
-
-		start++;	
+		++ pointer;	
 	}
-	if(out != '\n')
-		print(pointer,(buf_end - pointer),WHITE);
+	if(out != '\n') {
+		print(start,buf_end - start,WHITE);
+	}
 	buf_end = buffer;
 }

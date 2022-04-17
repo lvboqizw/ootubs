@@ -29,10 +29,11 @@ private:
 
 
 public:
-	O_Stream() {};
-
 	enum Base {BIN=2, OCT=8, DEC=10, HEX=16};
 	Base b = DEC;
+	
+	O_Stream() {};
+
 
 	O_Stream& operator << (unsigned char c);
 	O_Stream& operator << (char c);

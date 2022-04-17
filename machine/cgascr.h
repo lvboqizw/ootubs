@@ -70,6 +70,7 @@ public:
 // The high_reg is the 14. register and the low is pointed to the 15. register
 struct Cursor
 {
+	unsigned short position;
 	char high_reg;
 	char low_reg;
 };

@@ -37,7 +37,7 @@ CGA_Screen::CGA_Screen() {
             show(x,y,' ',15);
         }
     }
-	setpos(0,0);
+    setpos(0,0);
 }
 
 void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
@@ -51,11 +51,11 @@ void CGA_Screen::setpos(int x, int y) {
     IO_Port data(DATAREGISTER);
 
     Cursor cur;
-    cur.high_reg = x + y * 80;
+    cur.position = x + y * 80;
     index.outb(14);
-    data.outb(cur.high_reg);
+    data.outb((cur.position >> 8) & 0xff);
     index.outb(15);
-    data.outb(cur.high_reg + 1);
+    data.outb(cur.position & 0xff);
 }
 
 void CGA_Screen::getpos(int &x, int &y) {
@@ -68,8 +68,9 @@ void CGA_Screen::getpos(int &x, int &y) {
     index.outb(14);
     cur.high_reg = data.inb();
 
-    x = cur.high_reg % 80;
-    y = cur.high_reg / 80;
+    cur.position = (cur.high_reg << 8) | cur.low_reg;
+    x = cur.position % 80;
+    y = cur.position / 80;
 }
 
 void CGA_Screen::print(char* text, int length, unsigned char attrib) {

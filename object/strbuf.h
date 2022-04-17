@@ -15,19 +15,21 @@
 
 #ifndef __strbuf_include__
 #define __strbuf_include__
-#include <stddef.h>
+
 
 
 class Stringbuffer {
 protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
-	char buffer[66];
-	size_t size = sizeof(buffer);
+
+	int size = 65;
 	char* buf_end;
 
 /* Add your code here */ 
 public:
+	char buffer[65];
+
 	Stringbuffer();
 
 	void put (char c);

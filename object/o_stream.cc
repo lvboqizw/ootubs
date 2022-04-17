@@ -19,60 +19,62 @@
 #include "object/o_stream.h"
 
 
-int ulong_to_char_stack(unsigned long n, char* stack, int base)
-{
+int ulong_to_char_stack(unsigned long n, char* tra_stack, int base) {
 	char characters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-	int i = 66; 
+	int i = 64; 
 	do
 	{
 		int reminder = n%base;
 		n /= base;
-		stack[i] = (characters[reminder]); 
+		tra_stack[i] = (characters[reminder]); 
 		--i;
 	} while(n > 0);
 	if(base == 16) {
-		stack[i] = 'x';
+		tra_stack[i] = 'x';
 		--i;
 	}
 	if(base == 8 or base == 16) {
-		stack[i] = '0';
+		tra_stack[i] = '0';
 		--i;
 	}
 	if(base == 2) {
-		stack[i] = 'b';
+		tra_stack[i] = 'b';
 		--i;
 	}
 	return i;
 }
 
+int long_to_char_stack(signed long n, char* tra_stack, int base){
+	int i;
+	if (n >= 0) {
+		i = ulong_to_char_stack(n, tra_stack, base);
+	} else {
+		n = 0 - n;
+		int tmp = ~n;
+		++ tmp;
+		i = ulong_to_char_stack(tmp, tra_stack, base);
+	}
+}
 
 O_Stream& O_Stream::operator << (unsigned long n) {
-    char stack[65];
+	char stack[65];
     int i = ulong_to_char_stack(n,stack, this->b);
 
-    for (int j = i+1; j < 66; ++ j) {
+    for (int j = i + 1; j < 65; ++ j) {
         this -> put(stack[j]);
     }
 
     return *this;
 }
 
-O_Stream& O_Stream::operator << (long n) 
-{
-	char stack[66];
-	int i = ulong_to_char_stack((unsigned long) n, stack, this->b);
+O_Stream& O_Stream::operator << (long n) {
+	char stack[65];
+	int i = long_to_char_stack(n, stack, this-> b);
 
-	if(n < 0)
-	{
-		stack[i]='-';
-		--i;
-	}
-
-	for(int j = i+1; j < 66; ++j)
+	for(int j = i+1; j < 65; ++j)
 	{
 		this->put(stack[j]);
 	}
-
 	return *this;
 }
 
@@ -89,6 +91,7 @@ O_Stream& O_Stream::operator << (unsigned short n)
 {
 	return operator<<((unsigned long)n);
 }
+
 O_Stream& O_Stream::operator << (int n) 
 {
 	return operator<<((long)n);
