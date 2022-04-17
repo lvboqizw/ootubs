@@ -125,7 +125,7 @@ O_Stream& O_Stream::operator << (O_Stream& (*fkt) (O_Stream&)){
 	return fkt(*this);
 }
 
-O_Stream& end(O_Stream& stream) {
+O_Stream& endl(O_Stream& stream) {
     stream.put('\n');
     stream.flush();
     return stream;

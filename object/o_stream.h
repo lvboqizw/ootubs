@@ -49,8 +49,6 @@ public:
 	O_Stream& operator << (char* text);
 
 	O_Stream& operator << (O_Stream& (*fkt) (O_Stream&));
-
-	virtual void flush();
 };
 
 /*---------------------------------------------------------------------------*/
@@ -76,9 +74,9 @@ public:
 	O_Stream& oct(O_Stream& os);
 
 // DEC: selects the decimal number system
-	O_Stream& oct(O_Stream& os);
+	O_Stream& dec(O_Stream& os);
 
 // HEX: selects the hexadecimal number system
-	O_Stream& oct(O_Stream& os);
+	O_Stream& hex(O_Stream& os);
 
 #endif

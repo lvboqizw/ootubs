@@ -1,6 +1,7 @@
 
 #include "machine/cgascr.h"
 #include "device/cgastr.h"
+#include "object/o_stream.h"
 
 
 int main()
@@ -11,9 +12,15 @@ scr.show(0, 0, 'q', 0x0f);
 
 CGA_Stream kout;
 
-// kout << "a" << endl;
+int a = 2147483647;
 
-// kout.flush();
+kout << "a = " << dec << a << " ist hexadezimal " << hex << a << endl;
+
+int b = -1;
+
+kout << "b = " << oct << b << " ist hexadezimal " << hex << b << endl;
+
+kout.flush();
 
 
 char* text = "abcdefghijklmnopqrstuvwxyz";
