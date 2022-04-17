@@ -22,7 +22,7 @@ class Stringbuffer {
 protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
-	char buffer[16];
+	char buffer[66];
 	size_t size = sizeof(buffer);
 	char* buf_end;
 

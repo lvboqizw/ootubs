@@ -13,4 +13,45 @@
 
 #include "device/cgastr.h"
 
-/* Add your code here */ 
+
+CGA_Stream::CGA_Stream()
+{
+	for(int y=0; y<25; ++y)
+	for(int x=0; x<80; ++x)
+		show(x,y,' ',15);
+
+	setpos(0,0);
+}
+
+
+void CGA_Stream::flush()
+{
+	char* start=buffer;
+	char* pointer=buffer;
+	int x,y;
+	char out;
+	while(start != buf_end)
+	{
+		out = *start; 	
+
+		if(out == '\n')
+		{
+			print(pointer,start - pointer,WHITE);
+			getpos(x,y);
+			x = 0;
+			y++;
+			if(y>24)
+			{
+				y = 24;
+				scroll();
+			}
+			setpos(x,y);
+			pointer = start;
+		}
+
+		start++;	
+	}
+	if(out != '\n')
+		print(pointer,(buf_end - pointer),WHITE);
+	buf_end = buffer;
+}
