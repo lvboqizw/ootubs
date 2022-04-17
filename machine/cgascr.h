@@ -49,7 +49,7 @@ private:
 
 	CGA_Screen(const CGA_Screen &copy); // prevent copying
 public:
-	CGA_Screen() {};
+	CGA_Screen();
 	// show a character on the screen
 	void show(int x, int y, char c, unsigned char attrib);
 	

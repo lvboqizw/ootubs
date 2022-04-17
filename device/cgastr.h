@@ -24,7 +24,7 @@ private:
       CGA_Stream(CGA_Stream &copy); // prevent copying
 
 public:
-      CGA_Stream();
+      CGA_Stream() {};
 
       void flush();
 };

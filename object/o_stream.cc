@@ -17,7 +17,6 @@
 /*****************************************************************************/
 
 #include "object/o_stream.h"
-#include "machine/cgascr.h"
 
 
 int ulong_to_char_stack(unsigned long n, char* stack, int base)
