@@ -54,6 +54,7 @@ int long_to_char_stack(signed long n, char* tra_stack, int base){
 		++ tmp;
 		i = ulong_to_char_stack(tmp, tra_stack, base);
 	}
+	return i;
 }
 
 O_Stream& O_Stream::operator << (unsigned long n) {

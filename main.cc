@@ -28,35 +28,46 @@ void test_blick() {
 
 void test_StrBuf() {
 	int a = 7;
-	kout << "a = " << bin << a;
-	scr.print(kout.buffer,65, WHITE);
+	kout << "a = " << a << endl;
+	// scr.print(kout.buffer,65, WHITE);
+	// kout << endl;
+	int x,y;
+	scr.getpos(x, y);
+	scr.show(x, y,'c',WHITE);
+	//scr.print(kout.buffer,65, WHITE);
 }
 
 void test_O_Stream() {
 	unsigned short unsign = 65535;
 
-	kout << "unsigned number: (bin)" << bin << unsign << endl;
-	kout << "(oct)" << oct << unsign << endl;
-	kout << "(dec)" << dec << unsign << endl;
+	// kout << "(oct)" << oct << unsign << endl;
+	// kout << "(dec)" << dec << unsign << endl;
 	// // scr.print(kout.buffer,3, WHITE);
-	// kout << 'a' << endl;
+	kout << "unsigned number: (bin)" << bin << unsign << endl;
+	//	scr.print(kout.buffer,65, WHITE);
+	kout << "(bin)" << bin << unsign << endl;
+	// 	scr.print(kout.buffer,3, WHITE);
+	// kout << "unsigned" << bin << unsign << endl;
+	// 	scr.print(kout.buffer,3, WHITE);
 	// kout << "(hex)" << hex << unsign << endl;
 }
 
 void test_signedNumber() {
-	signed long a = -1;
+	int a = -1;
 
-	kout << "a = " << oct << a << endl;
+	kout << "a = " << hex << a << endl;
 }
 
 int main()
 {
-	// test_SetCursor();
-	//test_PrintString();
-	// test_PrintAChar();
+	test_SetCursor();
+	// test_PrintString();
+	test_PrintAChar();
 	// test_StrBuf();
-	test_O_Stream();
+	// test_O_Stream();
+	// test_SetCursor();
 	// test_signedNumber();
+
 
 
 	return 0;
