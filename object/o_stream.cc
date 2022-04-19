@@ -33,6 +33,10 @@ int ulong_to_char_stack(unsigned long n, char* tra_stack, int base) {
 		tra_stack[i] = 'x';
 		--i;
 	}
+	if(base == 8) {
+		tra_stack[i] = 'o';
+		--i;
+	}
 	if(base == 8 or base == 16) {
 		tra_stack[i] = '0';
 		--i;
@@ -44,15 +48,14 @@ int ulong_to_char_stack(unsigned long n, char* tra_stack, int base) {
 	return i;
 }
 
-int long_to_char_stack(signed long n, char* tra_stack, int base){
+int long_to_char_stack(long n, char* tra_stack, int base){
 	int i;
 	if (n >= 0) {
-		i = ulong_to_char_stack(n, tra_stack, base);
+		i = ulong_to_char_stack((unsigned long)n, tra_stack, base);
 	} else {
-		n = 0 - n;
-		int tmp = ~n;
-		++ tmp;
-		i = ulong_to_char_stack(tmp, tra_stack, base);
+		// int tmp = -n;
+		n = -n;
+		i = ulong_to_char_stack((unsigned long)n, tra_stack, base);
 	}
 	return i;
 }
@@ -72,6 +75,10 @@ O_Stream& O_Stream::operator << (long n) {
 	char stack[65];
 	int i = long_to_char_stack(n, stack, this-> b);
 
+	if(n < 0) {
+		this-> put('-');
+	}
+
 	for(int j = i+1; j < 65; ++j)
 	{
 		this->put(stack[j]);
@@ -79,33 +86,29 @@ O_Stream& O_Stream::operator << (long n) {
 	return *this;
 }
 
+O_Stream& O_Stream::operator << (short n) {
+	return operator<<((long) n);
+}
+
+O_Stream& O_Stream::operator << (unsigned short n) {
+	return operator<<((unsigned long) n);
+}
+
+O_Stream& O_Stream::operator << (int n) {
+	return operator<<((long) n);
+}
+
+O_Stream& O_Stream::operator << (unsigned int n) {
+	return operator<<((unsigned long)n);
+}
+
+O_Stream& O_Stream::operator << (unsigned char n) {
+	return operator<<((unsigned long)n);
+}
+
 O_Stream& O_Stream::operator << (char c) {
     this->put(c);
     return *this;
-}
-
-O_Stream& O_Stream::operator << (short n) {
-	return operator<<((long)n);
-}
-
-O_Stream& O_Stream::operator << (unsigned short n) 
-{
-	return operator<<((unsigned long)n);
-}
-
-O_Stream& O_Stream::operator << (int n) 
-{
-	return operator<<((long)n);
-}
-
-O_Stream& O_Stream::operator << (unsigned int n) 
-{
-	return operator<<((unsigned long)n);
-}
-
-O_Stream& O_Stream::operator << (unsigned char n) 
-{
-	return operator<<((unsigned long)n);
 }
 
 O_Stream& O_Stream::operator << (void* pointer){

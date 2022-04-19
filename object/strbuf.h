@@ -22,13 +22,12 @@ class Stringbuffer {
 protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
-
-	int size = 65;
-	char* buf_end;
+	int size = 70;
+	char* buf_end;                   // point to the position after the last cahracter in the buffer
 
 /* Add your code here */ 
 public:
-	char buffer[65];
+	char buffer[70];
 
 	Stringbuffer();
 

@@ -15,19 +15,16 @@
 
 
 
-void CGA_Stream::flush()
-{
-	char* start=buffer;
-	char* pointer=buffer;
+void CGA_Stream::flush() {
+	char* pointer=buffer;		// pointer point at the right now readed character
+	char* flag=buffer;   		// flag point at the begin of the buffer
 	int x,y;
 	char out;
-	while(pointer < buf_end)
-	{
-		out = *pointer; 	
+	while(pointer != buf_end) {
+		out = *pointer; 
 
-		if(out == '\n')
-		{
-			print(start,pointer - start,WHITE);
+		if(out == '\n') {       // if get the '\n', set the cursor at the beginning of the line bellow
+			print(flag, pointer - flag, WHITE);
 			getpos(x,y);
 			x = 0;
 			++ y;
@@ -37,12 +34,11 @@ void CGA_Stream::flush()
 				scroll();
 			}
 			setpos(x,y);
-			start = pointer;
+			flag = pointer;
 		}
 		++ pointer;	
 	}
-	if(out != '\n') {
-		print(start,buf_end - start,WHITE);
-	}
+	if(out != '\n')
+		print(flag,(buf_end - flag),WHITE);
 	buf_end = buffer;
 }
