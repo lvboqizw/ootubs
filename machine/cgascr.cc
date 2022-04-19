@@ -17,16 +17,7 @@
 
 // Calculate the address of the cursor
 char* CGA_Screen::get_addr(int x, int y) {
-    return (char *)CGA_START + 2 * (x + y * 80);
-}
-
-void copy(char *desti) {
-    char *tmp = desti;
-    while(desti <= tmp + 158) {
-        *desti = *(desti + 160);
-        *(desti + 1) = *(desti + 161);
-        desti += 2; 
-    }
+    return (char *)CGA_START + 2 * (x + y * ROW);
 }
 
 /* PUBLIC METHODS */
@@ -42,11 +33,11 @@ void CGA_Screen::setpos(int x, int y) {
     IO_Port data(DATAREGISTER);
 
     Cursor cur;
-    cur.position = x + y * 80;
+    cur.position = x + y * ROW;
     index.outb(14);
-    data.outb((cur.position >> 8) & 0xff);
+    data.outb((unsigned char)(cur.position >> 8) & 0xff);
     index.outb(15);
-    data.outb(cur.position & 0xff);
+    data.outb((unsigned char) cur.position & 0xff);
 }
 
 void CGA_Screen::getpos(int &x, int &y) {
@@ -69,28 +60,57 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
     getpos(x, y);
     for(int i = 0; i < length; ++i)
 	{
-		if(x > 79 || text[i] == '\n') {
-			x = 0;
-			if(y == 24)
-				scroll();
-		 	else
-				++y;
-		}
-        if(text[i] != '\n') {
-		    show(x, y, text[i], attrib);
-            ++ x;
+        if(text[i] == '\n'){
+            x = 0;
+            if(y >= COLUMN) {
+                scroll();
+            } else {
+                ++y;
+            }
+        } else {
+            if(x >= ROW) {
+                x = 0;
+                if(y >= COLUMN) {
+                    y = COLUMN - 1;
+                    scroll();
+                }else {
+                    ++y;
+                }
+            }
+            show(x, y, text[i], attrib);
+            ++x;
         }
+		// if(x > 79 || text[i] == '\n') {
+		// 	x = 0;
+		// 	if(y == 24)
+		// 		scroll();
+		//  	else
+		// 		++y;
+		// }
+        // if(text[i] != '\n') {
+		//     show(x, y, text[i], attrib);
+        //     ++ x;
+        // }
 	}
 	setpos(x,y);
 }
 
 void CGA_Screen::scroll() {
-    for(int i = 0; i < 24; ++i){
-        copy((char *)CGA_START + i * 160);
+    int y = COLUMN - 1;
+    for(int j = 1; j < COLUMN - 1; ++j) {
+        copy_to_pre_line(j);
     }
-    for(int i = 0; i<80; i++){
-		*((char *)CGA_START + 24*160+i*2) = ' ';
-	}
+    for(int i = 0; i < ROW; ++i) {
+        show(i, y, ' ', WHITE);
+    }
+    setpos(0, y);
+}
 
+void CGA_Screen::copy_to_pre_line(int j) {
+    char* this_line = get_addr(0, j);
+    char* pre_line = get_addr(0, j-1);
+    for(int i = 0; i < ROW ; ++i) {
+        *(pre_line + i*2) = *(this_line + i*2);
+    }
 }
 

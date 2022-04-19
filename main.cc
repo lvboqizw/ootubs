@@ -13,16 +13,18 @@ void test_PrintAChar() {
 }
 
 void test_PrintString() {
-	char text[] = "in order to test the print funktion, i must write a sentence with more than 80 characters.\nAnd now i think that's enough.\n";
-	char text1[] = "the third line\n";
-	scr.print(text, sizeof(text)/sizeof(char), WHITE);
-	scr.print(text1, sizeof(text1)/sizeof(char), BLUE);
+	char long_text[] = "Wait for control to return from inferior to debugger. If inferior gets a signal, we may decide to start it up again instead of returning. That is why there is a loop in this function. When this function actually returns it means the inferior should be left stopped and GDB should read more commands\n";
+   	char eighty_text[] = "one two three four five six seven eight nine ten eleven twelf thirteen fourteen.";
+	char sev_nine[] = "one two three four five six seven eight nine ten eleven twelf thirteen fourtee";
+	// scr.print(long_text, sizeof(long_text)/sizeof(char), WHITE);
+	// scr.print(eighty_text, sizeof(eighty_text)/sizeof(char), RED);
+	scr.print(sev_nine, sizeof(sev_nine)/sizeof(char), WHITE);
 	// scr.print(text, sizeof(text)/sizeof(char), WHITE);
 	// scr.print(text, sizeof(text)/sizeof(char), BLUE);
 }
 
 void test_SetCursor() {
-	scr.setpos(0, 4);
+	scr.setpos(0, 24);
 }
 
 void test_blick() {
@@ -44,12 +46,12 @@ void test_signedNumber() {
 
 int main()
 {
-	test_PrintString();
 	// test_PrintAChar();
 	// test_O_Stream();
-	// test_SetCursor();
+	test_SetCursor();
+	test_PrintString();
+	// scr.scroll();
 	// test_signedNumber();
 
 	return 0;
 }
-

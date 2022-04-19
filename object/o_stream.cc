@@ -53,7 +53,6 @@ int long_to_char_stack(long n, char* tra_stack, int base){
 	if (n >= 0) {
 		i = ulong_to_char_stack((unsigned long)n, tra_stack, base);
 	} else {
-		// int tmp = -n;
 		n = -n;
 		i = ulong_to_char_stack((unsigned long)n, tra_stack, base);
 	}

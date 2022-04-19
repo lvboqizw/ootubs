@@ -17,6 +17,9 @@
 
 #define CGA_START 0xb8000
 
+#define ROW 80
+#define COLUMN 25
+
 #define INDEXREGITSER 0x3d4
 #define DATAREGISTER 0x3d5
 
@@ -43,9 +46,8 @@ private:
 	unsigned char attrib;
 	char *pos;
 	
-	char* get_posion(int x, int y);
-	void set_attrib();
 	char* get_addr(int x, int y);
+	void copy_to_pre_line(int y);
 
 	CGA_Screen(const CGA_Screen &copy); // prevent copying
 public:
