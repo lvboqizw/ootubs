@@ -15,4 +15,18 @@
 
 #include "object/strbuf.h"
 
-/* Add your code here */ 
+
+Stringbuffer::Stringbuffer() {
+    buf_end = buffer;
+}
+
+void Stringbuffer::put(char c) {
+    if(buf_end >= buffer + size){
+        this->flush();
+        buf_end = buffer;
+    }
+
+    *buf_end = c;
+    ++buf_end;
+}
+
