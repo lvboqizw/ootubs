@@ -17,16 +17,15 @@
 
 
 Stringbuffer::Stringbuffer() {
-    buf_end = buffer;
+    capacity = 0;
 }
 
 void Stringbuffer::put(char c) {
-    if(buf_end >= buffer + size){
+    if(capacity >= size){
         this->flush();
-        buf_end = buffer;
+        capacity = 0;
     }
-
-    *buf_end = c;
-    ++buf_end;
+    buffer[capacity] = c;
+    ++ capacity;
 }
 

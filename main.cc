@@ -13,9 +13,12 @@ void test_PrintAChar() {
 }
 
 void test_PrintString() {
-	char* text = "in order to test the print funktion, i must write a sentence with more than 80 characters, and now i think that's enough.\n";
-	scr.print(text, 123, WHITE);
-
+	char text[] = "in order to test the print funktion, i must write a sentence with more than 80 characters.\nAnd now i think that's enough.\n";
+	char text1[] = "the third line\n";
+	scr.print(text, sizeof(text)/sizeof(char), WHITE);
+	scr.print(text1, sizeof(text1)/sizeof(char), BLUE);
+	// scr.print(text, sizeof(text)/sizeof(char), WHITE);
+	// scr.print(text, sizeof(text)/sizeof(char), BLUE);
 }
 
 void test_SetCursor() {
@@ -41,9 +44,9 @@ void test_signedNumber() {
 
 int main()
 {
-	// test_PrintString();
+	test_PrintString();
 	// test_PrintAChar();
-	test_O_Stream();
+	// test_O_Stream();
 	// test_SetCursor();
 	// test_signedNumber();
 

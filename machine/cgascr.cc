@@ -69,15 +69,17 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
     getpos(x, y);
     for(int i = 0; i < length; ++i)
 	{
-		if(x > 79) {
-			x =  0;
+		if(x > 79 || text[i] == '\n') {
+			x = 0;
 			if(y == 24)
 				scroll();
 		 	else
 				++y;
 		}
-		show(x, y, text[i], attrib);
-		++x;
+        if(text[i] != '\n') {
+		    show(x, y, text[i], attrib);
+            ++ x;
+        }
 	}
 	setpos(x,y);
 }

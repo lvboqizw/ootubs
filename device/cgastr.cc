@@ -23,29 +23,7 @@ CGA_Stream::CGA_Stream() {
 }
 
 void CGA_Stream::flush() {
-	char* pointer=buffer;		// pointer point at the right now readed character
-	char* flag=buffer;   		// flag point at the begin of the buffer
-	int x,y;
-	char out;
-	while(pointer != buf_end) {
-		out = *pointer; 
-
-		if(out == '\n') {       // if get the '\n', set the cursor at the beginning of the line bellow
-			print(flag, pointer - flag, WHITE);
-			getpos(x,y);
-			x = 0;
-			++ y;
-			if(y > 24)
-			{
-				y = 24;
-				scroll();
-			}
-			setpos(x,y);
-			flag = pointer;
-		}
-		++ pointer;	
-	}
-	if(out != '\n')
-		print(flag,(buf_end - flag),WHITE);
-	buf_end = buffer;
+	int x, y;
+	print(buffer, capacity, WHITE);
+	capacity = 0;
 }

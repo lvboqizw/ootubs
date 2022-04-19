@@ -23,7 +23,7 @@ protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
 	int size = 70;
-	char* buf_end;                   // point to the position after the last cahracter in the buffer
+	int capacity = 0;
 
 /* Add your code here */ 
 public:
