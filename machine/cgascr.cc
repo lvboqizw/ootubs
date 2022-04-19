@@ -31,15 +31,6 @@ void copy(char *desti) {
 
 /* PUBLIC METHODS */
 
-CGA_Screen::CGA_Screen() {
-    for(int y=0; y<25; ++y) {
-        for(int x=0; x<80; ++x) {
-            show(x,y,' ',15);
-        }
-    }
-    setpos(0,0);
-}
-
 void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
     pos = get_addr(x, y);
     *pos = c;

@@ -29,8 +29,8 @@ void test_blick() {
 void test_O_Stream() {
 	unsigned short unsign = 65535;
 	kout << "unsigned number : " << unsign << endl;
-	kout << "Bin of number: " << bin << unsign << endl;
-
+	kout << "Bin of the number: " << bin << unsign << endl;
+	kout << "Octal of the number: " << oct << unsign << endl;
 }
 
 void test_signedNumber() {
