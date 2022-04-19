@@ -53,17 +53,6 @@ Keyboard_Controller kc;
 // 	kout << "a = " << oct << a << endl;
 // }
 
-// void test_set_repeat_rate(){
-// 	int delay = 1, speed = 25;
-
-// 	kc.set_repeat_rate(speed,delay);
-// }
-
-// void test_key_hit(){
-// 	kout<<"please press a key"<<endl;
-// 	Key k = kc.key_hit();
-// 	kout<<k.valid()<<endl;
-// }
 
 void ktrl_test(){
 
@@ -76,16 +65,12 @@ void ktrl_test(){
 		if(key.valid()){
 			kout <<key.ascii()<< endl;
 		}
+		kout.flush();
 	}
-	kout.flush();
+	
 }
 
 
-// void test_set_led(){
-
-// 	kc.set_led(4, 1);
-
-// }
 int main()
 {
 	kout<<"funktioniert!"<<endl;
