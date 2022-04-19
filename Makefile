@@ -171,7 +171,7 @@ bootdisk: $(OBJDIR)/bootdisk.iso
 # 'qemu' runs the QEMU emulator with the system
 
 qemu: $(OBJDIR)/bootdisk.iso
-	$(QEMU) -drive file=build/bootdisk.iso,format=raw -k en-us -nographic
+	$(QEMU) -drive file=build/bootdisk.iso,format=raw -k en-us 
 
 # --------------------------------------------------------------------------
 # 'qemu-smp' runs QEMU in SMP (symmetric multi-processing) mode with 2 CPUs
@@ -185,7 +185,7 @@ qemu-smp: $(OBJDIR)/bootdisk.iso
 
 qemu-gdb: $(OBJDIR)/bootdisk.iso
 	$(VERBOSE) echo "target remote localhost:$(shell echo $$(( $$(id -u) % (65536 - 1024) + 1024 )))" > /tmp/gdbcommands.$(shell id -u)
-	$(QEMU) -drive file=build/bootdisk.iso,format=raw -k en-us -S -gdb -nographic tcp::$(shell echo $$(( $$(id -u) % (65536 - 1024) + 1024 )))
+	$(QEMU) -drive file=build/bootdisk.iso,format=raw -k en-us -S -gdb tcp::$(shell echo $$(( $$(id -u) % (65536 - 1024) + 1024 )))
 
 # --------------------------------------------------------------------------
 # 'gdb' starts the GDB debugger and makes it connect to an already started

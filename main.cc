@@ -3,17 +3,13 @@
 #include "device/cgastr.h"
 #include "object/o_stream.h"
 #include "machine/keyctrl.h"
+#include "machine/key.h"
 
 
 CGA_Screen scr;
 CGA_Stream kout;
 Keyboard_Controller kc;
 
-int main(){
-
-	kout<<"ok"<<endl;
-	return 0;
-}
 
 // void test_PrintAChar() {
 // 	char c = 'a';
@@ -69,25 +65,42 @@ int main(){
 // 	kout<<k.valid()<<endl;
 // }
 
+void ktrl_test(){
+
+	Keyboard_Controller kc;
+	Key key;
+
+	kc.set_repeat_rate(2,2);
+	while (true){
+		key=kc.key_hit();
+		if(key.valid()){
+			kout <<key.ascii()<< endl;
+		}
+	}
+	kout.flush();
+}
+
+
 // void test_set_led(){
 
 // 	kc.set_led(4, 1);
 
 // }
-// int main()
-// {
-// 	kout<<"funktioniert!"<<endl;
-// 	test_SetCursor();
-// 	test_PrintString();
-// 	test_PrintAChar();
-// 	test_StrBuf();
-// 	test_O_Stream();
-// 	test_signedNumber();
-// 	// test_key_hit();
-// 	// test_set_led();
-// 	// test_set_repeat_rate();
+int main()
+{
+	kout<<"funktioniert!"<<endl;
+	// test_SetCursor();
+	// test_PrintString();
+	// test_PrintAChar();
+	// test_StrBuf();
+	// test_O_Stream();
+	// test_signedNumber();
+	// // test_key_hit();
+	// // test_set_led();
+	// // test_set_repeat_rate();
+	ktrl_test();
 
 
-// 	return 0;
-// }
+	return 0;
+}
 
