@@ -60,25 +60,25 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
     getpos(x, y);
     for(int i = 0; i < length; ++i)
 	{
-        if(text[i] == '\n'){
-            x = 0;
-            if(y >= COLUMN) {
-                scroll();
+        if(text[i] == '\n'){        // check if the inputed character is '\n'?
+            x = 0;                  // get '\n', move the cursor to the beginning of the next line
+            if(y >= COLUMN) {       // is the cursor on the last line?
+                scroll();           // the cursor on the last line, scroll up the screen
             } else {
-                ++y;
+                ++y;                // not on the last line, add one to the y
             }
-        } else {
-            if(x >= ROW) {
-                x = 0;
-                if(y >= COLUMN) {
-                    y = COLUMN - 1;
-                    scroll();
+        } else {                    // get a character expect '\n'
+            if(x >= ROW) {          // is the cursor on the last position of a line?
+                x = 0;              // the cursor is on the last position of a line
+                if(y >= COLUMN) {   // is the cursor on the last line?
+                    y = COLUMN - 1; // the cursor is on the last line, set the y = 24(the last line)
+                    scroll();       // scroll up the screen
                 }else {
-                    ++y;
+                    ++y;            // the cursor is not on the last line, add one to the y
                 }
             }
-            show(x, y, text[i], attrib);
-            ++x;
+            show(x, y, text[i], attrib);    // show the character on the right now position
+            ++x;                            // move cursor to the next position
         }
 		// if(x > 79 || text[i] == '\n') {
 		// 	x = 0;
@@ -92,25 +92,25 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
         //     ++ x;
         // }
 	}
-	setpos(x,y);
+	setpos(x,y);                    // set the cursor position on the last
 }
 
 void CGA_Screen::scroll() {
-    int y = COLUMN - 1;
-    for(int j = 1; j < COLUMN - 1; ++j) {
+    int y = COLUMN - 1;             // set y at the last line(24)
+    for(int j = 1; j <= COLUMN - 1; ++j) {       // in loop copy each line to the previous line, start with the second line(begin with 1)
         copy_to_pre_line(j);
     }
-    for(int i = 0; i < ROW; ++i) {
+    for(int i = 0; i < ROW; ++i) {              // set the character on the last line to the ' ' 
         show(i, y, ' ', WHITE);
     }
     setpos(0, y);
 }
 
 void CGA_Screen::copy_to_pre_line(int j) {
-    char* this_line = get_addr(0, j);
-    char* pre_line = get_addr(0, j-1);
+    char* this_line = get_addr(0, j);           // get the first character's address of the given line
+    char* pre_line = get_addr(0, j-1);          // get the first character's address of the previous line of the given line
     for(int i = 0; i < ROW ; ++i) {
-        *(pre_line + i*2) = *(this_line + i*2);
+        *(pre_line + i*2) = *(this_line + i*2); // copy each character for the given line to the previous line
     }
 }
 
