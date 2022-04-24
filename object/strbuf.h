@@ -23,7 +23,7 @@ protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
 	int size = 70;
-	int capacity = 0;
+	int used_capacity = 0;
 
 /* Add your code here */ 
 public:

@@ -24,7 +24,7 @@ void test_PrintString() {
 }
 
 void test_SetCursor() {
-	scr.setpos(0, 24);        // work fine with 0, 1, 4, 7, 10, 11, 13, 14, 16, 17, 20; error with 2, 3, 5, 6, 8, 9, 12, 15, 18, 19, 21, 22, 23, 24
+	scr.setpos(0, 23);        // work fine with 0, 1, 4, 7, 10, 11, 13, 14, 16, 17, 20; error with 2, 3, 5, 6, 8, 9, 12, 15, 18, 19, 21, 22, 23, 24
 }
 
 void test_blick() {
@@ -46,12 +46,16 @@ void test_signedNumber() {
 
 int main()
 {
+	scr.clear();
 	// test_PrintAChar();
 	// test_O_Stream();
-	test_SetCursor();
-	test_PrintString();
-	scr.scroll();
+	// test_SetCursor();
+	// for (int i = 0; i < 6; ++ i) {
+	// 	test_PrintString();
+	// }
+	// scr.scroll();
 	// test_signedNumber();
+	test_O_Stream();
 
 	return 0;
 }
