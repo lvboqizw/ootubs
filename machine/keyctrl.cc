@@ -330,16 +330,24 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 	// wait, untill the last command was processed.
 
-	while((ctrl_port.inb() & inpb) != 0);
+	int status;
+
+	do{
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
 
 	//send the command.
 
 	data_port.outb(kbd_cmd::set_speed);
 
 	//wait for the ack.
-	while((ctrl_port.inb() & inpb != 0));
+	do{
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
 
-	while((ctrl_port.inb() & outb) == 0);
+	do{
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
 
 	if(data_port.inb() != kbd_reply::ack)return;
 
@@ -348,7 +356,10 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 	data_port.outb((delay<<5)|speed);
 
 	//wait for the ack.
-	while((ctrl_port.inb() & outb) == 0);
+	do{
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
+	
 	if(data_port.inb() != kbd_reply::ack)return;
 
 	
