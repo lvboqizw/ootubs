@@ -20,6 +20,8 @@ class PIC {
 private:
 	PIC(const PIC &copy); // prevent copying
 
+	CPU cpu;
+
 	enum {
     	timer    = 0,
     	keyboard = 1
