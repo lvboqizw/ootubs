@@ -13,4 +13,25 @@
 /* be controlled by using class CPU.                                         */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "io_port.h"
+
+PIC::PIC() {
+    IO_Port master_1(0x20), slave_1(0xa0), master_2(0x21), slave_2(0xa1);
+
+    //initialising the PIC's registers
+    //Set ICW1
+    master_1.outb(0x11);
+    slave_1.outb(0x11);
+
+    //Set ICW2
+    master_2.outb(0x20);
+    slave_2.outb(0x28);
+
+    //Set ICW3
+    master_2.outb(0x04);
+    slave_2.outb(0x02);
+
+    //Set ICW4
+    master_2.outb(0x03);
+    slave_2.oub(0x03);
+}
