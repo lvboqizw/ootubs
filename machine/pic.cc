@@ -14,8 +14,10 @@
 /*****************************************************************************/
 
 #include "io_port.h"
+#include "pic.h"
 
 PIC::PIC() {
+
     IO_Port master_1(0x20), slave_1(0xa0), master_2(0x21), slave_2(0xa1);
 
     //initialising the PIC's registers
@@ -33,5 +35,5 @@ PIC::PIC() {
 
     //Set ICW4
     master_2.outb(0x03);
-    slave_2.oub(0x03);
+    slave_2.outb(0x03);
 }

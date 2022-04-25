@@ -21,11 +21,11 @@ Stringbuffer::Stringbuffer() {
 }
 
 void Stringbuffer::put(char c) {
-    if(used_capacity >= size){
+    if(used_capacity >= size){    //used_capactiy show the number of characters in the buffer,
         this->flush();
         used_capacity = 0;
     }
-    buffer[used_capacity] = c;
+    buffer[used_capacity] = c;    
     ++ used_capacity;
 }
 
