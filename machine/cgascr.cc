@@ -21,11 +21,13 @@ char* CGA_Screen::get_addr(int x, int y) {
 }
 
 /* PUBLIC METHODS */
+// initialization the screen
 CGA_Screen::CGA_Screen() {
-    this->attrib = DEFAULT_SCREEN_ATTRIB;
+    this->attrib = DEFAULT_SCREEN_ATTRIB;   // default color : white
     clear();
 }
 
+// show one character on the given position
 void CGA_Screen::show(unsigned short x, unsigned short y, char c, unsigned char attrib){
     pos = get_addr(x, y);
     *pos = c;

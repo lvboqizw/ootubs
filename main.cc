@@ -1,3 +1,4 @@
+/* Add your code here */ 
 
 #include "machine/cgascr.h"
 #include "device/cgastr.h"
@@ -5,6 +6,7 @@
 #include "machine/keyctrl.h"
 #include "machine/key.h"
 
+// void test_set_led(){
 
 CGA_Screen scr;
 CGA_Stream kout;

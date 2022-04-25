@@ -23,13 +23,13 @@ int ulong_to_char_stack(unsigned long n, char* tra_stack, int base) {
 	char characters[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 	int i = 64; 
 	do
-	{
-		int reminder = n%base;
+	{												// firts store the number in a temp array,
+		int reminder = n%base;      				// the number stored from right to the left 
 		n /= base;
 		tra_stack[i] = (characters[reminder]); 
 		--i;
 	} while(n > 0);
-	if(base == 16) {
+	if(base == 16) {								// add the notice of the different base
 		tra_stack[i] = 'x';
 		--i;
 	}
@@ -49,8 +49,8 @@ int ulong_to_char_stack(unsigned long n, char* tra_stack, int base) {
 }
 
 int long_to_char_stack(long n, char* tra_stack, int base){
-	int i;
-	if (n >= 0) {
+	int i;																// if the number is a negative, put a minus number of it to the  
+	if (n >= 0) {														// usigned umber transformation method
 		i = ulong_to_char_stack((unsigned long)n, tra_stack, base);
 	} else {
 		n = -n;
@@ -60,10 +60,10 @@ int long_to_char_stack(long n, char* tra_stack, int base){
 }
 
 O_Stream& O_Stream::operator << (unsigned long n) {
-	char stack[65];
+	char stack[65];										// a tempurary char array to save the number from right to the left
     int i = ulong_to_char_stack(n,stack, this->b);
 
-    for (int j = i + 1; j < 65; ++ j) {
+    for (int j = i + 1; j < 65; ++ j) {					// save the result in the buffer
         this -> put(stack[j]);
     }
 
@@ -74,7 +74,7 @@ O_Stream& O_Stream::operator << (long n) {
 	char stack[65];
 	int i = long_to_char_stack(n, stack, this-> b);
 
-	if(n < 0) {
+	if(n < 0) {										// if the number is negative, add a minus sign before the number
 		this-> put('-');
 	}
 
@@ -112,7 +112,7 @@ O_Stream& O_Stream::operator << (char c) {
 
 O_Stream& O_Stream::operator << (void* pointer){
 	Base tmp = this->b;
-	this->b = HEX;
+	this->b = HEX;								// transfer the number in to the hex to show the address
 	operator << ((unsigned long)pointer);
 	this->b = tmp;
 	return *this; 
