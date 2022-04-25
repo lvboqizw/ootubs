@@ -58,12 +58,14 @@ void ktrl_test(){
 
 	Keyboard_Controller kc;
 	Key key;
+	char a;
 
 	kc.set_repeat_rate(2,2);
 	while (true){
 		key=kc.key_hit();
 		if(key.valid()){
-			kout <<key.ascii() << '\0';
+			a=key.ascii();
+			kout <<a<< '\0';
 		}
 		kout.flush();
 	}
