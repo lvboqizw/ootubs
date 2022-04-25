@@ -61,6 +61,9 @@ void ktrl_test(){
 	char a;
 
 	kc.set_repeat_rate(2,2);
+	kc.set_led(1,1);
+	kc.set_led(2,1);
+	kc.set_led(4,1);
 	while (true){
 		key=kc.key_hit();
 		if(key.valid()){
