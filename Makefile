@@ -22,9 +22,9 @@
 # source-code files
 
 STARTUP_SOURCE = ./startup.asm
-CC_SOURCES = $(shell find . -name "*.cc")
-C_SOURCES = $(shell find . -name "*.c")
-ASM_SOURCES = $(shell find ./machine -name "*.asm")
+CC_SOURCES = $(shell find . -name "*.cc" -not -path "./.history*")
+C_SOURCES = $(shell find . -name "*.c" -not -path "./.history*")
+ASM_SOURCES = $(shell find ./machine -name "*.asm" -not -path "./.history*")
 
 # build settings
 #
