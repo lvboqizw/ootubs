@@ -16,6 +16,7 @@
 #include "object/o_stream.h"
 #include "machine/key.h"
 
+CGA_Stream kout;
  
 /* STATIC MEMBERS */
 
@@ -370,7 +371,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 	if(data_port.inb() != kbd_reply::ack)return;
 	
-	kout<<"double ok"<<endl;
 	
 /* Add your code here */ 
  

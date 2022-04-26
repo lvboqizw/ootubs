@@ -11,11 +11,6 @@
 /* INCLUDES */
 
 #include "machine/keyctrl.h"
-#include "machine/cgascr.h"
-#include "device/cgastr.h"
-#include "object/o_stream.h"
-#include "machine/key.h"
-
  
 /* STATIC MEMBERS */
 
@@ -335,9 +330,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 	// wait, untill the last command was processed.
 
-
-	CGA_Stream kout;
- 
 	int status;
 
 	do{
@@ -354,11 +346,8 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 		status = ctrl_port.inb();
 	}while((status & outb) == 0);
 
-
 	if(data_port.inb() != kbd_reply::ack)return;
 	//set the parameter when received the ack.
-
-	kout<<"ok"<<endl;
 
 	data_port.outb((delay<<5)|speed);
 
@@ -370,7 +359,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 	if(data_port.inb() != kbd_reply::ack)return;
 	
-	kout<<"double ok"<<endl;
 	
 /* Add your code here */ 
  

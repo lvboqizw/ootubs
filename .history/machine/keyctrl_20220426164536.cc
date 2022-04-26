@@ -370,7 +370,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 	if(data_port.inb() != kbd_reply::ack)return;
 	
-	kout<<"double ok"<<endl;
 	
 /* Add your code here */ 
  
