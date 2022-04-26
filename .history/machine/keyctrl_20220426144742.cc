@@ -374,7 +374,7 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 void Keyboard_Controller::set_led (char led, bool on)
 {
-// /* Add your code here */ 
+/* Add your code here */ 
 
 	
 	int status;
@@ -411,7 +411,6 @@ void Keyboard_Controller::set_led (char led, bool on)
 	data_port.outb(leds);
 
 	// wait for the ack
-
 
 	do{
 		status = ctrl_port.inb();
