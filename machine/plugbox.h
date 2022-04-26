@@ -18,6 +18,10 @@ class Plugbox {
 private:
 	Plugbox(const Plugbox &copy); // prevent copying
 /* Add your code here */ 
+
+public:
+	int timer = 32;
+	
 };
 
 #endif
