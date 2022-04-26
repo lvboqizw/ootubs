@@ -366,9 +366,46 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 void Keyboard_Controller::set_led (char led, bool on)
 {
-/* Add your code here */ 
+// /* Add your code here */ 
 
-	int status;
+// 	int status;
+
+// 	// wait, untill the last command was processed.
+
+// 	do{
+// 		status = ctrl_port.inb();
+// 	}while((status & inpb) != 0);
+
+// 	data_port.outb(kbd_cmd::set_led);
+
+// 	// wait for the ack
+
+// 	do{
+// 		status = data_port.inb();
+// 	}while(status != kbd_reply::ack);
+
+//     // send the ledcommand when received the ack
+
+// 	do{
+// 		status = ctrl_port.inb();
+// 	}while((status & inpb) != 0);
+
+
+// 	if(on){
+// 		leds |= led;
+// 	}else{
+// 		leds &= ~led;
+// 	}
+
+// 	data_port.outb(leds);
+
+// 	// wait for the ack
+
+// 	do{
+// 		status = data_port.inb();
+// 	}while(status != kbd_reply::ack);
+	
+		int status;
 
 	// wait, untill the last command was processed.
 
@@ -381,8 +418,10 @@ void Keyboard_Controller::set_led (char led, bool on)
 	// wait for the ack
 
 	do{
-		status = data_port.inb();
-	}while(status != kbd_reply::ack);
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
+
+	if(data_port.inb() != kbd_reply::ack)return;
 
     // send the ledcommand when received the ack
 
@@ -402,9 +441,10 @@ void Keyboard_Controller::set_led (char led, bool on)
 	// wait for the ack
 
 	do{
-		status = data_port.inb();
-	}while(status != kbd_reply::ack);
-	
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
+
+	if(data_port.inb() != kbd_reply::ack)return;
 
 /* Add your code here */ 
  
