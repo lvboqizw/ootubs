@@ -12,15 +12,15 @@
 #define __Gate_include__
 
 /* Add your code here */ 
-class gate
+class Gate
 {
 private:
     /* data */
 public:
-    gate(/* args */);
-    ~gate();
+    Gate();
+    ~Gate();
 
-    virtual void trigger();
+    virtual void trigger() = 0;
 };
 
 #endif
