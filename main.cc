@@ -62,7 +62,7 @@ void ktrl_test(){
 	Key key;
 	char a;
 
-	kc.set_repeat_rate(2,2);
+	kc.set_repeat_rate(31,0);
 	kc.set_led(1,1);
 	kc.set_led(2,1);
 	kc.set_led(4,1);

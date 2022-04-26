@@ -440,6 +440,7 @@ void Keyboard_Controller::set_led (char led, bool on)
 
 	// wait for the ack
 
+
 	do{
 		status = ctrl_port.inb();
 	}while((status & outb) == 0);
