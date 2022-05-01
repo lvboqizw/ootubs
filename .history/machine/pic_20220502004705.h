@@ -19,22 +19,17 @@
 class PIC {
 private:
 	PIC(const PIC &copy); // prevent copying
-
-	CPU cpu;
-
-	enum {
-    	timer    = 0,
-    	keyboard = 1
+public:
+	PIC() {}
+/* Add your code here */ 
+	enum{
+		timer = 0,
+		keyboard =1
 	};
 
-public:
-	PIC();
-
-	void allow(int interupt_device);
-
-	void forbid(int interupt_device);
-
-	bool is_masked(int interupt_device);
+	void allow(int interrupt_device);
+	void forbid(int interrupt_device);
+	bool is_masked(int interrupt_device);
 };
 
 #endif

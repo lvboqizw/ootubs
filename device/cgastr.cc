@@ -13,36 +13,10 @@
 
 #include "device/cgastr.h"
 
+CGA_Stream::CGA_Stream() {}
 
-
-void CGA_Stream::flush()
-{
-	char* start=buffer;
-	char* pointer=buffer;
-	int x,y;
-	char out;
-	while(pointer < buf_end)
-	{
-		out = *pointer; 	
-
-		if(out == '\n')
-		{
-			print(start,pointer - start,WHITE);
-			getpos(x,y);
-			x = 0;
-			++ y;
-			if(y > 24)
-			{
-				y = 24;
-				scroll();
-			}
-			setpos(x,y);
-			start = pointer;
-		}
-		++ pointer;	
-	}
-	if(out != '\n') {
-		print(start,buf_end - start,WHITE);
-	}
-	buf_end = buffer;
+void CGA_Stream::flush() {
+	int x, y;
+	print(buffer, used_capacity, WHITE);
+	used_capacity = 0;
 }

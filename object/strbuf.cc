@@ -17,16 +17,15 @@
 
 
 Stringbuffer::Stringbuffer() {
-    buf_end = buffer;
+    used_capacity = 0;
 }
 
 void Stringbuffer::put(char c) {
-    if(buf_end >= buffer + size){
+    if(used_capacity >= size){    //used_capactiy show the number of characters in the buffer,
         this->flush();
-        buf_end = buffer;
+        used_capacity = 0;
     }
-
-    *buf_end = c;
-    ++buf_end;
+    buffer[used_capacity] = c;    
+    ++ used_capacity;
 }
 

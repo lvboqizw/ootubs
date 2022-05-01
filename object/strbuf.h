@@ -22,13 +22,12 @@ class Stringbuffer {
 protected:
 	Stringbuffer(const Stringbuffer &copy); // prevent copying
 
-
-	int size = 65;
-	char* buf_end;
+	int size = 70;
+	int used_capacity = 0;
 
 /* Add your code here */ 
 public:
-	char buffer[65];
+	char buffer[70];
 
 	Stringbuffer();
 

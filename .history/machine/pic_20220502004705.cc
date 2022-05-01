@@ -13,28 +13,6 @@
 /* be controlled by using class CPU.                                         */
 /*****************************************************************************/
 
-#ifndef __pic_include__
-#define __pic_include__
+/* Add your code here */
 
-class PIC {
-private:
-	PIC(const PIC &copy); // prevent copying
-
-	CPU cpu;
-
-	enum {
-    	timer    = 0,
-    	keyboard = 1
-	};
-
-public:
-	PIC();
-
-	void allow(int interupt_device);
-
-	void forbid(int interupt_device);
-
-	bool is_masked(int interupt_device);
-};
-
-#endif
+/* INCLUDE */

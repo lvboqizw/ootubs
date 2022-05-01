@@ -17,87 +17,97 @@
 
 // Calculate the address of the cursor
 char* CGA_Screen::get_addr(int x, int y) {
-    return (char *)CGA_START + 2 * (x + y * 80);
-}
-
-void copy(char *desti) {
-    char *tmp = desti;
-    while(desti <= tmp + 158) {
-        *desti = *(desti + 160);
-        *(desti + 1) = *(desti + 161);
-        desti += 2; 
-    }
+    return (char *)CGA_START + 2 * (x + y * ROW);
 }
 
 /* PUBLIC METHODS */
-
+// initialization the screen
 CGA_Screen::CGA_Screen() {
-    for(int y=0; y<25; ++y) {
-        for(int x=0; x<80; ++x) {
-            show(x,y,' ',15);
-        }
-    }
-    setpos(0,0);
+    this->attrib = DEFAULT_SCREEN_ATTRIB;   // default color : white
+    clear();
 }
 
-void CGA_Screen::show(int x, int y, char c, unsigned char attrib){
+// show one character on the given position
+void CGA_Screen::show(unsigned short x, unsigned short y, char c, unsigned char attrib){
     pos = get_addr(x, y);
     *pos = c;
     *(pos + 1) = attrib;
 }
 
-void CGA_Screen::setpos(int x, int y) {
-    IO_Port index(INDEXREGITSER);
-    IO_Port data(DATAREGISTER);
+void CGA_Screen::setpos(unsigned short x, unsigned short y) {
+    IO_Port indexreg(INDEXREGITSER);                //indirect access
+    IO_Port datareg(DATAREGISTER);
 
-    Cursor cur;
-    cur.position = x + y * 80;
-    index.outb(14);
-    data.outb((cur.position >> 8) & 0xff);
-    index.outb(15);
-    data.outb(cur.position & 0xff);
+    int pos = (x+(y*80));                   //calculate the position
+
+    indexreg.outb(15);
+    datareg.outb(pos & 0xff);               //write first half (8bit)
+    indexreg.outb(14);
+    datareg.outb((pos >> 8) & 0xff);        //wirte second half (3bit)
 }
 
-void CGA_Screen::getpos(int &x, int &y) {
-    IO_Port index(INDEXREGITSER);
-    IO_Port data(DATAREGISTER);
+void CGA_Screen::getpos(unsigned short &x, unsigned short &y) {
+    IO_Port indexreg(INDEXREGITSER);                //indirect access
+    IO_Port datareg(DATAREGISTER);
 
-    Cursor cur;
-    index.outb(15);
-    cur.low_reg = data.inb();
-    index.outb(14);
-    cur.high_reg = data.inb();
+    indexreg.outb(15);
+    char cursor1 = datareg.inb();           //fetch first half
+    indexreg.outb(14);
+    char cursor2 = datareg.inb();           //fetch second half
 
-    cur.position = (cur.high_reg << 8) | cur.low_reg;
-    x = cur.position % 80;
-    y = cur.position / 80;
+    int pos = (cursor1 & 0xff) | ((cursor2 & 0xff) << 8);    //put them together to one position
+
+    x = (pos)%80;                         //write the positionparameters back to the given addresses
+    y = (pos)/80;
 }
 
 void CGA_Screen::print(char* text, int length, unsigned char attrib) {
-    int x, y;
-    getpos(x, y);
-    for(int i = 0; i < length; ++i)
-	{
-		if(x > 79) {
-			x =  0;
-			if(y == 24)
-				scroll();
-		 	else
-				++y;
-		}
-		show(x, y, text[i], attrib);
-		++x;
-	}
-	setpos(x,y);
+    unsigned short curpos_x;
+    unsigned short curpos_y;
+    getpos(curpos_x, curpos_y);                                 //here I am right now
+    for (unsigned int i = 0;i<length;i++){
+        if(text[i]=='\n'){
+            curpos_x=0;
+            ++curpos_y;
+        } else {
+            show(curpos_x, curpos_y, text[i], this->attrib);   //each char for it's own
+            ++curpos_x;
+        }
+        if(curpos_x>=79){                                       //don't go over the edge
+            ++curpos_y;                                         //next line
+            curpos_x=0;                                         //start from the beginning
+        }
+        if(curpos_y>24){
+            scroll();
+            curpos_y=24;
+        }
+    }
+    setpos(curpos_x,curpos_y);
 }
 
 void CGA_Screen::scroll() {
-    for(int i = 0; i < 24; ++i){
-        copy((char *)CGA_START + i * 160);
+    char* pos = (char*) 0xB80A0;            //start in the second line
+    for(unsigned int i=0;i<24;i++){         //cycle through lines
+        for(unsigned int j=0;j<80;j++){     //cycle thorugh columns
+            show(j,i,*pos,*(pos+1));
+            pos+=2;
+        }
     }
-    for(int i = 0; i<80; i++){
-		*((char *)CGA_START + 24*160+i*2) = ' ';
-	}
-
+    char att = this->attrib;
+    for(int k=0;k<80;k++){
+        show(k,24,' ',att);                 //fill the last line with spaces
+    }
+    setpos(0,24);
 }
 
+
+void CGA_Screen::clear() {
+    char* CGA = (char*) 0xb8000;
+    char att = this->attrib;
+    for(unsigned int i=0;i<80*2*25;i++){
+        CGA[i]=' ';                 //set space
+        i++;
+        CGA[i]=att;                 //set attribute
+    }
+    setpos(0,0);                    //start from the beginning
+}
