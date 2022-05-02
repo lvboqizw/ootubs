@@ -39,7 +39,7 @@ Keyboard_Controller kc;
 // }
 
 void test_O_Stream() {
-	unsigned short unsign = 65535;
+	unsigned long unsign = 1ul << 31;//4294967295;
 
 	kout << "unsigned number: (bin)" << bin << unsign << endl;
 	kout << "(oct)" << oct << unsign << endl;
