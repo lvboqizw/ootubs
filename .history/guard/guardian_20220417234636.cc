@@ -2,18 +2,23 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                            K E Y B O A R D                                */
+/*                              G U A R D I A N                              */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Keyboard driver.                                                          */
+/* The system's central interrupt handling routine.                          */
+/* The parameter specifies the number of the interrupt that occurred.        */
 /*****************************************************************************/
 
-/* Add your code here */ 
-/* INCLUDE */
-#include "device/keyboard.h"
-#include "machine/plugbox.h"
-#include "device/cgastr.h"
-#include "machine/pic.h"
-#include "guard/gate.h"
-/* Add your code here */ 
+/* INCLUDES */
+
+/* FUNCTIONS */
+
+extern "C" void guardian (unsigned int slot);
+
+/* GUARDIAN: Low-level interrupt handling. We will extend this function at */
+/*           a later point in time.                                        */
+
+void guardian (unsigned int slot)
+{
  
+}

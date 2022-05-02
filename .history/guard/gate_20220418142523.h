@@ -2,18 +2,15 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                            K E Y B O A R D                                */
+/*                                  G A T E                                  */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Keyboard driver.                                                          */
+/* Class of objects that handle interrupts.                                  */
 /*****************************************************************************/
 
+#ifndef __Gate_include__
+#define __Gate_include__
+
 /* Add your code here */ 
-/* INCLUDE */
-#include "device/keyboard.h"
-#include "machine/plugbox.h"
-#include "device/cgastr.h"
-#include "machine/pic.h"
-#include "guard/gate.h"
-/* Add your code here */ 
- 
+
+#endif
