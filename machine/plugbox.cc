@@ -17,15 +17,15 @@ Plugbox::Plugbox() {                                        //für alle Unterbre
 }
 
 void Plugbox::assign(unsigned int slot, Gate& gate) {       // check the slot, if the slot is in the range of the capacity
-    if(slot < 64) {
+    if(slot < 256) {
         map[slot] = &gate;
     } else {
         panic.trigger();
     }
 }
 
-Gate& Plugbox::report(unsigned int slot) {                  // how to check the slot? if the slot is out of the range, what shold be return??
-    if(slot < 64) {
+Gate& Plugbox::report(unsigned int slot) {                  
+    if(slot < 256) {
         return *(map[slot]);
     } else {
         return panic;

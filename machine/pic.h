@@ -22,12 +22,12 @@ private:
 
 	CPU cpu;
 
+public:
 	enum {
     	timer    = 0,
     	keyboard = 1
 	};
 
-public:
 	PIC();
 
 	void allow(int interupt_device);

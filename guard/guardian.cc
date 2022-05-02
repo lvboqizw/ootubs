@@ -15,7 +15,7 @@
 /* FUNCTIONS */
 
 extern "C" void guardian (unsigned int slot);
-//from where??
+
 extern Plugbox plugbox;
 extern CPU cpu;
 

@@ -22,12 +22,13 @@ private:
 	Plugbox(const Plugbox &copy); // prevent copying
 /* Add your code here */ 
 
-	Gate* map[64];
+	Gate* map[256];
 
 public:
-	int timer = 32;
-	
-	int keyboard = 33;
+	enum {
+		timer = 32,
+		keyboard = 33,
+	};
 
 	Plugbox();
 
