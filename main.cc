@@ -38,22 +38,22 @@ Keyboard_Controller kc;
 // 	scr.print(kout.buffer,65, WHITE);
 // }
 
-// void test_O_Stream() {
-// 	unsigned short unsign = 65535;
+void test_O_Stream() {
+	unsigned short unsign = 65535;
 
-// 	kout << "unsigned number: (bin)" << bin << unsign << endl;
-// 	kout << "(oct)" << oct << unsign << endl;
-// 	kout << "(dec)" << dec << unsign << endl;
-// 	// // scr.print(kout.buffer,3, WHITE);
-// 	// kout << 'a' << endl;
-// 	// kout << "(hex)" << hex << unsign << endl;
-// }
+	kout << "unsigned number: (bin)" << bin << unsign << endl;
+	kout << "(oct)" << oct << unsign << endl;
+	kout << "(dec)" << dec << unsign << endl;
+	// // scr.print(kout.buffer,3, WHITE);
+	// kout << 'a' << endl;
+	kout << "(hex)" << hex << unsign << endl;
+}
 
-// void test_signedNumber() {
-// 	signed long a = -1;
+void test_signedNumber() {
+	signed long a = -1;
 
-// 	kout << "a = " << oct << a << endl;
-// }
+	kout << "a = " << oct << a << endl;
+}
 
 
 void ktrl_test(){
@@ -85,7 +85,8 @@ int main()
 	// test_PrintString();
 	// test_PrintAChar();
 	// test_StrBuf();
-	// test_O_Stream();
+	test_O_Stream();
+	test_signedNumber();
 	// test_signedNumber();
 	// // test_key_hit();
 	// // test_set_led();
