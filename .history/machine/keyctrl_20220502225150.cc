@@ -355,7 +355,7 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
         kout<<"------------------------------------------"<<endl;
     }
 
-	pic.allow(PIC::keyboard);	
+		pic.allow(PIC::keyboard);	
 
 
 	

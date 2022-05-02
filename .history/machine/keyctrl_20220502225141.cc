@@ -355,7 +355,7 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
         kout<<"------------------------------------------"<<endl;
     }
 
-	pic.allow(PIC::keyboard);	
+		pic.allow(PIC::keyboard);	
 
 
 	
@@ -419,7 +419,7 @@ void Keyboard_Controller::set_led (char led, bool on)
 	if(data_port.inb() != kbd_reply::ack)return;
 
 
-	pic.allow(PIC::keyboard);	
+		pic.allow(PIC::keyboard);	
 
 
 /* Add your code here */ 
