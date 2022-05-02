@@ -12,8 +12,10 @@
 /* Add your code here */ 
 #include "machine/plugbox.h"
 
-Plugbox::Plugbox() {                                        //für alle Unterbrechungen und Ausnahmen das global bekannte Panic-Objekt panic eingetragen???
-
+Plugbox::Plugbox() {                                        
+    for(int i = 0; i < 256; ++ i) {
+        assign(i, panic);
+    }
 }
 
 void Plugbox::assign(unsigned int slot, Gate& gate) {       // check the slot, if the slot is in the range of the capacity
