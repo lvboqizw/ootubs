@@ -292,54 +292,85 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 {
 /* Add your code here */ 
 
+	// int speed_rr = 0x00;
+	// int delay_rr = 0x00;
 
-	 // wait, untill the last command was processed.
-	 extern CGA_Stream kout;
+	// switch(speed){
+	// 	case 30:
+	// 		speed_rr = 0x00;
+	// 		break;
+	// 	case 25:
+	// 		speed_rr = 0x02;
+	// 		break;
+	// 	case 20:
+	// 		speed_rr = 0x04;
+	// 		break;
+	// 	case 15:
+	// 		speed_rr = 0x08;
+	// 		break;
+	// 	case 10:
+	// 		speed_rr = 0x0c;
+	// 		break;
+	// 	case 7:
+	// 		speed_rr = 0x10;
+	// 		break;
+	// 	case 5:
+	// 		speed_rr = 0x14;
+	// 		break;
+	// }
+
+	// switch(delay){
+	// 	case 0:
+	// 		break;
+	// 	case 1:
+	// 		delay_rr = 0x20;
+	// 		break;
+	// 	case 2:
+	// 		delay_rr = 0x40;
+	// 		break;
+	// 	case 3:
+	// 		delay_rr = 0x60;
+	// 		break; 
+	// }
+
+	// wait, untill the last command was processed.
+
+
+	CGA_Stream kout;
+ 
 	int status;
-    do {
-        status = ctrl_port.inb();
-    } while ((status & inpb) != 0);
 
-    // send the command.
-    data_port.outb(kbd_cmd::set_speed);
+	do{
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
 
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
+	//send the command.
 
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-        /* kout<<"ACK1"<<endl; */
-    }
+	data_port.outb(kbd_cmd::set_speed);
 
-    // set the parameter when received the ack.
-    unsigned char optcode = (delay << 5) + speed;
-    data_port.outb(optcode);
+	//wait for the ack.
+	
+	do{
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
 
-    // wait for the ack.
 
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
+	if(data_port.inb() != kbd_reply::ack)return;
+	//set the parameter when received the ack.
 
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-		
-        kout<<"------------------------------------------"<<endl;
-        kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
-        kout<<"------------------------------------------"<<endl;
-    }
+	kout<<"ok"<<endl;
 
+	data_port.outb((delay<<5)|speed);
+
+	//wait for the ack.
+	
+	do{
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
+
+	if(data_port.inb() != kbd_reply::ack)return;
+	
+	kout<<"double ok"<<endl;
 	
 /* Add your code here */ 
  
@@ -351,8 +382,44 @@ void Keyboard_Controller::set_led (char led, bool on)
 {
 // /* Add your code here */ 
 
+// 	int status;
+
+// 	// wait, untill the last command was processed.
+
+// 	do{
+// 		status = ctrl_port.inb();
+// 	}while((status & inpb) != 0);
+
+// 	data_port.outb(kbd_cmd::set_led);
+
+// 	// wait for the ack
+
+// 	do{
+// 		status = data_port.inb();
+// 	}while(status != kbd_reply::ack);
+
+//     // send the ledcommand when received the ack
+
+// 	do{
+// 		status = ctrl_port.inb();
+// 	}while((status & inpb) != 0);
+
+
+// 	if(on){
+// 		leds |= led;
+// 	}else{
+// 		leds &= ~led;
+// 	}
+
+// 	data_port.outb(leds);
+
+// 	// wait for the ack
+
+// 	do{
+// 		status = data_port.inb();
+// 	}while(status != kbd_reply::ack);
 	
-	int status;
+		int status;
 
 	// wait, untill the last command was processed.
 
@@ -386,7 +453,6 @@ void Keyboard_Controller::set_led (char led, bool on)
 	data_port.outb(leds);
 
 	// wait for the ack
-
 
 	do{
 		status = ctrl_port.inb();

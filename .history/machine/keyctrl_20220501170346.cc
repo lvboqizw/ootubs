@@ -352,7 +352,7 @@ void Keyboard_Controller::set_led (char led, bool on)
 // /* Add your code here */ 
 
 	
-	int status;
+		int status;
 
 	// wait, untill the last command was processed.
 
@@ -386,7 +386,6 @@ void Keyboard_Controller::set_led (char led, bool on)
 	data_port.outb(leds);
 
 	// wait for the ack
-
 
 	do{
 		status = ctrl_port.inb();

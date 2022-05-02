@@ -8,10 +8,7 @@
 
 // void test_set_led(){
 
-CGA_Screen scr;
-CGA_Stream kout;
 Keyboard_Controller kc;
-
 
 // void test_PrintAChar() {
 // 	char c = 'a';
@@ -58,11 +55,14 @@ Keyboard_Controller kc;
 
 void ktrl_test(){
 
+	CGA_Screen scr;
+
+	CGA_Stream kout;
 	Keyboard_Controller kc;
 	Key key;
 	char a;
 
-	kc.set_repeat_rate(30,2);
+	kc.set_repeat_rate(2,2);
 	kc.set_led(1,1);
 	kc.set_led(2,1);
 	kc.set_led(4,1);

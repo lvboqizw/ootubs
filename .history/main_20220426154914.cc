@@ -62,10 +62,10 @@ void ktrl_test(){
 	Key key;
 	char a;
 
-	kc.set_repeat_rate(30,2);
-	kc.set_led(1,1);
-	kc.set_led(2,1);
-	kc.set_led(4,1);
+	kc.set_repeat_rate(0,0);
+	// kc.set_led(1,0);
+	// kc.set_led(2,1);
+	// kc.set_led(4,1);
 	while (true){
 		key=kc.key_hit();
 		if(key.valid()){

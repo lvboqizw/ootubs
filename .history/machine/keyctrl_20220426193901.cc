@@ -293,53 +293,44 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 /* Add your code here */ 
 
 
-	 // wait, untill the last command was processed.
-	 extern CGA_Stream kout;
+	// wait, untill the last command was processed.
+
+
+	CGA_Stream kout;
+ 
 	int status;
-    do {
-        status = ctrl_port.inb();
-    } while ((status & inpb) != 0);
 
-    // send the command.
-    data_port.outb(kbd_cmd::set_speed);
+	do{
+		status = ctrl_port.inb();
+	}while((status & inpb) != 0);
 
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
+	//send the command.
 
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-        /* kout<<"ACK1"<<endl; */
-    }
+	data_port.outb(kbd_cmd::set_speed);
 
-    // set the parameter when received the ack.
-    unsigned char optcode = (delay << 5) + speed;
-    data_port.outb(optcode);
+	//wait for the ack.
+	
+	do{
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
 
-    // wait for the ack.
 
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
+	if(data_port.inb() != kbd_reply::ack)return;
+	//set the parameter when received the ack.
 
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-		
-        kout<<"------------------------------------------"<<endl;
-        kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
-        kout<<"------------------------------------------"<<endl;
-    }
+	kout<<"ok"<<endl;
 
+	data_port.outb((delay<<5)|speed);
+
+	//wait for the ack.
+	
+	do{
+		status = ctrl_port.inb();
+	}while((status & outb) == 0);
+
+	if(data_port.inb() != kbd_reply::ack)return;
+	
+	kout<<"double ok"<<endl;
 	
 /* Add your code here */ 
  
@@ -352,7 +343,7 @@ void Keyboard_Controller::set_led (char led, bool on)
 // /* Add your code here */ 
 
 	
-	int status;
+		int status;
 
 	// wait, untill the last command was processed.
 
@@ -386,7 +377,6 @@ void Keyboard_Controller::set_led (char led, bool on)
 	data_port.outb(leds);
 
 	// wait for the ack
-
 
 	do{
 		status = ctrl_port.inb();
