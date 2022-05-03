@@ -20,7 +20,6 @@
 extern CGA_Stream kout;
 extern PIC pic;
 extern Plugbox plugbox;
-extern Keyboard_Controller kc;
 
 
 void Keyboard::plugin (){
@@ -31,11 +30,11 @@ void Keyboard::plugin (){
 }
 
 void Keyboard::trigger(){
-	Key key = kc.key_hit();
+	Key key = key_hit();
 	if(key.valid()){
 		//ctrl + alt + del
 		if(key.ctrl() && key.alt() && key.scancode()== 53){
-			kc.reboot();
+			reboot();
 		}else{
 			//tastendruck
 			unsigned short x,y;

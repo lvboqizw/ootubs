@@ -307,49 +307,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 	 // wait, untill the last command was processed.
 	 extern CGA_Stream kout;
 	int status;
-    do {
-        status = ctrl_port.inb();
-    } while ((status & inpb) != 0);
-
-    // send the command.
-    data_port.outb(kbd_cmd::set_speed);
-
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
-
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-        /* kout<<"ACK1"<<endl; */
-    }
-
-    // set the parameter when received the ack.
-    unsigned char optcode = (delay << 5) + speed;
-    data_port.outb(optcode);
-
-    // wait for the ack.
-
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
-
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-		
-        kout<<"------------------------------------------"<<endl;
-        kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
-        kout<<"------------------------------------------"<<endl;
-    }
 
 	bool ismasked = pic.is_masked(PIC::keyboard);
 	

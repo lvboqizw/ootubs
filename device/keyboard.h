@@ -26,6 +26,7 @@ private:
 public:
 /* Add your code here */ 
  
+	Keyboard() {};
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 
