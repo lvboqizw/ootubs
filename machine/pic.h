@@ -16,6 +16,7 @@
 #ifndef __pic_include__
 #define __pic_include__
 #include "io_port.h"
+#include "machine/cpu.h"
 
 class PIC {
 private:
