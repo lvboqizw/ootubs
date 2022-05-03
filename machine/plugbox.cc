@@ -13,13 +13,13 @@
 #include "machine/plugbox.h"
 
 Plugbox::Plugbox() {                                        
-    for(int i = 0; i < 256; ++ i) {
+    for(int i = 0; i < 64; ++ i) {
         assign(i, panic);
     }
 }
 
 void Plugbox::assign(unsigned int slot, Gate& gate) {       // check the slot, if the slot is in the range of the capacity
-    if(slot < 256) {
+    if(slot < 64) {
         map[slot] = &gate;
     } else {
         panic.trigger();
@@ -27,9 +27,9 @@ void Plugbox::assign(unsigned int slot, Gate& gate) {       // check the slot, i
 }
 
 Gate& Plugbox::report(unsigned int slot) {                  
-    if(slot < 256) {
+    if(slot < 64) {
         return *(map[slot]);
     } else {
-        return panic;
+        // return panic;
     }
 }

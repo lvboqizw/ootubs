@@ -10,8 +10,11 @@
 /* Add your code here */ 
 /* Add your code here */ 
 #include "panic.h"
+#include "machine/cpu.h"
+#include "device/cgastr.h"
 
-
+extern CPU cpu;
+extern CGA_Stream kout;
 
 void Panic::trigger() {
     kout << "A Panic triggred" << endl;   

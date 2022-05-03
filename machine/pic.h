@@ -18,11 +18,10 @@
 #include "io_port.h"
 #include "machine/cpu.h"
 
+
 class PIC {
 private:
 	PIC(const PIC &copy); // prevent copying
-
-	CPU cpu;
 
 	IO_Port master_1, slave_1, master_2, slave_2;
 

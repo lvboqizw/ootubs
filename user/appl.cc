@@ -23,7 +23,7 @@ extern CGA_Stream kout;
 void Application::action()
 {
 /* Add your code here */ 
-    char* text = "Application";
+    char text[] = "Application";
 
     scr.setpos(30, 18);
     scr.print(text, sizeof(text)/sizeof(char), WHITE);

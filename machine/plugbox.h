@@ -15,16 +15,14 @@
 #include "guard/gate.h"
 #include "device/panic.h"
 
-
+extern Panic panic;
 
 class Plugbox {
 private:
 	Plugbox(const Plugbox &copy); // prevent copying
 /* Add your code here */ 
 
-	Gate* map[256];
-
-	Panic panic;
+	Gate* map[64];
 
 public:
 	enum {
