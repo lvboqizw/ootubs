@@ -28,7 +28,7 @@ int main()
 {
 	kout<<"funktioniert!"<<endl;
 	appl.action();
-	// plugbox.report(300).trigger();
+	
 
 	return 0;
 }

@@ -30,6 +30,6 @@ Gate& Plugbox::report(unsigned int slot) {
     if(slot < 64) {
         return *(map[slot]);
     } else {
-        // return panic;
+        return panic;
     }
 }

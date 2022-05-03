@@ -24,7 +24,8 @@ void Application::action()
 {
 /* Add your code here */ 
     char text[] = "Application";
-
-    scr.setpos(30, 18);
-    scr.print(text, sizeof(text)/sizeof(char), WHITE);
+    while(1) {
+        scr.setpos(30, 18);
+        scr.print(text, sizeof(text)/sizeof(char), WHITE);
+    }
 }
