@@ -10,3 +10,26 @@
 /*****************************************************************************/
 
 /* Add your code here */ 
+#include "machine/plugbox.h"
+
+Plugbox::Plugbox() {                                        
+    for(int i = 0; i < 256; ++ i) {
+        assign(i, panic);
+    }
+}
+
+void Plugbox::assign(unsigned int slot, Gate& gate) {       // check the slot, if the slot is in the range of the capacity
+    if(slot < 256) {
+        map[slot] = &gate;
+    } else {
+        panic.trigger();
+    }
+}
+
+Gate& Plugbox::report(unsigned int slot) {                  
+    if(slot < 256) {
+        return *(map[slot]);
+    } else {
+        return panic;
+    }
+}

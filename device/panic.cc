@@ -9,4 +9,13 @@
 /*****************************************************************************/
 /* Add your code here */ 
 /* Add your code here */ 
- 
+#include "panic.h"
+
+
+
+void Panic::trigger() {
+    kout << "A Panic triggred" << endl;   
+    cpu.halt();                           
+}
+
+
