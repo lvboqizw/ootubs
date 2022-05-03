@@ -1,22 +1,28 @@
 /* Add your code here */ 
 
 #include "machine/cgascr.h"
-#include "device/cgastr.h"
-#include "object/o_stream.h"
 #include "machine/keyctrl.h"
 #include "machine/key.h"
+#include "machine/cpu.h"
+#include "machine/plugbox.h"
+#include "device/cgastr.h"
+#include "device/panic.h"
+#include "object/o_stream.h"
+#include "user/appl.h"
 
-// void test_set_led(){
-
+//machine
 CGA_Screen scr;
-CGA_Stream kout;
+Key key;
 Keyboard_Controller kc;
+CPU cpu;
+Plugbox plugbox;
+//device
+Panic panic;
+//object
+CGA_Stream kout;
+//user
+Application appl;
 
-
-// void test_PrintAChar() {
-// 	char c = 'a';
-// 	scr.print(&c, 1, WHITE);
-// }
 
 // void test_PrintString() {
 // 	char* text = "in order to test the print funktion, i must write a sentence with more than 80 characters, and now i think that's enough.";
@@ -81,18 +87,8 @@ void ktrl_test(){
 int main()
 {
 	kout<<"funktioniert!"<<endl;
-	// test_SetCursor();
-	// test_PrintString();
-	// test_PrintAChar();
-	// test_StrBuf();
-	test_O_Stream();
-	test_signedNumber();
-	// test_signedNumber();
-	// // test_key_hit();
-	// // test_set_led();
-	// // test_set_repeat_rate();
-	ktrl_test();
-
+	appl.action();
+	plugbox.report(300);
 
 	return 0;
 }
