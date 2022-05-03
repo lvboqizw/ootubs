@@ -2,37 +2,38 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                            K E Y B O A R D                                */
+/*                              P L U G B O X                                */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Keyboard driver.                                                          */
+/* Abstracts an interrupt vector table. Allows to configure handler routines */
+/* for every hardware and software interrupt and every CPU exception.        */
 /*****************************************************************************/
 
-#ifndef __Keyboard_include__
-#define __Keyboard_include__
+#ifndef __Plugbox_include__
+#define __Plugbox_include__
 
-#include "machine/keyctrl.h"
 #include "guard/gate.h"
-#include "machine/key.h"
- 
-class Keyboard : public Gate, public Keyboard_Controller
-/* Add your code here */ 
-//:public Gate, public Keyboard_Controller
-{
+#include "device/panic.h"
+
+extern Panic panic;
+
+class Plugbox {
 private:
-	Keyboard(const Keyboard &copy); // prevent copying
+	Plugbox(const Plugbox &copy); // prevent copying
 /* Add your code here */ 
-	Key key;
+
+	Gate* map[64];
+
 public:
-/* Add your code here */ 
- 
-	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
-	void plugin();
+	int timer = 32;
+	
+	int keyboard = 33;
 
-	void trigger();
+	Plugbox();
 
-/* Add your code here */ 
+	void assign(unsigned int slot, Gate& gate);
 
+	Gate& report(unsigned int slot);
 };
 
 #endif

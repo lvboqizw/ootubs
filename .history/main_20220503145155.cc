@@ -1,19 +1,10 @@
 /* Add your code here */ 
 
 #include "machine/cgascr.h"
+#include "device/cgastr.h"
+#include "object/o_stream.h"
 #include "machine/keyctrl.h"
 #include "machine/key.h"
-<<<<<<< HEAD
-#include "machine/cpu.h"
-#include "machine/plugbox.h"
-#include "device/cgastr.h"
-#include "device/panic.h"
-#include "object/o_stream.h"
-#include "user/appl.h"
-
-//machine
-CGA_Screen scr;
-=======
 #include "machine/pic.h"
 
 // void test_set_led(){
@@ -62,26 +53,31 @@ PIC pic;
 
 // void test_signedNumber() {
 // 	signed long a = -1;
->>>>>>> jing
 
-// Keyboard_Controller kc;
-CPU cpu;
-Plugbox plugbox;
-//device
-Panic panic;
-//object
-CGA_Stream kout;
-//user
-Application appl;
+// 	kout << "a = " << oct << a << endl;
+// }
+
+
+void ktrl_test(){
+
+	Keyboard_Controller kc;
+	Key key;
+
+	kc.set_repeat_rate(2,2);
+	while (true){
+		key=kc.key_hit();
+		if(key.valid()){
+			kout <<key.ascii()<< endl;
+		}
+		kout.flush();
+	}
+	
+}
 
 
 int main()
 {
 	kout<<"funktioniert!"<<endl;
-<<<<<<< HEAD
-	appl.action();
-	
-=======
 	// test_SetCursor();
 	// test_PrintString();
 	// test_PrintAChar();
@@ -96,7 +92,6 @@ int main()
 /* Add your code here */ 
 
 /* Add your code here */ 
->>>>>>> jing
 
 	return 0;
 }

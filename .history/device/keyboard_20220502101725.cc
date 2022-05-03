@@ -38,7 +38,7 @@ void Keyboard::trigger(){
 			kc.reboot();
 		}else{
 			//tastendruck
-			unsigned short x,y;
+			int x,y;
 			kout.getpos(x,y);
 			kout.setpos(10,10);
 			kout << key.ascii();

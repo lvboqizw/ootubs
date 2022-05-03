@@ -246,28 +246,26 @@ Key Keyboard_Controller::key_hit ()
 	Key invalid;  // not explicitly initialized Key objects are invalid
 /* Add your code here */ 
 /* Add your code here */ 
-	bool valid = true;
+	int status;
 	//wait for the input
 		// do{
 		// 	status = ctrl_port.inb();
 		// }while( (status & outb) == 0 );
 
 		// if((status & auxb) != 0)return invalid; //maus und keyboard konnen nicht gleichzeitig arbeiten
-	while(ctrl_port.inb()&outb){
-		code = data_port.inb();
-		if(!key_decoded())
-			valid = false;
-	}
-	if(valid)
-		return gather;
-	return invalid;
-		
+		bool ismasked = pic.is_masked(PIC::Keyboard);
+		if(!ismasked){
+			code = data_port.inb();
+			if(key_decoded())//judge whether it is valid
+				return gather;
+			return invalid;
+		}
 	//to determine which key was entered
 		// code = data_port.inb();
 		// if(key_decoded())//judge whether it is valid
 		// 		return gather;
 /* Add your code here */ 
-	// return invalid;
+	return invalid;
 }
 
 // REBOOT: Reboots the PC. Yes, in a PC the keyboard controller is
@@ -307,54 +305,11 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 	 // wait, untill the last command was processed.
 	 extern CGA_Stream kout;
 	int status;
-    do {
-        status = ctrl_port.inb();
-    } while ((status & inpb) != 0);
-
-    // send the command.
-    data_port.outb(kbd_cmd::set_speed);
-
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
-
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-        /* kout<<"ACK1"<<endl; */
-    }
-
-    // set the parameter when received the ack.
-    unsigned char optcode = (delay << 5) + speed;
-    data_port.outb(optcode);
-
-    // wait for the ack.
-
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
-
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-		
-        kout<<"------------------------------------------"<<endl;
-        kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
-        kout<<"------------------------------------------"<<endl;
-    }
 
 	bool ismasked = pic.is_masked(PIC::keyboard);
 	
-	if(!ismasked){//interrupt wurde an der cpu geleitet(wenn es nicht in diese schleife geht, dann ist es schon verboten)
-		pic.forbid(PIC::keyboard);	//verboten
+	if(!ismasked){
+		pic.forbid(PIC::keyboard);	
 	}
 
     do {

@@ -11,14 +11,10 @@
 /* INCLUDES */
 
 #include "machine/keyctrl.h"
-#include "machine/cgascr.h"
 #include "device/cgastr.h"
-#include "object/o_stream.h"
-#include "machine/key.h"
-#include "machine/pic.h"
+#include "machine/cgascr.h"
  
 /* STATIC MEMBERS */
-extern PIC pic;
 
 unsigned char Keyboard_Controller::normal_tab[] = {
     0,   0,   '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 225, 39,   '\b',
@@ -246,28 +242,18 @@ Key Keyboard_Controller::key_hit ()
 	Key invalid;  // not explicitly initialized Key objects are invalid
 /* Add your code here */ 
 /* Add your code here */ 
-	bool valid = true;
-	//wait for the input
-		// do{
-		// 	status = ctrl_port.inb();
-		// }while( (status & outb) == 0 );
+	int status;
+		do{
+			status = ctrl_port.inb();
+		}while( (status & outb) == 0 );
 
-		// if((status & auxb) != 0)return invalid; //maus und keyboard konnen nicht gleichzeitig arbeiten
-	while(ctrl_port.inb()&outb){
-		code = data_port.inb();
-		if(!key_decoded())
-			valid = false;
-	}
-	if(valid)
-		return gather;
-	return invalid;
+		if((status & auxb) != 0)return invalid; 
 		
-	//to determine which key was entered
-		// code = data_port.inb();
-		// if(key_decoded())//judge whether it is valid
-		// 		return gather;
+		code = data_port.inb();
+		if(key_decoded())
+				return gather;
 /* Add your code here */ 
-	// return invalid;
+	return invalid;
 }
 
 // REBOOT: Reboots the PC. Yes, in a PC the keyboard controller is
@@ -302,61 +288,10 @@ void Keyboard_Controller::reboot()
 void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 {
 /* Add your code here */ 
-
-
-	 // wait, untill the last command was processed.
-	 extern CGA_Stream kout;
 	int status;
-    do {
-        status = ctrl_port.inb();
-    } while ((status & inpb) != 0);
+    extern CGA_Stream kout;
 
-    // send the command.
-    data_port.outb(kbd_cmd::set_speed);
-
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
-
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-        /* kout<<"ACK1"<<endl; */
-    }
-
-    // set the parameter when received the ack.
-    unsigned char optcode = (delay << 5) + speed;
-    data_port.outb(optcode);
-
-    // wait for the ack.
-
-    // wait for the ack.
-    do {
-        status = ctrl_port.inb();
-    } while ((status & outb) == 0);
-
-    // check ack
-    status = data_port.inb();
-    if (status != kbd_reply::ack) {
-        // error handling
-        return;
-    } else {
-		
-        kout<<"------------------------------------------"<<endl;
-        kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
-        kout<<"------------------------------------------"<<endl;
-    }
-
-	bool ismasked = pic.is_masked(PIC::keyboard);
-	
-	if(!ismasked){//interrupt wurde an der cpu geleitet(wenn es nicht in diese schleife geht, dann ist es schon verboten)
-		pic.forbid(PIC::keyboard);	//verboten
-	}
-
+    // wait, untill the last command was processed.
     do {
         status = ctrl_port.inb();
     } while ((status & inpb) != 0);
@@ -383,8 +318,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
     data_port.outb(optcode);
 
     // wait for the ack.
-
-    // wait for the ack.
     do {
         status = ctrl_port.inb();
     } while ((status & outb) == 0);
@@ -395,16 +328,11 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
         // error handling
         return;
     } else {
-		
         kout<<"------------------------------------------"<<endl;
         kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
         kout<<"------------------------------------------"<<endl;
     }
 
-	pic.allow(PIC::keyboard);	
-
-
-	
 /* Add your code here */ 
  
 }
@@ -413,16 +341,10 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 void Keyboard_Controller::set_led (char led, bool on)
 {
-// /* Add your code here */ 
+/* Add your code here */ 
 
 	
 	int status;
-
-	bool ismasked = pic.is_masked(PIC::keyboard);
-	
-	if(!ismasked){
-		pic.forbid(PIC::keyboard);	
-	}
 
 	// wait, untill the last command was processed.
 
@@ -457,16 +379,11 @@ void Keyboard_Controller::set_led (char led, bool on)
 
 	// wait for the ack
 
-
 	do{
 		status = ctrl_port.inb();
 	}while((status & outb) == 0);
 
 	if(data_port.inb() != kbd_reply::ack)return;
-
-
-	pic.allow(PIC::keyboard);	
-
 
 /* Add your code here */ 
  

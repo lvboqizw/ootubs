@@ -15,7 +15,7 @@
 #include "guard/gate.h"
 #include "machine/key.h"
  
-class Keyboard : public Gate, public Keyboard_Controller
+class Keyboard from Gate
 /* Add your code here */ 
 //:public Gate, public Keyboard_Controller
 {
