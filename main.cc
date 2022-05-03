@@ -17,11 +17,11 @@ Keyboard_Controller kc;
 CPU cpu;
 Plugbox plugbox;
 //device
-Panic panic;
+// Panic panic;
 //object
 CGA_Stream kout;
 //user
-Application appl;
+//Application appl;
 
 
 // void test_PrintString() {
@@ -87,8 +87,8 @@ void ktrl_test(){
 int main()
 {
 	kout<<"funktioniert!"<<endl;
-	appl.action();
-	plugbox.report(300);
+	// appl.action();
+	// plugbox.report(300);
 
 	return 0;
 }

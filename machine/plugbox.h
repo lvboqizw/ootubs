@@ -15,7 +15,7 @@
 #include "guard/gate.h"
 #include "device/panic.h"
 
-extern Panic panic;
+
 
 class Plugbox {
 private:
@@ -23,6 +23,8 @@ private:
 /* Add your code here */ 
 
 	Gate* map[256];
+
+	Panic panic;
 
 public:
 	enum {
