@@ -16,6 +16,9 @@
 
 extern "C" void guardian (unsigned int slot);
 
+extern Plugbox plugbox;
+extern CPU cpu;
+
 // //from where??
 extern Plugbox plugbox;
 extern CPU cpu;

@@ -305,16 +305,13 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 
 	 // wait, untill the last command was processed.
-	extern CGA_Stream kout;
+	 extern CGA_Stream kout;
 	int status;
-
-	bool forbiden = false;
 
 	bool ismasked = pic.is_masked(PIC::keyboard);
 	
 	if(!ismasked){//interrupt wurde an der cpu geleitet(wenn es nicht in diese schleife geht, dann ist es schon verboten)
 		pic.forbid(PIC::keyboard);	//verboten
-		forbiden = true;
 	}
 
     do {
@@ -361,10 +358,7 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
         kout<<"------------------------------------------"<<endl;
     }
 
-	if(forbiden)
-		pic.allow(PIC::keyboard);	
-
-	// pic.allow(PIC::keyboard);	
+	pic.allow(PIC::keyboard);	
 
 
 	
@@ -381,13 +375,10 @@ void Keyboard_Controller::set_led (char led, bool on)
 	
 	int status;
 
-	bool forbiden = false;
-
 	bool ismasked = pic.is_masked(PIC::keyboard);
 	
-	if(!ismasked){//interrupt wurde an der cpu geleitet(wenn es nicht in diese schleife geht, dann ist es schon verboten)
-		pic.forbid(PIC::keyboard);	//verboten
-		forbiden = true;
+	if(!ismasked){
+		pic.forbid(PIC::keyboard);	
 	}
 
 	// wait, untill the last command was processed.
@@ -430,10 +421,8 @@ void Keyboard_Controller::set_led (char led, bool on)
 
 	if(data_port.inb() != kbd_reply::ack)return;
 
-	if(forbiden)
-		pic.allow(PIC::keyboard);	//Wenn wir Interrupts zuvor deaktiviert haben,
-									//sollten wir sie wieder aktivieren, 
-									//aber wir sollten den Status nicht ändern, wenn er zuvor deaktiviert war.
+
+	pic.allow(PIC::keyboard);	
 
 
 /* Add your code here */ 
