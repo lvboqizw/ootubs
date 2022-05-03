@@ -17,8 +17,8 @@ class Gate
 private:
     /* data */
 public:
-    Gate();
-    ~Gate();
+    Gate() {};
+    ~Gate() {};
 
     virtual void trigger() = 0;
 };
