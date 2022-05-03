@@ -246,19 +246,15 @@ Key Keyboard_Controller::key_hit ()
 	Key invalid;  // not explicitly initialized Key objects are invalid
 /* Add your code here */ 
 /* Add your code here */ 
-	bool valid = true;
+	int status;
 	//wait for the input
 		// do{
 		// 	status = ctrl_port.inb();
 		// }while( (status & outb) == 0 );
 
 		// if((status & auxb) != 0)return invalid; //maus und keyboard konnen nicht gleichzeitig arbeiten
-	while(ctrl_port.inb()&outb){
-		code = data_port.inb();
-		if(!key_decoded())
-			valid = false;
-	}
-	if(valid)
+	code = data_port.inb();
+	if(key_decoded())//judge whether it is valid
 		return gather;
 	return invalid;
 		

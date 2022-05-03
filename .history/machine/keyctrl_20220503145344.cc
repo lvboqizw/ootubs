@@ -246,19 +246,15 @@ Key Keyboard_Controller::key_hit ()
 	Key invalid;  // not explicitly initialized Key objects are invalid
 /* Add your code here */ 
 /* Add your code here */ 
-	bool valid = true;
+	int status;
 	//wait for the input
 		// do{
 		// 	status = ctrl_port.inb();
 		// }while( (status & outb) == 0 );
 
 		// if((status & auxb) != 0)return invalid; //maus und keyboard konnen nicht gleichzeitig arbeiten
-	while(ctrl_port.inb()&outb){
-		code = data_port.inb();
-		if(!key_decoded())
-			valid = false;
-	}
-	if(valid)
+	code = data_port.inb();
+	if(key_decoded())//judge whether it is valid
 		return gather;
 	return invalid;
 		
@@ -310,8 +306,8 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 
 	bool ismasked = pic.is_masked(PIC::keyboard);
 	
-	if(!ismasked){//interrupt wurde an der cpu geleitet(wenn es nicht in diese schleife geht, dann ist es schon verboten)
-		pic.forbid(PIC::keyboard);	//verboten
+	if(!ismasked){
+		pic.forbid(PIC::keyboard);	
 	}
 
     do {
