@@ -28,11 +28,7 @@ void Application::action()
     char text[] = "Application";
     while(1) {
         cpu.disable_int();   // for atomic instruction
-<<<<<<< HEAD
-        scr.setpos(30, 18);
-=======
-        scr.setpos(30,18);
->>>>>>> 244e8f1f23a5ea2fab1bc5acc0053e8b9c562385
+        scr.set(30,18);
         kout << text;
         kout.flush();
         cpu.enable_int();

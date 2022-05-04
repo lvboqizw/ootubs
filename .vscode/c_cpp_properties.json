@@ -1,10 +1,10 @@
 {
     "configurations": [
         {
-<<<<<<< HEAD
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}"
             ],
             "defines": [
                 "_DEBUG",
@@ -13,19 +13,17 @@
             ],
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
-=======
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}"
-            ],
-            "defines": [],
+            "intelliSenseMode": "windows-msvc-x64",
+            "macFrameworkPath": [],
+            "compilerArgs": [],
+            "mergeConfigurations": false,
             "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
-            "cppStandard": "gnu++14",
-            "intelliSenseMode": "linux-gcc-x64"
->>>>>>> jing
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/**"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
         }
     ],
     "version": 4

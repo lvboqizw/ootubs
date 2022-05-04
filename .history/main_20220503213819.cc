@@ -26,10 +26,11 @@ Application appl;
 
 Keyboard keyboard;
 
+
 int main()
 {
 	kout<<"funktioniert!"<<endl;
-	keyboard.plugin();
+	// keyboard.plugin();
 	appl.action();
 	
 

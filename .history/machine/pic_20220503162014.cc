@@ -66,7 +66,7 @@ void PIC::forbid(int interupt_device) {
         master_2.outb(ocw1);              
     } else {                              // use the second PIC
         ocw1 = slave_2.inb();             //get current state to ensure previous bits stay set
-        ocw1 |= (1<<(interupt_device-8)); //set the corresponding bit to 1 so that it's not allowed
+        ocw1 |= (1<<(interupt_device-8)); //set the corresponding bit to 0 so that it's not allowed
         slave_2.outb(ocw1);  
     }
 }

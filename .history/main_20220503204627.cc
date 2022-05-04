@@ -19,17 +19,17 @@ Plugbox plugbox;
 PIC pic;
 //device
 Panic panic;
+Keyboard keyboard;
 //object
 CGA_Stream kout;
 //user
 Application appl;
 
-Keyboard keyboard;
 
 int main()
 {
 	kout<<"funktioniert!"<<endl;
-	keyboard.plugin();
+	// keyboard.plugin();
 	appl.action();
 	
 
