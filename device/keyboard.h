@@ -30,7 +30,7 @@ public:
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 
-	void trigger();
+	void trigger() override;
 
 /* Add your code here */ 
 
