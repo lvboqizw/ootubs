@@ -40,7 +40,7 @@ void Keyboard::trigger(){
 			unsigned short x,y;
 			kout.getpos(x,y);
 			kout.setpos(10,10);
-			kout << key.ascii();
+			kout << (char)key.ascii();
 			kout.flush();
 			kout.setpos(x,y);
 		}
