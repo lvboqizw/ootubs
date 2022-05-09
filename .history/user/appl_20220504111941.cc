@@ -2,35 +2,35 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                 P A N I C                                 */
+/*                         A P P L I C A T I O N                             */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Default interrupt handler.                                                */
+/* The Application class defines the (only) application for OOStuBS.         */
 /*****************************************************************************/
-
-#ifndef __panic_include__
-#define __panic_include__
 
 /* INCLUDES */
 
-#include "guard/gate.h"
-#include "machine/cpu.h"
+#include "user/appl.h"
 #include "device/cgastr.h"
-
-class Panic : public Gate
+#include "machine/cgascr.h"
+#include "machine/cpu.h"
 /* Add your code here */ 
+ 
+/* GLOBAL VARIABLES */
+extern CGA_Screen scr;
+extern CGA_Stream kout;
+extern CPU cpu;
+/* Add your code here */ 
+ 
+void Application::action()
 {
-private:
-	CPU cpu;
-	CGA_Stream kout;                   
-
-	Panic (const Panic &copy); // prevent copying
-public:
-	Panic () {}
 /* Add your code here */ 
-	void trigger ();
-
-	bool prologue();
-};
-
-#endif
+    char text[] = "Application";
+    while(1) {
+        cpu.disable_int();   // for atomic instruction
+        scr.setpos(30,18);
+        kout << text;
+        kout.flush();
+        cpu.enable_int();
+    }
+}

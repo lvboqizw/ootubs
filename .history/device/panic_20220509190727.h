@@ -29,8 +29,6 @@ public:
 	Panic () {}
 /* Add your code here */ 
 	void trigger ();
-
-	bool prologue();
 };
 
 #endif

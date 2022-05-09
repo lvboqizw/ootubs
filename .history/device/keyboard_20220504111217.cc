@@ -8,38 +8,43 @@
 /* Keyboard driver.                                                          */
 /*****************************************************************************/
 
-#ifndef __Keyboard_include__
-#define __Keyboard_include__
-
-#include "machine/keyctrl.h"
+/* Add your code here */ 
+/* INCLUDE */
+#include "device/keyboard.h"
+#include "machine/plugbox.h"
+#include "device/cgastr.h"
+#include "machine/pic.h"
 #include "guard/gate.h"
-#include "machine/key.h"
+
+/* Functions */
+extern CGA_Stream kout;
+extern PIC pic;
+extern Plugbox plugbox;
+
+
+void Keyboard::plugin (){
+	//Keyboard in der Plugbox anmelden
+	plugbox.assign(Plugbox::keyboard, *this);
+		//interrupts für tastatur erlauben
+	pic.allow(PIC::keyboard);
+}
+
+void Keyboard::trigger(){
+	Key key = key_hit();
+	if(key.valid()){
+		//ctrl + alt + del
+		if(key.ctrl() && key.alt() && key.scancode()== 53){
+			reboot();
+		}else{
+			//tastendruck
+			unsigned short x,y;
+			kout.getpos(x,y);
+			kout.setpos(5,5);
+			kout << key.ascii();
+			kout.flush();
+			kout.setpos(x,y);
+		}
+	}
+}
+/* Add your code here */ 
  
-class Keyboard : public Gate, public Keyboard_Controller
-/* Add your code here */ 
-//:public Gate, public Keyboard_Controller
-{
-private:
-	Keyboard(const Keyboard &copy); // prevent copying
-/* Add your code here */ 
-    Key buffer[1024];
-	unsigned int length;
-	Key key;
-public:
-/* Add your code here */ 
- 
-    Keyboard(){}
-	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
-	void plugin();
-
-	void trigger();
-
-	bool prologue();
-
-	void epilogue();
-
-/* Add your code here */ 
-
-};
-
-#endif
