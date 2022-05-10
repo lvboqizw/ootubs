@@ -21,9 +21,9 @@ extern Guard guard;
 
 class Secure {
 public:
-    inline Secure() { guard.enter(); };
+    inline Secure() { guard.enter();};
 
-    inline ~Secure() {};
+    inline ~Secure() {guard.leave();};
 };
 
 #endif

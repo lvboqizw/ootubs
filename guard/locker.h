@@ -21,10 +21,10 @@ private:
 	bool lock;
 public:
 	Locker() : lock(false) {};
-	//call the method to enter the  critical section
+	//a critical section is entered and the locking variable has to be locked
 	inline void enter() {lock = true;};
-	//call the method to leave the critical section
-	inline void retene() {lock = false;};
+	//a critical section is left and the locking variable can be released
+	inline void retne() {lock = false;};
 	//indicates whether the critical section is free
 	inline bool avail() {return !lock;};
 };

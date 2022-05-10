@@ -23,10 +23,13 @@ private:
 	Guard (const Guard &copy); // prevent copying
 
 	Queue epiQ; //The queue to save the accumulated epilogues
+
+	/* get the next epilogue from the queue. */
+	Gate* remove_epilogue();	
 public:
 	Guard () {}
 /* Add your code here */ 
-	//Regular control flow leaves the critical section. another accumulated epilohies can be processed
+	//Regular control flow leaves the critical section. Waiting epilohies can be processed
 	void leave();
 
 	/* Is called by guardian() if the prviously executed prologue has indicated by a return value of true

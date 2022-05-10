@@ -11,8 +11,10 @@
 #ifndef __Gate_include__
 #define __Gate_include__
 
+#include "object/chain.h"
+
 /* Add your code here */ 
-class Gate
+class Gate : public Chain
 {
 private:
     /* data */
