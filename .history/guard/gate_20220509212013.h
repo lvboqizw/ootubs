@@ -19,8 +19,8 @@ private:
     bool queue;
 
 public:
-    Gate() {};
-    ~Gate() {};
+    Gate();
+    ~Gate();
 
     virtual void trigger() = 0;
 

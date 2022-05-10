@@ -21,4 +21,13 @@ void Panic::trigger() {
     cpu.halt();                           
 }
 
-
+bool Panic::prologue () {
+    
+    cpu.disable_int();
+    
+    kout << "kernel panic" << endl;
+    
+	cpu.halt();
+	
+	return false;
+}

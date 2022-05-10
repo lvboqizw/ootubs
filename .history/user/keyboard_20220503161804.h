@@ -2,30 +2,38 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                 P A N I C                                 */
+/*                            K E Y B O A R D                                */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Default interrupt handler.                                                */
+/* Keyboard driver.                                                          */
 /*****************************************************************************/
 
-#ifndef __panic_include__
-#define __panic_include__
+#ifndef __Keyboard_include__
+#define __Keyboard_include__
 
-/* INCLUDES */
-
+#include "machine/keyctrl.h"
 #include "guard/gate.h"
-
-class Panic : public Gate
+#include "machine/key.h"
+ 
+class Keyboard : public Gate, public Keyboard_Controller
 /* Add your code here */ 
+//:public Gate, public Keyboard_Controller
 {
 private:
-	Panic (const Panic &copy); // prevent copying
-public:
-	Panic () {}
+	Keyboard(const Keyboard &copy); // prevent copying
 /* Add your code here */ 
-	void trigger ();
+	Key key;
+public:
+/* Add your code here */ 
+ 
+    Keyboard(){}
+	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
+	void plugin();
 
-	bool prologue();
+	void trigger();
+
+/* Add your code here */ 
+
 };
 
 #endif

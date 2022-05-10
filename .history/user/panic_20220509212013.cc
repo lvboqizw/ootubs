@@ -2,39 +2,29 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                                 P A N I C                                 */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* Default interrupt handler.                                                */
 /*****************************************************************************/
-
-#ifndef __Gate_include__
-#define __Gate_include__
-
 /* Add your code here */ 
-class Gate
-{
-private:
-    /* data */
-    bool queue;
+/* Add your code here */ 
+#include "panic.h"
 
-public:
-    Gate() {};
-    ~Gate() {};
 
-    virtual void trigger() = 0;
 
-    virtual bool prologue() = 0;
+void Panic::trigger() {
+    kout << "A Panic triggred" << endl;   
+    cpu.halt();                           
+}
 
-   virtual void epilogue() = 0;
-
-   void queued(bool q){
-       queue = q;
-   }
-
-   bool queued() const{//read only
-	   return queue;
-   }
-};
-
-#endif
+bool Panic::prologue () {
+    
+    cpu.disable_int();
+    
+    kout << "kernel panic" << endl;
+    
+	cpu.halt();
+	
+	return false;
+}

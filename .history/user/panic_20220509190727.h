@@ -2,39 +2,33 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                                 P A N I C                                 */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* Default interrupt handler.                                                */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
+#ifndef __panic_include__
+#define __panic_include__
 
+/* INCLUDES */
+
+#include "guard/gate.h"
+#include "machine/cpu.h"
+#include "device/cgastr.h"
+
+class Panic : public Gate
 /* Add your code here */ 
-class Gate
 {
 private:
-    /* data */
-    bool queue;
+	CPU cpu;
+	CGA_Stream kout;                   
 
+	Panic (const Panic &copy); // prevent copying
 public:
-    Gate() {};
-    ~Gate() {};
-
-    virtual void trigger() = 0;
-
-    virtual bool prologue() = 0;
-
-   virtual void epilogue() = 0;
-
-   void queued(bool q){
-       queue = q;
-   }
-
-   bool queued() const{//read only
-	   return queue;
-   }
+	Panic () {}
+/* Add your code here */ 
+	void trigger ();
 };
 
 #endif
