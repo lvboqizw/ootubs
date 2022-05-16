@@ -26,6 +26,8 @@ public:
 	void trigger ();
 
 	bool prologue();
+
+	void epilogue ();
 };
 
 #endif

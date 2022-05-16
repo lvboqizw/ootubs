@@ -22,12 +22,14 @@ void Panic::trigger() {
 }
 
 bool Panic::prologue () {
-    
+	
+	return false;
+}
+
+void Panic::epilogue () {
     cpu.disable_int();
     
     kout << "kernel panic" << endl;
     
 	cpu.halt();
-	
-	return false;
 }
