@@ -7,29 +7,30 @@
 /*---------------------------------------------------------------------------*/
 /* Default interrupt handler.                                                */
 /*****************************************************************************/
-/* Add your code here */ 
-/* Add your code here */ 
-#include "panic.h"
+
+#ifndef __panic_include__
+#define __panic_include__
+
+/* INCLUDES */
+
+#include "guard/gate.h"
 #include "machine/cpu.h"
 #include "device/cgastr.h"
 
-extern CPU cpu;
-extern CGA_Stream kout;
+class Panic : public Gate
+/* Add your code here */ 
+{
+private:
+	CPU cpu;
+	CGA_Stream kout;                   
 
-void Panic::trigger() {
-    kout << "A Panic triggred" << endl;   
-    cpu.halt();                           
-}
+	Panic (const Panic &copy); // prevent copying
+public:
+	Panic () {}
+/* Add your code here */ 
+	void trigger ();
 
-bool Panic::prologue () {
-	
-	return false;
-}
+	bool prologue();
+};
 
-void Panic::epilogue () {
-    cpu.disable_int();
-    
-    kout << "kernel panic" << endl;
-    
-	cpu.halt();
-}
+#endif

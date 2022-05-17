@@ -22,15 +22,21 @@ class Keyboard : public Gate, public Keyboard_Controller
 private:
 	Keyboard(const Keyboard &copy); // prevent copying
 /* Add your code here */ 
+    Key buffer[1024];
+	unsigned int length;
 	Key key;
 public:
 /* Add your code here */ 
  
-	Keyboard() {};
+    Keyboard(){}
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 
-	void trigger();
+	void trigger() override;
+
+	bool prologue();
+
+	void epilogue();
 
 /* Add your code here */ 
 

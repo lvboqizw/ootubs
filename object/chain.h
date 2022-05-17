@@ -2,41 +2,24 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                              C H A I N                                    */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* By inheriting from the Chain class, the derived class inherits a chain    */
+/* pointer that allows its instances to be enqueued in a linked list         */
+/* (implemented in the Queue class).                                         */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
+#ifndef __chain_include__
+#define __chain_include__
 
-#include "object/chain.h"
-
-/* Add your code here */ 
-class Gate : public Chain
-{
+class Chain {
 private:
-    /* data */
-    bool queue;
+	Chain(const Chain &copy); // prevent copying
 
 public:
-    Gate() {};
-    ~Gate() {};
-
-    virtual void trigger() = 0;
-
-    virtual bool prologue() = 0;
-
-   virtual void epilogue() = 0;
-
-   void queued(bool q){
-       queue = q;
-   }
-
-   bool queued() const{//read only
-	   return queue;
-   }
+	Chain() {}
+	Chain *next;
 };
 
 #endif

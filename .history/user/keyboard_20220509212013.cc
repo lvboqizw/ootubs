@@ -25,7 +25,7 @@ extern Plugbox plugbox;
 void Keyboard::plugin (){
 	//Keyboard in der Plugbox anmelden
 	plugbox.assign(Plugbox::keyboard, *this);
-	//interrupts für tastatur erlauben
+		//interrupts für tastatur erlauben
 	pic.allow(PIC::keyboard);
 }
 
@@ -54,12 +54,6 @@ bool Keyboard::prologue ()
 {
 	Key key = this->key_hit();
 
-	//for debug
-	kout.setpos(5,5);
-	kout<<"b";
-	kout.flush();
-	//
-
 	if(key.valid()){
 		//CTRL + ALT + DEL abfragen
 		if((key.ctrl()==true) && (key.alt()==true) && (key.scancode()==0x53))
@@ -67,11 +61,6 @@ bool Keyboard::prologue ()
 			this->epilogue();
 			this->reboot();
 		}else{
-			//for debug
-			kout.setpos(5,5);
-			kout<<"c";
-			kout.flush();
-			//
 			if(length != 1023)//buffer is not full
 				buffer[length++] = key;
 		}

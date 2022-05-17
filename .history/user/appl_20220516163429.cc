@@ -29,13 +29,12 @@ void Application::action()
     char text[] = "Application";
     while(1) {
 
-        //cpu.disable_int();
-        Secure secure;
+        Secure c;
         scr.setpos(30,18);
         kout << text;
         kout.flush();
-        // cpu.enable_int();
+        cpu.enable_int();
 
-        // for(int i=0;i<10000;i++){}
+        for(int i=0;i<10000;i++){}
     }
 }
