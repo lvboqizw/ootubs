@@ -29,7 +29,6 @@ void Application::action()
     char text[] = "Application";
     while(1) {
 
-        //cpu.disable_int();
         Secure secure;
         scr.setpos(30,18);
         kout << text;
