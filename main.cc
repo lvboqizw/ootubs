@@ -26,13 +26,9 @@ Keyboard keyboard;
 
 int main()
 {
+	cpu.enable_int();
 	kout<<"funktioniert!"<<endl;
 	keyboard.plugin();
-    //for debug
-	kout.setpos(5,5);
-	kout<<"a";
-	kout.flush();
-	//
 	appl.action();
 	
 

@@ -14,12 +14,14 @@
 #include "machine/plugbox.h"
 #include "device/cgastr.h"
 #include "machine/pic.h"
+#include "machine/cpu.h"
 #include "guard/gate.h"
 
 /* Functions */
 extern CGA_Stream kout;
 extern PIC pic;
 extern Plugbox plugbox;
+extern CPU cpu;
 
 
 void Keyboard::plugin (){
@@ -52,13 +54,9 @@ void Keyboard::trigger(){
 
 bool Keyboard::prologue ()
 {
+	// cpu.disable_int();
 	Key key = this->key_hit();
-
-	//for debug
-	kout.setpos(5,5);
-	kout<<"b";
-	kout.flush();
-	//
+	char data;
 
 	if(key.valid()){
 		//CTRL + ALT + DEL abfragen
@@ -67,24 +65,31 @@ bool Keyboard::prologue ()
 			this->epilogue();
 			this->reboot();
 		}else{
-			//for debug
-			kout.setpos(5,5);
-			kout<<"c";
-			kout.flush();
-			//
 			if(length != 1023)//buffer is not full
 				buffer[length++] = key;
+			// data = (char)key.ascii();
+			// if(data){
+			// 	if(this->data != 0)return false;
+			// 	this->data= data;
+			// 	return true;
+			// }
+			return key.valid();
+
 		}
 
-	}return key.valid();
+	}
+	// cpu.enable_int();
+	return key.valid();
 }
     
 
 void Keyboard::epilogue ()
 {
-	kout.setpos(0,0);
+	kout.setpos(5,5);
 	while(length > 0)
 		kout<<(char)buffer[--length].ascii();
+	// kout<<this->data;
+	// this->data = 0;
 	kout.flush();	
 }
 /* Add your code here */ 

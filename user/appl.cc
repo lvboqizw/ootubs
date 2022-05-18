@@ -36,6 +36,6 @@ void Application::action()
         kout.flush();
         // cpu.enable_int();
 
-        // for(int i=0;i<10000;i++){}
+
     }
 }

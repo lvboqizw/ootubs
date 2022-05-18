@@ -25,6 +25,7 @@ private:
     Key buffer[1024];
 	unsigned int length;
 	Key key;
+	char data;
 public:
 /* Add your code here */ 
  
