@@ -28,15 +28,13 @@ Gate* Guard::remove_epilogue() {
 }
 
 void Guard::leave() {
-        Gate* current = remove_epilogue();
-        while(current) {                    //if geted current gate is not NULL
-            current-> queued(false);        //set the flag as false: the gate is now moved out of the queue
-            cpu.enable_int();
-            current-> epilogue();           //run the epilogue part of the interrupt
-            cpu.disable_int();
-            current = remove_epilogue();    //get next gate from the queue
-        }
-        //<<<<<<
+    while (true) {
+        cpu.disable_int();
+        Gate* current = static_cast<Gate*>(epiQ.dequeue());  //get a gate which at the first position of queue
+        if (!current)                       //if current is null
+            break;
+        current->epilogue();                //run the epilogue part of the interrupt
+    }
         retne();                            // set up that the critical section is left
         cpu.enable_int();
 }
