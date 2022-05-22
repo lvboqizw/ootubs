@@ -19,14 +19,6 @@
 extern CPU cpu;
 extern CGA_Stream kout;
 
-Gate* Guard::remove_epilogue() {
-    cpu.disable_int();
-    Chain* head = epiQ.dequeue();           //get the at the first position qpilogue in the queue
-    Gate* g = static_cast<Gate*>(head);     //transform the type from chain to the gate
-    // cpu.enable_int();
-    return g;
-}
-
 void Guard::leave() {
     while (true) {
         cpu.disable_int();
