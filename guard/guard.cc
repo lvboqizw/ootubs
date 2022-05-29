@@ -22,29 +22,28 @@ extern CGA_Stream kout;
 void Guard::leave() {
     while (true) {
         cpu.disable_int();
-        Gate* current = static_cast<Gate*>(epiQ.dequeue());  //get a gate which at the first position of queue
+        Gate* current = (Gate*)(epiQ.dequeue());  //get a gate which at the first position of queue
         if (!current)                       //if current is null
             break;
+        current->queued(false);
+        cpu.enable_int();
         current->epilogue();                //run the epilogue part of the interrupt
     }
-        retne();                            // set up that the critical section is left
-        cpu.enable_int();
+    retne();                            // set up that the critical section is left
+    cpu.enable_int();
 }
 
 void Guard::relay(Gate* item) {
     if(avail()){                            //check whether the critical section is free
         Secure secure;                           //set up that the critical section is entered
-
         cpu.enable_int();
         item-> epilogue();
 
     } else {                                //if the critical section is not free
-
         if(!item->queued()) {                //check whether the gate is already been queued
-            cpu.disable_int();
             item->queued(true);             //set the flag as ture: the gate is queued
             epiQ.enqueue(item);
-            cpu.enable_int();
+            //cpu.enable_int();             //will be done auto
         }
     }
 }

@@ -56,29 +56,22 @@ bool Keyboard::prologue ()
 {
 	// cpu.disable_int();
 	Key key = this->key_hit();
-	char data;
 
 	if(key.valid()){
 		//CTRL + ALT + DEL abfragen
 		if((key.ctrl()==true) && (key.alt()==true) && (key.scancode()==0x53))
-		{
+		{	
 			this->epilogue();
 			this->reboot();
 		}else{
-			if(length != 1023)//buffer is not full
-				buffer[length++] = key;
-			// data = (char)key.ascii();
-			// if(data){
-			// 	if(this->data != 0)return false;
-			// 	this->data= data;
-			// 	return true;
-			// }
+			// if(length != 1023)//buffer is not full
+			// 	buffer[length++] = key;
+			this->data = (char)key.ascii();
 			return key.valid();
 
 		}
 
 	}
-	// cpu.enable_int();
 	return key.valid();
 }
     
@@ -86,10 +79,9 @@ bool Keyboard::prologue ()
 void Keyboard::epilogue ()
 {
 	kout.setpos(5,5);
-	while(length > 0)
-		kout<<(char)buffer[--length].ascii();
-	// kout<<this->data;
-	// this->data = 0;
+	// while(length > 0)
+	// 	kout<<(char)buffer[--length].ascii();
+	kout<<this->data;
 	kout.flush();	
 }
 /* Add your code here */ 
