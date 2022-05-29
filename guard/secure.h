@@ -23,7 +23,7 @@ class Secure {
 public:
     inline Secure() { guard.enter();};
 
-    inline ~Secure() {guard.retne();};
+    inline ~Secure() {guard.leave();};
 };
 
 #endif

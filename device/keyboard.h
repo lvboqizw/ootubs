@@ -26,6 +26,7 @@ private:
 	unsigned int length;
 	char data;
 	Key key;
+	char data;
 public:
 /* Add your code here */ 
  
