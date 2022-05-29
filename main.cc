@@ -13,6 +13,8 @@
 #include "guard/guard.h"
 #include "user/appl.h"
 
+#define STACK_SIZE 1024
+
 CGA_Screen scr;
 CPU cpu;
 Plugbox plugbox;
@@ -20,16 +22,18 @@ PIC pic;
 Panic panic;
 CGA_Stream kout;
 Guard guard;
-Application appl;
-
 Keyboard keyboard;
+
+unsigned char stack1[STACK_SIZE];
 
 int main()
 {
 	cpu.enable_int();
-	kout<<"funktioniert!"<<endl;
-	keyboard.plugin();
+	kout<<"Running"<<endl;
+	//keyboard.plugin();
+	Application appl(stack1);
 	appl.action();
+	kout << "return in main" << endl;
 	
 
 	return 0;

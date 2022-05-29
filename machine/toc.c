@@ -18,5 +18,9 @@ void toc_settle(struct toc *regs, void *tos,
 				void *),
 		void *object)
 {
-/* Add your code here */ 
+	void **tos_p = &tos;		// a void pointer point to a void pointer
+	*(--tos_p) = object;		// put the object in the stack
+	*(--tos_p) = 0;				// return point for kickoff
+	*(--tos_p) = kickoff;		// return point for resume
+	regs->rsp = tos_p; 			// save the stack pointer
 }
