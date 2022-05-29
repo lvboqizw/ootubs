@@ -35,7 +35,6 @@ void Guard::leave() {
             cpu.disable_int();
             current = remove_epilogue();    //get next gate from the queue
         }
-
         retne();                            // set up that the critical section is left
 }
 
@@ -46,7 +45,7 @@ void Guard::relay(Gate* item) {
         item-> epilogue();
         leave();
     } else {                                //if the critical section is not free
-        if(!item->queued()) {                //check whether the gate is already been queued
+        if(item->queued()) {                //check whether the gate is already been queued
             cpu.disable_int();
             item->queued(true);             //set the flag as ture: the gate is queued
             epiQ.enqueue(item);

@@ -35,7 +35,6 @@ void Guard::leave() {
             cpu.disable_int();
             current = remove_epilogue();    //get next gate from the queue
         }
-
         retne();                            // set up that the critical section is left
 }
 

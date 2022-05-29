@@ -77,10 +77,9 @@ bool Keyboard::prologue ()
 			// data = (char)key.ascii();
 			// if(data){
 			// 	if(this->data != 0)return false;
+			// }
 			// this->data = data;
 			// return true;
-			// }
-
 		}
 
 	}return key.valid();

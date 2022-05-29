@@ -53,7 +53,7 @@ void Keyboard::trigger(){
 bool Keyboard::prologue ()
 {
 	Key key = this->key_hit();
-	char data;
+
 	//for debug
 	kout.setpos(5,5);
 	kout<<"b";
@@ -74,13 +74,6 @@ bool Keyboard::prologue ()
 			//
 			if(length != 1023)//buffer is not full
 				buffer[length++] = key;
-			// data = (char)key.ascii();
-			// if(data){
-			// 	if(this->data != 0)return false;
-			// this->data = data;
-			// return true;
-			// }
-
 		}
 
 	}return key.valid();
@@ -92,8 +85,6 @@ void Keyboard::epilogue ()
 	kout.setpos(0,0);
 	while(length > 0)
 		kout<<(char)buffer[--length].ascii();
-	// kout<<this->data;
-	// this->data = 0;
 	kout.flush();	
 }
 /* Add your code here */ 

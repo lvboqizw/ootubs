@@ -45,5 +45,5 @@ void guardian (unsigned int slot)
         guard.relay(& g); 
          
     }
-    //cpu.enable_int();                         //after the interup is triggered, enable the cpu to get a new interup
+    cpu.enable_int();                         //after the interup is triggered, enable the cpu to get a new interup
 }

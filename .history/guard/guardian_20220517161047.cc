@@ -40,10 +40,10 @@ void guardian (unsigned int slot)
 	//
     Gate& g = plugbox.report(slot);           //use slot get an interup from the table,
     bool flag = g.prologue();
-        if (flag){          // trigger the interup or panic(if the slot is out of range)
-        //kout << flag << endl;
-        guard.relay(& g); 
-         
+    if(guard.avail()){
+        if (flag)          // trigger the interup or panic(if the slot is out of range)
+        kout << flag << endl;
+        guard.relay(& g);   
     }
-    //cpu.enable_int();                         //after the interup is triggered, enable the cpu to get a new interup
+    cpu.enable_int();                         //after the interup is triggered, enable the cpu to get a new interup
 }

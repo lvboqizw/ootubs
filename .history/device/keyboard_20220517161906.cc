@@ -77,10 +77,9 @@ bool Keyboard::prologue ()
 			// data = (char)key.ascii();
 			// if(data){
 			// 	if(this->data != 0)return false;
+			// }
 			// this->data = data;
 			// return true;
-			// }
-
 		}
 
 	}return key.valid();
@@ -93,7 +92,6 @@ void Keyboard::epilogue ()
 	while(length > 0)
 		kout<<(char)buffer[--length].ascii();
 	// kout<<this->data;
-	// this->data = 0;
 	kout.flush();	
 }
 /* Add your code here */ 
