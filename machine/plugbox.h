@@ -25,15 +25,10 @@ private:
 	Gate* map[64];
 
 public:
-	enum{
-		 timer = 32,
-	
-		 keyboard = 33
-
+	enum {
+		timer = 32,
+		keyboard = 33,
 	};
-	// int timer = 32;
-	
-	// int keyboard = 33;
 
 	Plugbox();
 

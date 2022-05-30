@@ -24,7 +24,9 @@ private:
 /* Add your code here */ 
     Key buffer[1024];
 	unsigned int length;
+	char data;
 	Key key;
+	char data;
 public:
 /* Add your code here */ 
  
@@ -32,7 +34,7 @@ public:
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 
-	void trigger();
+	void trigger() override;
 
 	bool prologue();
 
