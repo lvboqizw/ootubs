@@ -22,7 +22,23 @@
 class Coroutine {
 private:
 	Coroutine(const Coroutine &copy); // prevent copying
-/* Add your code here */ 
+
+public:
+	toc toc1;
+
+	/** Initializ the register values, make the stack pointer pointe to tos
+	 * and first activation execution begins with the kickoff function
+	*/
+	Coroutine (void* tos);
+
+	/**For the first activation of the first coroutine in the system*/
+	void go ();
+
+	/** Trigger a coroutine switch*/
+	void resume (Coroutine& next);
+
+	/**The method action represents the actual job of the coroutine*/
+	virtual void action () = 0;
 };
 
 #endif

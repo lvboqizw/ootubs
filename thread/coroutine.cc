@@ -19,6 +19,24 @@
 // Functions that are implemented at C or assembler level must be declared as
 // extern "C", because they do not conform to C++ name mangling.
 extern "C" {
-/* Add your code here */ 
+    void toc_go (struct toc* regs);
+    void toc_switch (struct toc* regs_now, struct toc* regs_then);
+    void toc_settle (struct toc* regs, void* tos, void (*kickoff)(void*, void*,
+                        void*, void*, void*, void*, Coroutine*), void* object);
 }
-/* Add your code here */ 
+
+extern void kickoff(void*, void*, void*, void*, void*, void*, Coroutine*);
+
+Coroutine::Coroutine (void* tos) {
+    toc_settle(&this -> toc1, tos, &kickoff, this);
+}
+
+void Coroutine::go() {
+    toc_go(&this->toc1);
+}
+
+void Coroutine::resume (Coroutine &next) {
+    toc_switch(&(this->toc1), &(next.toc1));
+}
+
+

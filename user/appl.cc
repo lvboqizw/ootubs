@@ -26,16 +26,5 @@ extern CPU cpu;
 void Application::action()
 {
 /* Add your code here */ 
-    char text[] = "Application";
-    while(1) {
-
-        //cpu.disable_int();
-        Secure secure;
-        scr.setpos(30,18);
-        kout << text;
-        kout.flush();
-        // cpu.enable_int();
-
-
-    }
+    kout << "action" << endl;
 }
