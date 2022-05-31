@@ -11,7 +11,6 @@
 /*****************************************************************************/
 
 /* Add your code here */ 
-#include "user/loop.h"
 #include "user/appl.h"
 #include "device/cgastr.h"
 #include "machine/cgascr.h"
@@ -28,7 +27,7 @@ extern CPU cpu;
 void Loop::action()
 {
 /* Add your code here */ 
-    kout << "first word from loop" << endl;
-    kout << "second word from loop"<<endl;
-    kout << "third word from loop"<<endl;
+    kout << "first word from appl" << endl;
+    kout << "second word from appl"<<endl;
+    kout << "third word from appl"<<endl;
 }

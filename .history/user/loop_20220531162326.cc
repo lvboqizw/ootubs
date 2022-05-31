@@ -11,7 +11,6 @@
 /*****************************************************************************/
 
 /* Add your code here */ 
-#include "user/loop.h"
 #include "user/appl.h"
 #include "device/cgastr.h"
 #include "machine/cgascr.h"

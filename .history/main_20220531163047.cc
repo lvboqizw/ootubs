@@ -35,12 +35,11 @@ int main()
 	cpu.enable_int();
 	kout<<"Running"<<endl;
 	//keyboard.plugin();
-	Application appl(stack1+STACK_SIZE);
-	Loop loop1(stack2+STACK_SIZE);
+	Application appl(stack1);
+	Loop loop1(stack2);
 	scheduler.ready(appl);
-	//scheduler.ready(loop1);
+	scheduler.ready(loop1);
 	scheduler.schedule();
-	//scheduler.resume();
 	// appl.action();
 	kout << "return in main" << endl;
 	

@@ -2,16 +2,14 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                 L O O P                                   */
+/*                         A P P L I C A T I O N                             */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Loop is a thread that does nothing else but count upwards and print this  */
-/* on the screen. In between, it yields the CPU. The Scheduler then decides  */
-/* which thread shall run next.                                              */
+/* The Application class defines the (only) application for OOStuBS.         */
 /*****************************************************************************/
 
-/* Add your code here */ 
-#include "user/loop.h"
+/* INCLUDES */
+
 #include "user/appl.h"
 #include "device/cgastr.h"
 #include "machine/cgascr.h"
@@ -25,10 +23,10 @@ extern CGA_Stream kout;
 extern CPU cpu;
 /* Add your code here */ 
  
-void Loop::action()
+void Application::action()
 {
 /* Add your code here */ 
-    kout << "first word from loop" << endl;
-    kout << "second word from loop"<<endl;
-    kout << "third word from loop"<<endl;
+    kout << "first word from appl" << endl;
+    kout << "second word from appl"<<endl;
+    kout << "third word from appl"<<endl;
 }

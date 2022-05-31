@@ -38,9 +38,9 @@ int main()
 	Application appl(stack1+STACK_SIZE);
 	Loop loop1(stack2+STACK_SIZE);
 	scheduler.ready(appl);
-	//scheduler.ready(loop1);
+	scheduler.ready(loop1);
 	scheduler.schedule();
-	//scheduler.resume();
+	
 	// appl.action();
 	kout << "return in main" << endl;
 	

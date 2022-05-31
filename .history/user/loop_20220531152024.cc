@@ -11,24 +11,6 @@
 /*****************************************************************************/
 
 /* Add your code here */ 
-#include "user/loop.h"
-#include "user/appl.h"
-#include "device/cgastr.h"
-#include "machine/cgascr.h"
-#include "machine/cpu.h"
-#include "guard/secure.h"
+ 
 /* Add your code here */ 
  
-/* GLOBAL VARIABLES */
-extern CGA_Screen scr;
-extern CGA_Stream kout;
-extern CPU cpu;
-/* Add your code here */ 
- 
-void Loop::action()
-{
-/* Add your code here */ 
-    kout << "first word from loop" << endl;
-    kout << "second word from loop"<<endl;
-    kout << "third word from loop"<<endl;
-}
