@@ -10,22 +10,24 @@
 /* which thread shall run next.                                              */
 /*****************************************************************************/
 
-#ifndef __loop_include__
-#define __loop_include__
-
 /* Add your code here */ 
-
-#include "thread/entrant.h"
-
-class Loop : public Entrant
+#include "user/appl.h"
+#include "device/cgastr.h"
+#include "machine/cgascr.h"
+#include "machine/cpu.h"
+#include "guard/secure.h"
+/* Add your code here */ 
+ 
+/* GLOBAL VARIABLES */
+extern CGA_Screen scr;
+extern CGA_Stream kout;
+extern CPU cpu;
+/* Add your code here */ 
+ 
+void Loop::action()
 {
-private:
-	Loop (const Loop &copy); // prevent copying
-
-public:
 /* Add your code here */ 
-	Loop(void *tos) : Entrant(tos) {};
-
-	void action ();
-};
-#endif
+    kout << "first word from appl" << endl;
+    kout << "second word from appl"<<endl;
+    kout << "third word from appl"<<endl;
+}

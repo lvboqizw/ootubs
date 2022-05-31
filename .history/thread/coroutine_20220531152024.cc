@@ -15,8 +15,6 @@
 /*****************************************************************************/
 
 #include "thread/coroutine.h"
-#include "device/cgastr.h"
-#include "guard/guard.h"
 
 // Functions that are implemented at C or assembler level must be declared as
 // extern "C", because they do not conform to C++ name mangling.
@@ -27,15 +25,12 @@ extern "C" {
                         void*, void*, void*, void*, Coroutine*), void* object);
 }
 
-extern CGA_Stream kout;
-extern Guard guard;
 extern void kickoff(void*, void*, void*, void*, void*, void*, Coroutine*);
 
 Coroutine::Coroutine (void* tos) {
     toc_settle(&this -> toc1, tos, &kickoff, this);
 }
 
-//is used for the first activation of the first coroutine in the system
 void Coroutine::go() {
     toc_go(&this->toc1);
 }

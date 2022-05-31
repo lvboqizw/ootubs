@@ -35,7 +35,6 @@ Coroutine::Coroutine (void* tos) {
     toc_settle(&this -> toc1, tos, &kickoff, this);
 }
 
-//is used for the first activation of the first coroutine in the system
 void Coroutine::go() {
     toc_go(&this->toc1);
 }

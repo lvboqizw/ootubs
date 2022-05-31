@@ -15,6 +15,7 @@
 #include "machine/cgascr.h"
 #include "machine/cpu.h"
 #include "guard/secure.h"
+#include "thread/scheduler.h"
 /* Add your code here */ 
  
 /* GLOBAL VARIABLES */
@@ -26,5 +27,7 @@ extern CPU cpu;
 void Application::action()
 {
 /* Add your code here */ 
-    kout << "from application" << endl;
+    kout << "first word from appl" << endl;
+    kout << "second word from appl"<<endl;
+    kout << "third word from appl"<<endl;
 }

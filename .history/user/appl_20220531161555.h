@@ -2,30 +2,27 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                 L O O P                                   */
+/*                         A P P L I C A T I O N                             */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Loop is a thread that does nothing else but count upwards and print this  */
-/* on the screen. In between, it yields the CPU. The Scheduler then decides  */
-/* which thread shall run next.                                              */
+/* The Application class defines the (only) application for OOStuBS.         */
 /*****************************************************************************/
 
-#ifndef __loop_include__
-#define __loop_include__
-
-/* Add your code here */ 
+#ifndef __application_include__
+#define __application_include__
 
 #include "thread/entrant.h"
 
-class Loop : public Entrant
+class Application : public Entrant
 {
 private:
-	Loop (const Loop &copy); // prevent copying
+	Application (const Application &copy); // prevent copying
 
 public:
 /* Add your code here */ 
-	Loop(void *tos) : Entrant(tos) {};
+	Application(void *tos) : Entrant(tos) {};
 
 	void action ();
 };
+
 #endif

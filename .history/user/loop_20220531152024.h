@@ -14,18 +14,5 @@
 #define __loop_include__
 
 /* Add your code here */ 
-
-#include "thread/entrant.h"
-
-class Loop : public Entrant
-{
-private:
-	Loop (const Loop &copy); // prevent copying
-
-public:
-/* Add your code here */ 
-	Loop(void *tos) : Entrant(tos) {};
-
-	void action ();
-};
+ 
 #endif
