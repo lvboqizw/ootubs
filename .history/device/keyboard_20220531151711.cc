@@ -56,6 +56,12 @@ bool Keyboard::prologue ()
 {
 	// cpu.disable_int();
 	Key key = this->key_hit();
+	// char data;
+	// //for debug
+	// kout.setpos(5,5);
+	// kout<<"b";
+	// kout.flush();
+	// //
 
 	if(key.valid()){
 		//CTRL + ALT + DEL abfragen
