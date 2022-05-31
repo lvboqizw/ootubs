@@ -10,7 +10,20 @@
 /* which thread shall run next.                                              */
 /*****************************************************************************/
 
-/* Add your code here */ 
- 
-/* Add your code here */ 
- 
+#include "user/loop.h"
+#include "device/cgastr.h"
+
+extern CGA_Stream kout;
+
+void Loop::action() {
+    // int i = 0;
+    // while(i < 10) {
+    //     kout.setpos(0, 5);
+    //     kout<< "Loop for " << i << " times";
+    //     kout.flush();
+    //     ++i;
+    // }
+    kout<< "output from loop" << endl;
+}
+
+

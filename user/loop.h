@@ -13,6 +13,15 @@
 #ifndef __loop_include__
 #define __loop_include__
 
-/* Add your code here */ 
- 
+#include "thread/entrant.h"
+
+class Loop : public Entrant {
+
+public:
+    Loop(void *tos) : Entrant(tos) {};
+
+    void action();
+
+};
+
 #endif

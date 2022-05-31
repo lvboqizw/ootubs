@@ -22,9 +22,9 @@ extern CGA_Screen scr;
 extern CGA_Stream kout;
 extern CPU cpu;
 /* Add your code here */ 
- 
+
 void Application::action()
 {
 /* Add your code here */ 
-    kout << "action" << endl;
+    kout << "from application" << endl;
 }
