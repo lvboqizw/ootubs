@@ -17,18 +17,24 @@
 #include "machine/cgascr.h"
 #include "machine/cpu.h"
 #include "guard/secure.h"
+#include "thread/scheduler.h"
 /* Add your code here */ 
  
 /* GLOBAL VARIABLES */
-extern CGA_Screen scr;
+
 extern CGA_Stream kout;
-extern CPU cpu;
-/* Add your code here */ 
+extern Scheduler scheduler;
+extern Secure secure;
+
  
 void Loop::action()
 {
-/* Add your code here */ 
-    kout << "first word from loop" << endl;
-    kout << "second word from loop"<<endl;
-    kout << "third word from loop"<<endl;
+    while(1) {
+        Secure secure;
+        kout.setpos(0, 7);
+        kout << "in the loop";
+        kout.flush();
+        scheduler.resume();
+    }
+
 }

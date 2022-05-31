@@ -16,18 +16,34 @@
 #include "machine/cpu.h"
 #include "guard/secure.h"
 #include "thread/scheduler.h"
-/* Add your code here */ 
- 
+#include "user/loop.h"
+
 /* GLOBAL VARIABLES */
 extern CGA_Screen scr;
 extern CGA_Stream kout;
 extern CPU cpu;
-/* Add your code here */ 
+extern Scheduler scheduler;
+
+#define STACK_SIZE 512
+
+unsigned char stack2[STACK_SIZE];
 
 void Application::action()
 {
 /* Add your code here */ 
-    kout << "first word from appl" << endl;
-    kout << "second word from appl"<<endl;
-    kout << "third word from appl"<<endl;
+    Loop loop(stack2 + STACK_SIZE);
+    scheduler.ready(loop);
+    int i = 0;
+    while(1) {
+        Secure secure;
+        kout.setpos(0, 5);
+        kout << "in the application";
+        kout.flush();
+        ++ i;
+        if(i == 100) {
+            kout << "end of appli" << endl;
+            scheduler.exit();
+        }
+        scheduler.resume();
+    }
 }
