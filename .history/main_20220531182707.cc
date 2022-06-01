@@ -40,9 +40,10 @@ int main()
 	scheduler.ready(appl);
 	scheduler.ready(loop1);
 	scheduler.schedule();
+	scheduler.exit();
 	//scheduler.resume();
 	// appl.action();
-	//kout << "return in main" << endl;
+	kout << "return in main" << endl;
 	
 
 	return 0;
