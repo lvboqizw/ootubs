@@ -27,15 +27,15 @@ Guard guard;
 Scheduler scheduler;
 Keyboard keyboard;
 
-unsigned char stack1[STACK_SIZE];
+unsigned char stack[STACK_SIZE];
 
 int main()
 {
 	cpu.enable_int();
 	kout<<"Running"<<endl;
-	Application appl(stack1+STACK_SIZE);
+	Application appl(stack+STACK_SIZE);      // the address start at a high address
 	scheduler.ready(appl);
 	scheduler.schedule();
-	
+
 	return 0;
 }

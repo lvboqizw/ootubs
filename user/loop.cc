@@ -31,10 +31,13 @@ void Loop::action()
 {
     while(1) {
         Secure secure;
-        kout.setpos(0, 7);
-        kout << "in the loop";
+        kout.setpos(0, 10 + num);
+        kout << "in the loop" << num ;
         kout.flush();
         scheduler.resume();
     }
+}
 
+void Loop::set_num(int i) {
+    num = i;
 }

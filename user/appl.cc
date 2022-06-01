@@ -26,23 +26,39 @@ extern Scheduler scheduler;
 
 #define STACK_SIZE 512
 
+unsigned char stack1[STACK_SIZE];
 unsigned char stack2[STACK_SIZE];
 
 void Application::action()
 {
 /* Add your code here */ 
-    Loop loop(stack2 + STACK_SIZE);
-    scheduler.ready(loop);
+    Loop loop1(stack1 + STACK_SIZE);
+    loop1.set_num(1);
+    Loop loop2(stack2 + STACK_SIZE);
+    loop2.set_num(2);
+
+    scheduler.ready(loop1);
+    scheduler.ready(loop2);
     int i = 0;
+    int j = 0;
     while(1) {
         Secure secure;
         kout.setpos(0, 5);
         kout << "in the application";
         kout.flush();
         ++ i;
-        if(i == 100) {
-            kout << "end of appli" << endl;
-            scheduler.exit();
+        ++ j;
+        if(i == 15000) {
+            kout << endl;
+            scheduler.kill(loop1);                   //kill the loop application
+            kout << "kill the loop1" << endl;
+            // kout << "end of the application" << endl;
+            // scheduler.exit();                        //terminate the application itself
+        }
+        if(j == 30000) {
+            kout << endl;
+            kout << "end of the application" << endl;
+            scheduler.exit();                        //terminate the application itself
         }
         scheduler.resume();
     }
