@@ -11,11 +11,11 @@
 #include "device/panic.h"
 #include "object/o_stream.h"
 #include "guard/guard.h"
-#include "thread/scheduler.h"
 #include "user/appl.h"
 #include "user/loop.h"
+#include "thread/scheduler.h"
 
-#define STACK_SIZE 512
+#define STACK_SIZE 1024
 
 CGA_Screen scr;
 CPU cpu;
@@ -24,18 +24,27 @@ PIC pic;
 Panic panic;
 CGA_Stream kout;
 Guard guard;
-Scheduler scheduler;
 Keyboard keyboard;
+Scheduler scheduler;
 
-unsigned char stack[STACK_SIZE];
+unsigned char stack1[STACK_SIZE];
+unsigned char stack2[STACK_SIZE];
 
 int main()
 {
 	cpu.enable_int();
 	kout<<"Running"<<endl;
-	Application appl(stack+STACK_SIZE);      // the address start at a high address
+	//keyboard.plugin();
+	Application appl(stack1+STACK_SIZE);
+	Loop loop1(stack2+STACK_SIZE);
 	scheduler.ready(appl);
+	//scheduler.ready(loop1);
 	scheduler.schedule();
+	scheduler.exit();
+	//scheduler.resume();
+	// appl.action();
+	kout << "return in main" << endl;
+	
 
 	return 0;
 }
