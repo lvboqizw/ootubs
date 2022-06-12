@@ -48,14 +48,12 @@ void Application::action()
         kout.flush();
         ++ i;
         ++ j;
-        if(i == 15000) {
+        if(i == 40000) {
             kout << endl;
             scheduler.kill(loop1);                   //kill the loop application
             kout << "kill the loop1" << endl;
-            // kout << "end of the application" << endl;
-            // scheduler.exit();                        //terminate the application itself
         }
-        if(j == 30000) {
+        if(j == 80000) {
             kout << endl;
             kout << "end of the application" << endl;
             scheduler.exit();                        //terminate the application itself
