@@ -8,4 +8,34 @@
 /* Implements the system-call interface to the Scheduler.                    */
 /*****************************************************************************/
 
-/* Add your code here */ 
+
+#include "syscall/guarded_scheduler.h"
+
+void Guarded_Scheduler::ready(Thread& that) {
+    {
+        Secure secure;
+        Scheduler::ready((Entrant&) that);
+    }
+}
+
+void Guarded_Scheduler::exit() {
+    {
+        Secure secure;
+        Scheduler::exit();
+    }
+}
+
+void Guarded_Scheduler::kill(Thread& that) {
+    {
+        Secure secure;
+        Scheduler::kill((Entrant&) that);
+    }
+}
+
+void Guarded_Scheduler::resume() {
+    {
+        Secure secure;
+        Scheduler::resume();
+    }
+}
+

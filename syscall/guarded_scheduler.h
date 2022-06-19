@@ -11,7 +11,9 @@
 #ifndef __guarded_scheduler_include__
 #define __guarded_scheduler_include__
 
-/* Add your code here */ 
+#include "thread/scheduler.h"
+#include "syscall/thread.h"
+#include "guard/secure.h"
 
 class Guarded_Scheduler
 /* Add your code here */ 
@@ -20,7 +22,18 @@ private:
 	Guarded_Scheduler(const Guarded_Scheduler &copy); // prevent copying
 public:
 	Guarded_Scheduler () {}
-/* Add your code here */ 
+
+	// Registers the process 'that' with the scheduler
+	void ready(Thread& that);
+
+	// A process call this method to terminate itself
+	void exit();
+
+	// A prcess call this method to terminate another process 'that'
+	void kill(Thread& that);
+
+	// Used to trigger a process switch
+	void resume();
 };
 
 #endif
