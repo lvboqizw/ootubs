@@ -14,14 +14,20 @@
 class PIT {
 private:
 	PIT(const PIT &copy); // prevent copying
-/* Add your code here */ 
+
+	int us;
+
 public:
 	PIT(int us) {
 		interval (us);
 	}
+
+	// Indicates which interrupt interval was set
 	int interval() {
-/* Add your code here */ 
+	return this->us;
 	}
+
+	// Set a new interupt interval
 	void interval(int us);
 };
 
