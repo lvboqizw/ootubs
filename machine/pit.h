@@ -11,14 +11,19 @@
 #ifndef __pit_include__
 #define __pit_include__
 
+#include "machine/io_port.h"
+
 class PIT {
 private:
 	PIT(const PIT &copy); // prevent copying
 
+	IO_Port crtl_register;
+	IO_Port counter;
+
 	int us;
 
 public:
-	PIT(int us) {
+	PIT(int us) : crtl_register(0x43), counter(0x40) { // counter0, 1.PIT
 		interval (us);
 	}
 
