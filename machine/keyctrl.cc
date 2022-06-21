@@ -335,7 +335,7 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
         // error handling
         return;
     } else {
-         kout<<"ACK1"<<endl; 
+       //  kout<<"ACK1"<<endl; 
     }
 
     // set the parameter when received the ack.
@@ -356,9 +356,9 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
         return;
     } else {
 		
-        kout<<"------------------------------------------"<<endl;
-        kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
-        kout<<"------------------------------------------"<<endl;
+        // kout<<"------------------------------------------"<<endl;
+        // kout << "[ACK!] DELAY " << delay << " SPEED " << speed <<" OPT_CODE:" << optcode << endl;
+        // kout<<"------------------------------------------"<<endl;
     }
 
 	if(forbiden)
