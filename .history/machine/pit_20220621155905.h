@@ -11,6 +11,19 @@
 #ifndef __pit_include__
 #define __pit_include__
 
+<<<<<<< HEAD
+class PIT {
+private:
+	PIT(const PIT &copy); // prevent copying
+/* Add your code here */ 
+public:
+	PIT(int us) {
+		interval (us);
+	}
+	int interval() {
+/* Add your code here */ 
+	}
+=======
 #include "machine/io_port.h"
 
 class PIT {
@@ -33,6 +46,7 @@ public:
 	}
 
 	// Set a new interupt interval
+>>>>>>> b45b96f7f63bc21cda9c395bee0aa3af01f8c910
 	void interval(int us);
 };
 

@@ -20,7 +20,6 @@
 #define STACK_SIZE 512
 
 CGA_Screen scr;
-
 CPU cpu;
 Plugbox plugbox;
 PIC pic;
@@ -47,9 +46,7 @@ int main()
 	kout<<"Running2"<<endl;
 
 	guard.enter();
-	kout<<"Running3"<<endl;
-
-	guarded_scheduler.schedule();
+	guarded_scheduler.Scheduler::schedule();
 
 	return 0;
 }

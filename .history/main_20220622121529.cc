@@ -49,7 +49,7 @@ int main()
 	guard.enter();
 	kout<<"Running3"<<endl;
 
-	guarded_scheduler.schedule();
+	guarded_scheduler.Scheduler::schedule();
 
 	return 0;
 }

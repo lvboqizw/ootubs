@@ -33,7 +33,6 @@ unsigned char stack2[STACK_SIZE];
 void Application::action()
 {
 /* Add your code here */ 
-    kout<<"in the app"<<endl;
     Loop loop1(stack1 + STACK_SIZE);
     loop1.set_num(1);
     Loop loop2(stack2 + STACK_SIZE);
@@ -43,6 +42,8 @@ void Application::action()
     guarded_scheduler.ready(loop2);
     int i = 0;
     int j = 0;
+        kout << "in the application222222222";
+
     while(1) {
         Secure secure;
         kout.setpos(0, 5);

@@ -33,13 +33,12 @@ unsigned char stack2[STACK_SIZE];
 void Application::action()
 {
 /* Add your code here */ 
-    kout<<"in the app"<<endl;
     Loop loop1(stack1 + STACK_SIZE);
     loop1.set_num(1);
     Loop loop2(stack2 + STACK_SIZE);
     loop2.set_num(2);
 
-    guarded_scheduler.ready(loop1);
+    guard_scheduler.ready(loop1);
     guarded_scheduler.ready(loop2);
     int i = 0;
     int j = 0;
