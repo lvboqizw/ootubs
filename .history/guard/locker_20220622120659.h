@@ -28,16 +28,11 @@ public:
 	//a critical section is entered and the locking variable has to be locked
 	inline void enter() {
 		if(lock==true) {
-			kout << "already in the lock" << endl;
+
 		}
-		kout << "in lock" << endl;
 		lock = true;};
 	//a critical section is left and the locking variable can be released
-	inline void retne() {
-		if(lock == false) {
-			kout<<"there is no lock" << endl;
-		}
-		lock = false;};
+	inline void retne() {lock = false;};
 	//indicates whether the critical section is free
 	inline bool avail() {return !lock;};
 };

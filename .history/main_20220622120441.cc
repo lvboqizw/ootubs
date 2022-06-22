@@ -10,7 +10,7 @@
 #include "device/keyboard.h"
 #include "device/panic.h"
 #include "object/o_stream.h"
-#include "syscall/guarded_scheduler.h"
+#include "guard/guard.h"
 #include "thread/scheduler.h"
 #include "syscall/guarded_scheduler.h"
 #include "user/appl.h"
@@ -20,7 +20,6 @@
 #define STACK_SIZE 512
 
 CGA_Screen scr;
-
 CPU cpu;
 Plugbox plugbox;
 PIC pic;
@@ -47,9 +46,7 @@ int main()
 	kout<<"Running2"<<endl;
 
 	guard.enter();
-	kout<<"Running3"<<endl;
-
-	guarded_scheduler.schedule();
+	guarded_scheduler.Scheduler::schedule();
 
 	return 0;
 }

@@ -12,7 +12,7 @@
 #include "syscall/guarded_scheduler.h"
 #include "device/cgastr.h"
 
-// extern CGA_Screen kout;
+extern CGA_Screen kout;
 
 void Guarded_Scheduler::ready(Thread& that) {
     {

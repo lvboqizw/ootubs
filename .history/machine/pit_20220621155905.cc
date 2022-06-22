@@ -8,6 +8,9 @@
 /* Programmable Interval Timer.                                              */
 /*****************************************************************************/
 
+<<<<<<< HEAD
+/* Add your code here */ 
+=======
 #include "machine/pit.h"
 
 void PIT::interval(int us) {
@@ -32,3 +35,4 @@ void PIT::interval(int us) {
     this -> counter.outb((char)steps);
     this -> counter.outb((char)(steps >> 8)); //???
 }
+>>>>>>> b45b96f7f63bc21cda9c395bee0aa3af01f8c910
