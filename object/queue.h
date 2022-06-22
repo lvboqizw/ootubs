@@ -24,6 +24,8 @@ protected:
 	Chain *head;
 	Chain **tail;
 
+	int counter = 0;
+
 public:
 	Queue()
 	{
@@ -33,6 +35,8 @@ public:
 	void enqueue(Chain *item);
 	Chain *dequeue();
 	void remove(Chain *);
+
+	int len();
 };
 
 #endif

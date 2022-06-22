@@ -27,6 +27,7 @@ void Queue::enqueue(Chain *item)
 	item->next = 0; // The new element has no successor yet.
 	*tail = item;   // Append at the end of the list
 	tail = &(item->next); // and update the tail pointer.
+	counter += 1;
 }
 
 // DEQUEUE: Returns the list's first element and removes it from the list.
@@ -44,6 +45,7 @@ Chain *Queue::dequeue()
 		else               // Otherwise, invalidate the pointer
 			item->next = 0;// to this element's successor.
 	}
+	counter -= 1;
 	return item;
 }
 
@@ -75,4 +77,9 @@ void Queue::remove(Chain *item)
 			}
 		}
 	}
+	counter -= 1;
+}
+
+int	Queue::len() {
+	return counter;
 }

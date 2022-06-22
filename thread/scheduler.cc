@@ -14,6 +14,7 @@
 /* Add your code here */ 
 #include "thread/scheduler.h"
 #include "guard/guard.h"
+#include "device/cgastr.h"
 
 
 extern Guard guard;
@@ -24,16 +25,20 @@ Scheduler::Scheduler(const Scheduler &copy){}
 
 void Scheduler::ready (Entrant &that){
     list.enqueue(&that);
+    kout << "after ready len of list: " << list.len() << endl;
 }
 
 void Scheduler::schedule(){
-    // Hole nächstes
     Entrant *next = static_cast<Entrant*>(list.dequeue());
-
-    if(!next) return;
-
-    // dispatchen
-    go(*next);
+    kout << "after schedule len of list: " << list.len() << endl;
+    kout << next << endl;
+    if(next){
+        kout << "get one" << endl; 
+        go(*next);
+    }
+    else{
+        kout << "get nothing" << endl;
+    }
 }
 
 void Scheduler::exit(){
