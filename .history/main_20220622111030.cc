@@ -40,8 +40,7 @@ int main()
 	kout<<"Running"<<endl;
 	Application appl(stack+STACK_SIZE);      // the address start at a high address
 	scheduler.ready(appl);
-	guard.enter();
-	scheduler.Scheduler::schedule();
+	scheduler.schedule();
 
 	return 0;
 }

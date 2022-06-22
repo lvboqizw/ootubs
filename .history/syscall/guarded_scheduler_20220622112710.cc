@@ -14,21 +14,21 @@
 void Guarded_Scheduler::ready(Thread& that) {
     {
         Secure secure;
-        this->Scheduler::ready(that);
+        Scheduler::ready(that);
     }
 }
 
 void Guarded_Scheduler::exit() {
     {
         Secure secure;
-        this->Scheduler::exit();
+        Scheduler::exit();
     }
 }
 
 void Guarded_Scheduler::kill(Thread& that) {
     {
         Secure secure;
-        this->Scheduler::kill( that);
+        Scheduler::kill( that);
     }
 }
 
