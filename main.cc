@@ -10,7 +10,7 @@
 #include "device/keyboard.h"
 #include "device/panic.h"
 #include "object/o_stream.h"
-#include "guard/guard.h"
+#include "syscall/guarded_scheduler.h"
 #include "thread/scheduler.h"
 #include "user/appl.h"
 #include "user/loop.h"

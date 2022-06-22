@@ -24,7 +24,7 @@ void Watch::windup() {
 }
 
 bool Watch::prologue(){
-    return true;            // ???????
+    return true;            
 }
 
 void Watch::epilogue(){

@@ -13,14 +13,13 @@
 
 #include "thread/entrant.h"
  
-class Thread :: public Entrant
+class Thread : public Entrant
 
- 
 {
 private:
 	Thread(const Thread &copy); // prevent copying
 public:
-	Thread(void *tos):Entrant(tos){}
+	Thread(void *tos):Entrant(tos){};
  
 };
 
