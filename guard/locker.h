@@ -14,6 +14,10 @@
 #ifndef __Locker_include__
 #define __Locker_include__
 
+#include "device/cgastr.h"
+
+extern CGA_Stream kout;
+
 class Locker {
 private:
 	Locker(const Locker &copy); // prevent copying
@@ -22,9 +26,19 @@ private:
 public:
 	Locker() : lock(false) {};
 	//a critical section is entered and the locking variable has to be locked
-	inline void enter() {lock = true;};
+	inline void enter() {
+		if(lock == true) {
+			kout << "Already in the Lock" << endl;
+		}
+		lock = true;
+	};
 	//a critical section is left and the locking variable can be released
-	inline void retne() {lock = false;};
+	inline void retne() {
+		if(lock == false) {
+			kout << "Nothing is locked now" << endl;
+		}
+		lock = false;
+	};
 	//indicates whether the critical section is free
 	inline bool avail() {return !lock;};
 };
