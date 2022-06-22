@@ -8,27 +8,46 @@
 /* Programmable Interval Timer.                                              */
 /*****************************************************************************/
 
-#include "machine/pit.h"
+#ifndef __pit_include__
+#define __pit_include__
 
-void PIT::interval(int us) {
-    this -> us = us;
+<<<<<<< HEAD
+class PIT {
+private:
+	PIT(const PIT &copy); // prevent copying
+/* Add your code here */ 
+public:
+	PIT(int us) {
+		interval (us);
+	}
+	int interval() {
+/* Add your code here */ 
+	}
+=======
+#include "machine/io_port.h"
 
-    long tmp = this -> us;
+class PIT {
+private:
+	PIT(const PIT &copy); // prevent copying
 
-    tmp /= 838;
-    tmp *= 1000; // how many steps are needed to reach us microseconds
+	IO_Port crtl_register;
+	IO_Port counter;
 
-    unsigned short steps = (unsigned short) tmp; //reduce the result to the 2 Byte size
+	int us;
 
-    /** Set up the control register:
-     * 6-7 -> 00 : Counter 0 for periodic interrupts
-     * 4-5 -> 11 : read/write least significant byte first, then most significant byte
-     * 1-3 -> 010 : periodic interrupt
-     * 0 : binary counting of 16 bits
-     * => 0b00110100 = 0x34
-    */
-    this -> crtl_register.outb(0x34);
+public:
+	PIT(int us) : crtl_register(0x43), counter(0x40) { // counter0, 1.PIT
+		interval (us);
+	}
 
-    this -> counter.outb((char)steps);
-    this -> counter.outb((char)(steps >> 8)); //???
-}
+	// Indicates which interrupt interval was set
+	int interval() {
+	return this->us;
+	}
+
+	// Set a new interupt interval
+>>>>>>> b45b96f7f63bc21cda9c395bee0aa3af01f8c910
+	void interval(int us);
+};
+
+#endif

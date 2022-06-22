@@ -24,10 +24,10 @@ void Watch::windup() {
 }
 
 bool Watch::prologue(){
-    return true;            
+    return true;            // ???????
 }
 
 void Watch::epilogue(){
-    guarded_scheduler.Scheduler::resume();
+    guarded_scheduler.Schedule::resume();
 }
 

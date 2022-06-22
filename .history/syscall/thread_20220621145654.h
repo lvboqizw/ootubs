@@ -2,28 +2,26 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                         A P P L I C A T I O N                             */
+/*                             T H R E A D                                   */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* The Application class defines the (only) application for OOStuBS.         */
+/* Implements user interface of a thread.                                    */
 /*****************************************************************************/
 
-#ifndef __application_include__
-#define __application_include__
+#ifndef __thread_include__
+#define __thread_include__
 
 #include "thread/entrant.h"
-#include "syscall/thread.h"
+ 
+class Thread :: public Entrant
 
-class Application : public Thread
+ 
 {
 private:
-	Application (const Application &copy); // prevent copying
-
+	Thread(const Thread &copy); // prevent copying
 public:
-/* Add your code here */ 
-	Application(void *tos) : Thread(tos) {};
-
-	void action ();
+	Thread(void *tos):Entrant(tos){}
+ 
 };
 
 #endif

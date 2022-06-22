@@ -17,8 +17,7 @@
 void Guarded_Scheduler::ready(Thread& that) {
     {
         Secure secure;
-        kout << "guard ready";
-        kout.flush();
+        kout << "guard ready" << endl;
         this->Scheduler::ready(that);
     }
 }

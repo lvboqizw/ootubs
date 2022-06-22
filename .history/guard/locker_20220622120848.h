@@ -30,7 +30,7 @@ public:
 		if(lock==true) {
 			kout << "already in the lock" << endl;
 		}
-		// kout << "in lock" << endl;
+		kout << "in lock" << endl;
 		lock = true;};
 	//a critical section is left and the locking variable can be released
 	inline void retne() {

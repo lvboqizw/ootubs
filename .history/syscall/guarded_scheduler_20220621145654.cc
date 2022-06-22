@@ -10,37 +10,32 @@
 
 
 #include "syscall/guarded_scheduler.h"
-#include "device/cgastr.h"
-
-// extern CGA_Screen kout;
 
 void Guarded_Scheduler::ready(Thread& that) {
     {
         Secure secure;
-        kout << "guard ready";
-        kout.flush();
-        this->Scheduler::ready(that);
+        Scheduler::ready((Entrant&) that);
     }
 }
 
 void Guarded_Scheduler::exit() {
     {
         Secure secure;
-        this->Scheduler::exit();
+        Scheduler::exit();
     }
 }
 
 void Guarded_Scheduler::kill(Thread& that) {
     {
         Secure secure;
-        this->Scheduler::kill( that);
+        Scheduler::kill((Entrant&) that);
     }
 }
 
 void Guarded_Scheduler::resume() {
     {
         Secure secure;
-        this->Scheduler::resume();
+        Scheduler::resume();
     }
 }
 

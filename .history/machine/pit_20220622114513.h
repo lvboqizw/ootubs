@@ -2,28 +2,38 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                         A P P L I C A T I O N                             */
+/*                                  P I T                                    */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* The Application class defines the (only) application for OOStuBS.         */
+/* Programmable Interval Timer.                                              */
 /*****************************************************************************/
 
-#ifndef __application_include__
-#define __application_include__
+#ifndef __pit_include__
+#define __pit_include__
 
-#include "thread/entrant.h"
-#include "syscall/thread.h"
+#include "machine/io_port.h"
 
-class Application : public Thread
-{
+class PIT {
 private:
-	Application (const Application &copy); // prevent copying
+	PIT(const PIT &copy); // prevent copying
+
+	IO_Port crtl_register;
+	IO_Port counter;
+
+	int us;
 
 public:
-/* Add your code here */ 
-	Application(void *tos) : Thread(tos) {};
+	PIT(int us) : crtl_register(0x43), counter(0x40) { // counter0, 1.PIT
+		interval (us);
+	}
 
-	void action ();
+	// Indicates which interrupt interval was set
+	int interval() {
+	return this->us;
+	}
+
+	// Set a new interupt interval
+	void interval(int us);
 };
 
 #endif

@@ -11,17 +11,24 @@
 #ifndef __guarded_scheduler_include__
 #define __guarded_scheduler_include__
 
+<<<<<<< HEAD
+/* Add your code here */ 
+=======
 #include "thread/scheduler.h"
 #include "syscall/thread.h"
 #include "guard/secure.h"
+>>>>>>> b45b96f7f63bc21cda9c395bee0aa3af01f8c910
 
-class Guarded_Scheduler : public Scheduler
+class Guarded_Scheduler
 /* Add your code here */ 
 {
 private:
 	Guarded_Scheduler(const Guarded_Scheduler &copy); // prevent copying
 public:
-	Guarded_Scheduler () {};
+	Guarded_Scheduler () {}
+<<<<<<< HEAD
+/* Add your code here */ 
+=======
 
 	// Registers the process 'that' with the scheduler
 	void ready(Thread& that);
@@ -34,6 +41,7 @@ public:
 
 	// Used to trigger a process switch
 	void resume();
+>>>>>>> b45b96f7f63bc21cda9c395bee0aa3af01f8c910
 };
 
 #endif

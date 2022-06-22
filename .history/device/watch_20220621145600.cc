@@ -9,6 +9,13 @@
 /* process switch if necessary.                                              */
 /*****************************************************************************/
 
+<<<<<<< HEAD
+/* Add your code here */ 
+/* Add your code here */ 
+ 
+/* Add your code here */ 
+/* Add your code here */ 
+=======
 #include "device/watch.h"
 #include "machine/plugbox.h"
 #include "machine/pic.h"
@@ -24,10 +31,11 @@ void Watch::windup() {
 }
 
 bool Watch::prologue(){
-    return true;            
+    return true;            // ???????
 }
 
 void Watch::epilogue(){
-    guarded_scheduler.Scheduler::resume();
+    guarded_scheduler.resume();
 }
+>>>>>>> b45b96f7f63bc21cda9c395bee0aa3af01f8c910
 

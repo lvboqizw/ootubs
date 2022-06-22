@@ -10,26 +10,34 @@
 /* which thread shall run next.                                              */
 /*****************************************************************************/
 
-#ifndef __loop_include__
-#define __loop_include__
-
 /* Add your code here */ 
+#include "user/loop.h"
+#include "user/appl.h"
+#include "device/cgastr.h"
+#include "machine/cgascr.h"
+#include "machine/cpu.h"
+#include "guard/secure.h"
+#include "thread/scheduler.h"
+/* Add your code here */ 
+ 
+/* GLOBAL VARIABLES */
 
-#include "thread/entrant.h"
-#include "syscall/thread.h"
+extern CGA_Stream kout;
+extern Guarded_Scheduler scheduler;
+extern Secure secure;
 
-class Loop : public Thread
+ 
+void Loop::action()
 {
-private:
-	Loop (const Loop &copy); // prevent copying
-	int num = 0;
+    while(1) {
+        Secure secure;
+        kout.setpos(0, 10 + num);
+        kout << "in the loop" << num ;
+        kout.flush();
+        //scheduler.resume();
+    }
+}
 
-public:
-/* Add your code here */ 
-	Loop(void *tos) : Thread(tos) {};
-
-	void action ();
-
-	void set_num(int i);
-};
-#endif
+void Loop::set_num(int i) {
+    num = i;
+}

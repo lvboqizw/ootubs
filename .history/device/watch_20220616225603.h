@@ -9,25 +9,31 @@
 /* process switch if necessary.                                              */
 /*****************************************************************************/
 
-#include "device/watch.h"
-#include "machine/plugbox.h"
-#include "machine/pic.h"
-#include "syscall/guarded_scheduler.h"
- 
-extern Plugbox plugbox;
-extern PIC pic;
-extern Guarded_Scheduler guarded_scheduler;
+#ifndef __watch_include__
+#define __watch_include__
 
-void Watch::windup() {
-    plugbox.assign(plugbox.timer, *this);
-    pic.allow(PIC::timer);   // allow the interrupts from timer
-}
+/* INCLUDES */
 
-bool Watch::prologue(){
-    return true;            
-}
+#include "guard/gate.h"
+#include "machine/pit.h"
 
-void Watch::epilogue(){
-    guarded_scheduler.Scheduler::resume();
-}
+class Watch : public Gate, public PIT {
+private:
+	Watch(const Watch &copy); // prevent copying
+public:
+	// WATCH: Timer initialization, see PIT.
+	Watch(int us) : PIT(us) {}
 
+	// WINDUP: "Winds up" the clock. To do this, the watch object must register
+	//         with the Plugbox plugbox and allow the interrupts of the timer
+	//         module with the help of the global pic object. 
+	void windup();
+
+	// PROLOGUE: Contains the prologue of the interrupt handler.
+	bool prologue();
+
+	// EPILOGUE: This method triggers the process switch.
+	void epilogue();
+};
+
+#endif
