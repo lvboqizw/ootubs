@@ -38,12 +38,13 @@ unsigned char stack[STACK_SIZE];
 int main()
 {
 	cpu.enable_int();
-	watch.windup();
+
 	Application appl(stack+STACK_SIZE);      // the address start at a high address
 	// kout<<"Running1"<<endl;
 	
 	// guarded_scheduler.ready(appl);
 	scheduler.ready(appl);
+	watch.windup();
 
 	guard.enter();
 	// guarded_scheduler.schedule();
