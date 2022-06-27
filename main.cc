@@ -28,7 +28,7 @@ CGA_Stream kout;
 Guard guard;
 Guarded_Scheduler guarded_scheduler;
 Scheduler scheduler;
-Watch watch(1000);
+Watch watch(20000);
 Keyboard keyboard;
 
 
@@ -46,8 +46,8 @@ int main()
 	// scheduler.ready(appl);
 
 	guard.enter();
-	watch.windup();               // resume (located in watch epilogie should run after the schedule. Because after the PIT been set, )
-
+	watch.windup();               // resume (located in watch epilogie should run after the guard Because after the PIT been set, )
+	for(int i=0;i < 1000000;i++);
 	guarded_scheduler.schedule();
 	// scheduler.schedule();
 

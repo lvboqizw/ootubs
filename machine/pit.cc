@@ -15,9 +15,10 @@ void PIT::interval(int us) {
 
     long tmp = this -> us;
 
-    tmp /= 838;
-    tmp *= 1000; // how many steps are needed to reach us microseconds
+   tmp *= 1000; // how many steps are needed to reach us microseconds 
 
+    tmp /= 838; // intieger division , :837
+ 
     unsigned short steps = (unsigned short) tmp; //reduce the result to the 2 Byte size
 
     /** Set up the control register:

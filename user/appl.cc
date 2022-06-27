@@ -51,6 +51,6 @@ void Application::action()
         kout.setpos(0, 18);
         kout << "in the application";
         kout.flush();
-        scheduler.resume();
+        // scheduler.resume();
     }
 }
