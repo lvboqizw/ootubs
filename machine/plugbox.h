@@ -32,8 +32,10 @@ public:
 
 	Plugbox();
 
+	// Plug in a handler routine at the interrupt number slot, provided in the form of a Gate object.
 	void assign(unsigned int slot, Gate& gate);
 
+	// Retrieve the Gate object for the specified slot.
 	Gate& report(unsigned int slot);
 };
 

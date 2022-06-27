@@ -45,9 +45,14 @@ int main()
 	guarded_scheduler.ready(appl);
 	// scheduler.ready(appl);
 
-	guard.enter();
-	watch.windup();               // resume (located in watch epilogie should run after the guard Because after the PIT been set, )
-	for(int i=0;i < 1000000;i++);
+	/**
+	 * watch.winterup()出发中断后会在epilogue调用resume, 如果放在guard.enter()前在lock无锁
+	 * 
+	 */
+	watch.windup(); 
+	guard.enter();				 
+	//watch.windup();               // resume (located in watch epilogie should run after the guard Because after the PIT been set, )
+	// for(int i=0;i < 1000000;i++);
 	guarded_scheduler.schedule();
 	// scheduler.schedule();
 
