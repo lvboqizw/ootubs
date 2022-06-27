@@ -30,5 +30,5 @@ void PIT::interval(int us) {
     this -> crtl_register.outb(0x34);
 
     this -> counter.outb((char)steps);
-    this -> counter.outb((char)(steps >> 8)); //???
+    this -> counter.outb((char)(steps >> 8)); 
 }

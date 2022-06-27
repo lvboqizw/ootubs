@@ -43,12 +43,12 @@ int main()
 	// kout<<"Running1"<<endl;
 	
 	guarded_scheduler.ready(appl);
-	//scheduler之前要确保没有epilogue在运行,有一个lock,guard went bevor windup.
+	//之前要确保没有epilogue在运行,有一个lock,guard went bevor windup.
 	//scheduler.ready(appl);
 	guard.enter();
-	watch.windup();
 	guarded_scheduler.schedule();
 	//这之前不能运行resume
 	//scheduler.schedule();
+	watch.windup();
 	return 0;
 }

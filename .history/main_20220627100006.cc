@@ -42,13 +42,13 @@ int main()
 	Application appl(stack+STACK_SIZE);      // the address start at a high address
 	// kout<<"Running1"<<endl;
 	
-	guarded_scheduler.ready(appl);
-	//scheduler之前要确保没有epilogue在运行,有一个lock,guard went bevor windup.
-	//scheduler.ready(appl);
+	// guarded_scheduler.ready(appl);
+	//之前要确保没有epilogue在运行,有一个lock,guard went bevor windup.
+	scheduler.ready(appl);
 	guard.enter();
-	watch.windup();
-	guarded_scheduler.schedule();
+	// guarded_scheduler.schedule();
 	//这之前不能运行resume
-	//scheduler.schedule();
+	scheduler.schedule();
+	watch.windup();
 	return 0;
 }
