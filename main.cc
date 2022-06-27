@@ -42,13 +42,13 @@ int main()
 	Application appl(stack+STACK_SIZE);      // the address start at a high address
 	// kout<<"Running1"<<endl;
 	
-	// guarded_scheduler.ready(appl);
-	scheduler.ready(appl);
-	watch.windup();
+	guarded_scheduler.ready(appl);
+	// scheduler.ready(appl);
 
 	guard.enter();
-	// guarded_scheduler.schedule();
-	scheduler.schedule();
+	guarded_scheduler.schedule();
+		watch.windup();               // resume (located in watch epilogie should run after the schedule. Because after the PIT been set, )
+	// scheduler.schedule();
 
 	return 0;
 }
