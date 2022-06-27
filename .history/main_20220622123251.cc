@@ -39,18 +39,19 @@ int main()
 {
 	cpu.enable_int();
 	watch.windup();
-	kout<<"Running"<<endl;
+	//kout<<"Running"<<endl;
 	Application appl(stack+STACK_SIZE);      // the address start at a high address
-	kout<<"Running1"<<endl;
+	//kout<<"Running1"<<endl;
 	
 	guarded_scheduler.ready(appl);
-	kout<<"Running2"<<endl;
+	//kout<<"Running2"<<endl;
 
 	guard.enter();
-	kout<<"Running3"<<endl;
+	//kout<<"Running3"<<endl;
 
 	guarded_scheduler.Scheduler::schedule();
-	
+
+	while();
 
 	return 0;
 }

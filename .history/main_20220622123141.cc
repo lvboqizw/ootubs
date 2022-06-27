@@ -50,7 +50,6 @@ int main()
 	kout<<"Running3"<<endl;
 
 	guarded_scheduler.Scheduler::schedule();
-	
 
 	return 0;
 }
