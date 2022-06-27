@@ -51,19 +51,6 @@ void Application::action()
         kout.setpos(0, 18);
         kout << "in the application";
         kout.flush();
-        // ++ i;
-        // ++ j;
-        // if(i == 40000) {
-        //     kout << endl;
-        //     guarded_scheduler.kill(loop1);                   //kill the loop application
-        //     kout << "kill the loop1" << endl;
-        // }
-        // if(j == 80000) {
-        //     kout << endl;
-        //     kout << "end of the application" << endl;
-        //     guarded_scheduler.exit();                        //terminate the application itself
-        // }
-        // guarded_scheduler.resume();
         scheduler.resume();
     }
 }

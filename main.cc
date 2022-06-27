@@ -46,8 +46,9 @@ int main()
 	// scheduler.ready(appl);
 
 	guard.enter();
+	watch.windup();               // resume (located in watch epilogie should run after the schedule. Because after the PIT been set, )
+
 	guarded_scheduler.schedule();
-		watch.windup();               // resume (located in watch epilogie should run after the schedule. Because after the PIT been set, )
 	// scheduler.schedule();
 
 	return 0;
