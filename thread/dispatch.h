@@ -22,7 +22,7 @@ class Dispatcher {
 private:
 	Dispatcher(const Dispatcher &copy); // prevent copying
 /* Add your code here */ 
-	Coroutine *ptr;
+	Coroutine *life_pointer;
 
 public:
 	// The constructor initializes the life pointer with null to indicate that no coroutine is known yet.

@@ -29,12 +29,8 @@ void Scheduler::ready (Entrant &that){
 
 void Scheduler::schedule(){
     Entrant *next = static_cast<Entrant*>(list.dequeue());
-    kout << next << endl;
     if(next){
         go(*next);
-    }
-    else{
-        // kout << "get nothing" << endl;
     }
 }
 

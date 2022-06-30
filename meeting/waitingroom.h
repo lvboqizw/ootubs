@@ -21,8 +21,13 @@ class Waitingroom : public Queue {
 private:
 	Waitingroom(const Waitingroom &copy); // prevent copying
 public:
-	Waitingroom() {}
-/* Add your code here */ 
+	Waitingroom() {};
+
+	/// The destructor removes all waiting processes from the list and wakes them up.
+	virtual ~Waitingroom() {};
+
+	/// the specified process customer is removed from the waiting room prematurely
+	virtual void remove(Customer* customer);
 };
 
 #endif

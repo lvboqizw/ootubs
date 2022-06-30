@@ -9,4 +9,10 @@
 /* for a specific event.                                                     */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "waitingroom.h"
+
+Waitingroom::remove(Customer* customer) {
+    if(!customer) return;
+    this->Queue::remove(customer);
+}
+
