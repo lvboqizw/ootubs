@@ -11,6 +11,7 @@
 #include "device/panic.h"
 #include "object/o_stream.h"
 #include "syscall/guarded_scheduler.h"
+#include "syscall/guarded_organizer.h"
 #include "thread/scheduler.h"
 #include "user/appl.h"
 #include "user/loop.h"
@@ -30,7 +31,7 @@ Guarded_Scheduler guarded_scheduler;
 Scheduler scheduler;
 Watch watch(20000);
 Keyboard keyboard;
-
+Guarded_Organizer guarded_organizer;
 
 unsigned char stack[STACK_SIZE];
 

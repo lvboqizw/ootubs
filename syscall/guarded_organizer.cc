@@ -9,4 +9,32 @@
 /* Organizer.                                                                */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "syscall/guarded_organizer.h"
+
+void Guarded_Organizer::ready(Thread& that) {
+    {
+        Secure secure;
+        Organizer::ready(that);
+    }
+}
+
+void Guarded_Organizer::exit() {
+    {
+        Secure secure;
+        Scheduler::exit();
+    }
+}
+
+void Guarded_Organizer::kill(Thread& that) {
+    {
+        Secure secure;
+        Organizer::kill(that);
+    }
+}
+
+void Guarded_Organizer::resume() {
+    {
+        Secure secure;
+        Organizer::resume();
+    }
+}

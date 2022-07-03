@@ -14,13 +14,21 @@
 
 #include "syscall/thread.h"
 #include "thread/organizer.h"
+#include "guard/secure.h"
 
 class Guarded_Organizer : public Organizer {
 private:
 	Guarded_Organizer(const Guarded_Organizer &copy); // prevent copying
 public:
 	Guarded_Organizer() {}
-/* Add your code here */ 
+
+	void ready(Thread& that);
+
+	void exit();
+
+	void kill(Thread& that);
+
+	void resume();
 };
 
 #endif
