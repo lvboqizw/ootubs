@@ -9,4 +9,24 @@
 /* counting semaphore.                                                       */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "semaphore.h"
+
+Semaphore::Semaphore(int c) {
+    counter = c;
+}
+
+void Semaphore::p() {
+
+}
+
+void Semaphore::v() {
+
+}
+
+void Semaphore::wait() {
+    p();
+}
+
+void Semaphore::signal() {
+    v();
+}

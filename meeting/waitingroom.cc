@@ -11,7 +11,7 @@
 
 #include "waitingroom.h"
 
-Waitingroom::remove(Customer* customer) {
+void Waitingroom::remove(Customer* customer) {
     if(!customer) return;
     this->Queue::remove(customer);
 }

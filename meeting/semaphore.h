@@ -21,6 +21,8 @@ class Semaphore: public Waitingroom
 private:
 	Semaphore(const Semaphore &copy); // prevent copying
 
+	int counter;
+
 public:
 	Semaphore(int c);
 

@@ -11,15 +11,39 @@
 
 #ifndef __organizer_include__
 #define __organizer_include__
-/* Add your code here */ 
-class Organizer
-/* Add your code here */ 
+
+#include "scheduler.h"
+#include "customer.h"
+#include "meeting/waitingroom.h"
+
+class Organizer : public Scheduler
 {
 private:
 	Organizer(const Organizer &copy); // prevent copying
 public:
-	Organizer() {}
-/* Add your code here */ 
+	Organizer() {};
+	
+	/**
+	 * @brief Blocks the running process and gives the processor to the next ready process.
+	 * 
+	 * @param customer The running process
+	 * @param waitingroom 
+	 */
+	void block(Customer& customer, Waitingroom& waitingroom);
+
+	/**
+	 * @brief To wake up a sleeping process, i.e. put it back to the ready list.
+	 * 
+	 * @param customer 
+	 */
+	void wakeup(Customer& customer);
+
+	/**
+	 * @brief The method allows one process to kill another(that).
+	 * 
+	 * @param that 
+	 */
+	void kill(Customer& that);
 };
 
 #endif
