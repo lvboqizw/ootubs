@@ -28,15 +28,15 @@ public:
 
     virtual bool prologue() = 0;
 
-   virtual void epilogue() = 0;
+    virtual void epilogue() = 0;
 
-   void queued(bool q){
-       queue = q;
-   }
+    void queued(bool q){
+        queue = q;
+    }
 
-   bool queued() const{//read only
-	   return queue;
-   }
+    bool queued() const{//read only
+	    return queue;
+    }
 };
 
 #endif

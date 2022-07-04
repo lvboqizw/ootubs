@@ -13,6 +13,7 @@
 #include "syscall/guarded_scheduler.h"
 #include "syscall/guarded_organizer.h"
 #include "thread/scheduler.h"
+#include "thread/dispatch.h"
 #include "user/appl.h"
 #include "user/loop.h"
 #include "device/watch.h"
@@ -36,25 +37,46 @@ Guarded_Organizer guarded_organizer;
 unsigned char stack[STACK_SIZE];
 
 
+void task3test() {								// question: why without this loop, the keyboard interput will not work?
+	while(1) {									// the cpu is disabled from somewhere?
+		Secure secure;
+		kout.setpos(10, 10);
+		kout << "test taks 3";
+		kout.flush();
+	}
+}
+
+void task4test() {
+	Secure secure;
+	Application appl(stack+STACK_SIZE);			// the address start at a high address
+	scheduler.ready(appl);
+	scheduler.schedule();								
+}
+
+void task5test() {
+	Application appl(stack+STACK_SIZE);			// the address start at a high address
+	guarded_scheduler.ready(appl);
+	guard.enter();
+	watch.windup();								// resume (located in watch epilogie should run after the guard Because after the PIT been set, )
+	guarded_scheduler.schedule();
+}
+
 int main()
 {
 	cpu.enable_int();
-
-	Application appl(stack+STACK_SIZE);      // the address start at a high address
-	// kout<<"Running1"<<endl;
+	keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
+	// task3test();
+	// task4test();
+	task5test();   
 	
-	guarded_scheduler.ready(appl);
+	// guarded_scheduler.ready(appl);
 	// scheduler.ready(appl);
-
-	/**
-	 * watch.winterup()出发中断后会在epilogue调用resume, 如果放在guard.enter()前在lock无锁
-	 * 
-	 */
-	watch.windup(); 
-	guard.enter();				 
-	//watch.windup();               // resume (located in watch epilogie should run after the guard Because after the PIT been set, )
+	
+	// watch.windup(); 
+	// guard.enter();				 
+	//watch.windup();               
 	// for(int i=0;i < 1000000;i++);
-	guarded_scheduler.schedule();
+	// guarded_scheduler.schedule();
 	// scheduler.schedule();
 
 	return 0;

@@ -36,8 +36,7 @@ void Loop::action()
         kout.setpos(0, 19 + num);
         kout << "in the loop" << num ;
         kout.flush();
-        // guarded_scheduler.resume();
-        scheduler.resume();
+        // scheduler.resume();              // TASK 4
     }
 }
 

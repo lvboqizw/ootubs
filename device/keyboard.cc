@@ -54,7 +54,7 @@ void Keyboard::plugin (){
 
 bool Keyboard::prologue ()
 {
-	// cpu.disable_int();
+	// cpu.disable_int();				//  the interrupts are disabled before guardian () is called
 	Key key = this->key_hit();
 
 	if(key.valid()){
@@ -67,9 +67,7 @@ bool Keyboard::prologue ()
 			// 	buffer[length++] = key;
 			this->data = (char)key.ascii();
 			return key.valid();
-
 		}
-
 	}
 	return key.valid();
 }
@@ -83,5 +81,4 @@ void Keyboard::epilogue ()
 	kout<<this->data;
 	kout.flush();	
 }
-/* Add your code here */ 
- 
+
