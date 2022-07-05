@@ -13,16 +13,27 @@
 #ifndef __Bellringer_include__
 #define __Bellringer_include__
 
-/* Add your code here */ 
+#include "bell.h"
+#include "object/list.h"
 
-class Bellringer
+class Bellringer: public List
 /* Add your code here */ 
 {
 private:
 	Bellringer(const Bellringer &copy); // prevent copying
+
+	Bell* bell;
 public:
 	Bellringer() {}
-/* Add your code here */ 
+
+	/// Checks whether bells are to be rung and does so if necessary
+	void check();
+
+	/// The bell is given to the bell ringer. It should be rung after ticks time units
+	void job (Bell* bell, int ticks);
+
+	/// The bell should not be rung after all
+	void cancel (Bell* bell);
 };
 
 #endif

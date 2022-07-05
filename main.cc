@@ -13,6 +13,7 @@
 #include "syscall/guarded_scheduler.h"
 #include "syscall/guarded_organizer.h"
 #include "syscall/guarded_semaphore.h"
+#include "syscall/guarded_keyboard.h"
 #include "thread/scheduler.h"
 #include "thread/dispatch.h"
 #include "user/appl.h"
@@ -32,7 +33,7 @@ Guard guard;
 Guarded_Scheduler guarded_scheduler;
 Scheduler scheduler;
 Watch watch(20000);
-Keyboard keyboard;
+Guarded_Keyboard keyboard;
 Guarded_Organizer guarded_organizer;
 
 unsigned char stack[STACK_SIZE];

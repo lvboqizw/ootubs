@@ -13,16 +13,37 @@
 #ifndef __Bell_include__
 #define __Bell_include__
 
-/* Add your code here */ 
+#include "object/chain.h"
 
-class Bell
+class Bell: public Chain
 /* Add your code here */ 
 {
 private:
 	Bell(const Bell &copy); // prevent copying
+
+	int counter = -1;
 public:
 	Bell() {}
-/* Add your code here */ 
+
+	/// Set the counter
+	inline void wait(int value) {
+		counter = value;
+	};
+
+	/// Get the counter
+	inline int wait() {return counter;};
+
+	/// Decrements the counter
+	void tick(){counter -= 1;};
+
+	/// Returns true, when the time has expired
+	bool run_down() {
+		if(counter == 0)
+			return true;
+		return false;};
+
+	/// Called by the bell ringer when it is the right time
+	// virtual void ring() = 0;
 };
 
 #endif

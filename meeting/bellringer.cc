@@ -10,4 +10,16 @@
 /* bellringer manages.                                                       */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "bellringer.h"
+
+void Bellringer::check() {
+    
+}
+
+void Bellringer::job(Bell* bell, int ticks) {
+    
+}
+
+void Bellringer::cancel(Bell* bell) {
+    
+}
