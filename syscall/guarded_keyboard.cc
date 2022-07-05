@@ -9,4 +9,10 @@
 /* keyboard.                                                                 */
 /*****************************************************************************/
 
-/* Add your code here */ 
+#include "guarded_keyboard.h"
+
+
+Key Guarded_Keyboard::getkey() {
+    Secure secure;
+    Keyboard::getkey();
+}

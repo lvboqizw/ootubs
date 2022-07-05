@@ -12,6 +12,7 @@
 #include "object/o_stream.h"
 #include "syscall/guarded_scheduler.h"
 #include "syscall/guarded_organizer.h"
+#include "syscall/guarded_semaphore.h"
 #include "thread/scheduler.h"
 #include "thread/dispatch.h"
 #include "user/appl.h"
@@ -61,13 +62,17 @@ void task5test() {
 	guarded_scheduler.schedule();
 }
 
+void task6test() {
+
+}
+
 int main()
 {
 	cpu.enable_int();
 	keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
 	// task3test();
 	// task4test();
-	task5test();   
+	// task5test();   
 	
 	// guarded_scheduler.ready(appl);
 	// scheduler.ready(appl);
