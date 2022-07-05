@@ -13,7 +13,13 @@
 #include "bellringer.h"
 
 void Bellringer::check() {
-    
+    Bell* bell;
+    bell = (Bell*)first();
+    if(!bell) return;
+    if(bell->run_down()) {
+        dequeue();                  // get the time outed bell out
+        bell->ring();
+    }
 }
 
 void Bellringer::job(Bell* bell, int ticks) {
@@ -21,5 +27,5 @@ void Bellringer::job(Bell* bell, int ticks) {
 }
 
 void Bellringer::cancel(Bell* bell) {
-    
+    this->dequeue(bell);
 }

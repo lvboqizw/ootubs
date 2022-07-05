@@ -22,7 +22,6 @@ class Bellringer: public List
 private:
 	Bellringer(const Bellringer &copy); // prevent copying
 
-	Bell* bell;
 public:
 	Bellringer() {}
 

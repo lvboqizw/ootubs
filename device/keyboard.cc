@@ -29,7 +29,7 @@ void Keyboard::plugin (){
 	plugbox.assign(Plugbox::keyboard, *this);
 	//interrupts für tastatur erlauben
 	pic.allow(PIC::keyboard);
-	semaphore.wait();
+	semaphore.wait();									// Wait for events
 }
 
 // void Keyboard::trigger(){
@@ -95,9 +95,8 @@ void Keyboard::epilogue ()
 }
 
 Key Keyboard::getkey() {
-	Key tmp;
-	tmp = this->key_hit();
-	semaphore.signal();
-	return tmp;
+	this->key = this->key_hit();						// Keyborad buffer is fulled
+	semaphore.signal();									// signal the event;
+	return this->key;
 }
 

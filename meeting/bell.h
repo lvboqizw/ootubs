@@ -21,7 +21,7 @@ class Bell: public Chain
 private:
 	Bell(const Bell &copy); // prevent copying
 
-	int counter = -1;
+	int counter;
 public:
 	Bell() {}
 
@@ -38,12 +38,12 @@ public:
 
 	/// Returns true, when the time has expired
 	bool run_down() {
-		if(counter == 0)
+		if(counter <= 0)
 			return true;
 		return false;};
 
 	/// Called by the bell ringer when it is the right time
-	// virtual void ring() = 0;
+	virtual void ring() = 0;
 };
 
 #endif
