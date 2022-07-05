@@ -2,35 +2,39 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                    G U A R D E D _ S C H E D U L E R                      */
+/*                    G U A R D E D _ O R G A N I Z E R                      */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Implements the system-call interface to the Scheduler.                    */
+/* The Guarded_Organizer implements the system call interface to the         */
+/* Organizer.                                                                */
 /*****************************************************************************/
 
+#include "syscall/guarded_organizer.h"
 
-#include "syscall/guarded_scheduler.h"
-#include "device/cgastr.h"
-
-
-
-void Guarded_Scheduler::ready(Thread& that) {
+void Guarded_Organizer::ready(Thread& that) {
+    {
         Secure secure;
-        this->Scheduler::ready(that);
+        Organizer::ready(that);
+    }
 }
 
-void Guarded_Scheduler::exit() {
+void Guarded_Organizer::exit() {
+    {
         Secure secure;
-        this->Scheduler::exit();
+        Scheduler::exit();
+    }
 }
 
-void Guarded_Scheduler::kill(Thread& that) {
+void Guarded_Organizer::kill(Thread& that) {
+    {
         Secure secure;
-        this->Scheduler::kill(that);
+        Organizer::kill(that);
+    }
 }
 
-void Guarded_Scheduler::resume() {
+void Guarded_Organizer::resume() {
+    {
         Secure secure;
-        this->Scheduler::resume();
+        Organizer::resume();
+    }
 }
-

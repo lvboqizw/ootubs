@@ -15,8 +15,9 @@ void PIT::interval(int us) {
 
     long tmp = this -> us;
 
-    tmp /= 838;
-    tmp *= 1000; // how many steps are needed to reach us microseconds
+   tmp *= 1000; // how many steps are needed to reach us microseconds 
+
+    tmp /= 838; // intieger division , if the devision before the multiply, tmp may becomes a 0 if the us is less than 838
 
     unsigned short steps = (unsigned short) tmp; //reduce the result to the 2 Byte size
 
@@ -30,5 +31,5 @@ void PIT::interval(int us) {
     this -> crtl_register.outb(0x34);
 
     this -> counter.outb((char)steps);
-    this -> counter.outb((char)(steps >> 8)); //???
+    this -> counter.outb((char)(steps >> 8)); 
 }

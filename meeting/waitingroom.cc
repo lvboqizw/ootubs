@@ -2,25 +2,17 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                             T H R E A D                                   */
+/*                        W A I T I N G R O O M                              */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Implements user interface of a thread.                                    */
+/* Implements a list of processes (Customer objects) that are all waiting    */
+/* for a specific event.                                                     */
 /*****************************************************************************/
 
-#ifndef __thread_include__
-#define __thread_include__
+#include "waitingroom.h"
 
-#include "thread/customer.h"
- 
-class Thread : public Customer
+void Waitingroom::remove(Customer* customer) {
+    if(!customer) return;
+    this->Queue::remove(customer);
+}
 
-{
-private:
-	Thread(const Thread &copy); // prevent copying
-public:
-	Thread(void *tos):Customer(tos){};
- 
-};
-
-#endif

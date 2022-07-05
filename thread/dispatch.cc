@@ -19,28 +19,28 @@
 extern CGA_Stream kout;
 
 Dispatcher::Dispatcher(){
-    this -> ptr = 0;
+    this -> life_pointer = 0;
 }
 
 void Dispatcher::go(Coroutine &first){
     // Prozess speichern
-    this -> ptr = &first;
+    this -> life_pointer = &first;
     // Prozess ausführen
     first.go();
 }
 
 void Dispatcher::dispatch(Coroutine &next){
     // aktuellen Prozess zwischenspeichern
-    Coroutine *temp = this -> ptr;
+    Coroutine *temp = this -> life_pointer;
 
-    if(!this -> ptr) return;
+    if(!this -> life_pointer) return;
 
     // Pointer neu setzen
-    this -> ptr = &next;
+    this -> life_pointer = &next;
     // Koroutinenwechsel
-    temp -> resume(*ptr);
+    temp -> resume(*life_pointer);
 }
 
 Coroutine* Dispatcher::active(){
-    return this -> ptr;
+    return this -> life_pointer;
 }

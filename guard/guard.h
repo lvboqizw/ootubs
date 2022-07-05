@@ -23,9 +23,7 @@ private:
 	Guard (const Guard &copy); // prevent copying
 
 	Queue epiQ; //The queue to save the accumulated epilogues
-
-	/* get the next epilogue from the queue. */
-	Gate* remove_epilogue();	
+	
 public:
 	Guard () {}
 /* Add your code here */ 

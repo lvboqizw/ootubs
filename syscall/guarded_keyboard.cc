@@ -2,25 +2,17 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                             T H R E A D                                   */
+/*                   G U A R D E D _ K E Y B O A R D                         */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Implements user interface of a thread.                                    */
+/* The Guarded_Keyboard class provides the system call interface to the      */
+/* keyboard.                                                                 */
 /*****************************************************************************/
 
-#ifndef __thread_include__
-#define __thread_include__
+#include "guarded_keyboard.h"
 
-#include "thread/customer.h"
- 
-class Thread : public Customer
 
-{
-private:
-	Thread(const Thread &copy); // prevent copying
-public:
-	Thread(void *tos):Customer(tos){};
- 
-};
-
-#endif
+Key Guarded_Keyboard::getkey() {
+    Secure secure;
+    Keyboard::getkey();
+}

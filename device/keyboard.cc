@@ -29,6 +29,7 @@ void Keyboard::plugin (){
 	plugbox.assign(Plugbox::keyboard, *this);
 	//interrupts für tastatur erlauben
 	pic.allow(PIC::keyboard);
+	semaphore.wait();									// Wait for events
 }
 
 // void Keyboard::trigger(){
@@ -54,8 +55,10 @@ void Keyboard::plugin (){
 
 bool Keyboard::prologue ()
 {
-	// cpu.disable_int();
-	Key key = this->key_hit();
+	// cpu.disable_int();				//  the interrupts are disabled before guardian () is called
+	// Key key = this->key_hit();
+	Key key = getkey();
+
 
 	if(key.valid()){
 		//CTRL + ALT + DEL abfragen
@@ -65,11 +68,11 @@ bool Keyboard::prologue ()
 		}else{
 			// if(length != 1023)//buffer is not full
 			// 	buffer[length++] = key;
+			// kout<<"in pro valied key" << endl;
+			// semaphore.wait();	
 			this->data = (char)key.ascii();
 			return key.valid();
-
 		}
-
 	}
 	return key.valid();
 }
@@ -77,11 +80,23 @@ bool Keyboard::prologue ()
 
 void Keyboard::epilogue ()
 {
-	kout.setpos(5,5);
-	// while(length > 0)
-	// 	kout<<(char)buffer[--length].ascii();
-	kout<<this->data;
-	kout.flush();	
+	// kout.setpos(5,5);
+	// // while(length > 0)
+	// // 	kout<<(char)buffer[--length].ascii();
+	// kout<<this->data;
+	// kout.flush();
+
+	// kout << getkey();
+	// this->semaphore.signal();
+	// kout.flush();
+
+	kout << this-> data<<endl;
+	// kout.flush();
 }
-/* Add your code here */ 
- 
+
+Key Keyboard::getkey() {
+	this->key = this->key_hit();						// Keyborad buffer is fulled
+	semaphore.signal();									// signal the event;
+	return this->key;
+}
+

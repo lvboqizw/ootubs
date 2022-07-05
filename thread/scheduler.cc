@@ -14,6 +14,7 @@
 /* Add your code here */ 
 #include "thread/scheduler.h"
 #include "guard/guard.h"
+#include "device/cgastr.h"
 
 
 extern Guard guard;
@@ -27,13 +28,10 @@ void Scheduler::ready (Entrant &that){
 }
 
 void Scheduler::schedule(){
-    // Hole nächstes
     Entrant *next = static_cast<Entrant*>(list.dequeue());
-
-    if(!next) return;
-
-    // dispatchen
-    go(*next);
+    if(next){
+        go(*next);
+    }
 }
 
 void Scheduler::exit(){

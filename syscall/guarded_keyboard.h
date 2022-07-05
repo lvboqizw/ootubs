@@ -2,41 +2,27 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                   G U A R D E D _ K E Y B O A R D                         */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* The Guarded_Keyboard class provides the system call interface to the      */
+/* keyboard.                                                                 */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
+#ifndef __Guarded_Keyboard_include__
+#define __Guarded_Keyboard_include__
 
-#include "object/chain.h"
+#include "device/keyboard.h"
+#include "guard/secure.h"
 
-/* Add your code here */ 
-class Gate : public Chain
+class Guarded_Keyboard: public Keyboard
 {
 private:
-    /* data */
-    bool queue;
-
+	Guarded_Keyboard(const Guarded_Keyboard &copy); // prevent copying
 public:
-    Gate() {};
-    ~Gate() {};
+	Guarded_Keyboard():Keyboard() {};
 
-    //virtual void trigger() = 0;
-
-    virtual bool prologue() = 0;
-
-    virtual void epilogue() = 0;
-
-    void queued(bool q){
-        queue = q;
-    }
-
-    bool queued() const{//read only
-	    return queue;
-    }
+	Key getkey();
 };
 
 #endif

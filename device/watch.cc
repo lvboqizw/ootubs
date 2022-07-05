@@ -24,10 +24,11 @@ void Watch::windup() {
 }
 
 bool Watch::prologue(){
-    return true;            // ???????
+    return true;            
 }
 
 void Watch::epilogue(){
-    guarded_scheduler.Scheduler::resume();
+    guarded_scheduler.Scheduler::resume();  //can't directly call the resume from guarded_scheduler: if simply call the resume from the guard, it will run the guard.enter() and guard.leave()
+                                            // it will enter the guard twice and leave twice
 }
 

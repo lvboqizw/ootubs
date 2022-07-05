@@ -23,7 +23,7 @@ extern Guard guard;
 void kickoff (void *dummy1, void *dummy2, void *dummy3, void *dummy4, 
                 void *dummy5, void *dummy6, Coroutine* object) {
 
-    guard.leave();
+    guard.leave(); // leave the guard from the main
     object->action();
 
 }

@@ -2,41 +2,26 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                         G U A R D E D _ B U Z Z E R                       */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* The Guarded_Buzzer class implements the system call interface to the      */
+/* Buzzer class.                                                             */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
-
-#include "object/chain.h"
+#ifndef __Guarded_Buzzer_include__
+#define __Guarded_Buzzer_include__
 
 /* Add your code here */ 
-class Gate : public Chain
+
+class Guarded_Buzzer
+/* Add your code here */ 
 {
 private:
-    /* data */
-    bool queue;
-
+	Guarded_Buzzer(const Guarded_Buzzer &copy); // prevent copying
 public:
-    Gate() {};
-    ~Gate() {};
-
-    //virtual void trigger() = 0;
-
-    virtual bool prologue() = 0;
-
-    virtual void epilogue() = 0;
-
-    void queued(bool q){
-        queue = q;
-    }
-
-    bool queued() const{//read only
-	    return queue;
-    }
+	Guarded_Buzzer() {}
+/* Add your code here */ 
 };
 
 #endif

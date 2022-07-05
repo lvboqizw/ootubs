@@ -2,41 +2,12 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                               B U Z Z E R                                 */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* An "alarm clock" is a synchronization object that allows one or more      */
+/* threads to put themselves to sleep for a specified time.                  */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
-
-#include "object/chain.h"
-
+/* INCLUDES */
 /* Add your code here */ 
-class Gate : public Chain
-{
-private:
-    /* data */
-    bool queue;
-
-public:
-    Gate() {};
-    ~Gate() {};
-
-    //virtual void trigger() = 0;
-
-    virtual bool prologue() = 0;
-
-    virtual void epilogue() = 0;
-
-    void queued(bool q){
-        queue = q;
-    }
-
-    bool queued() const{//read only
-	    return queue;
-    }
-};
-
-#endif

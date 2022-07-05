@@ -35,6 +35,7 @@ void guardian (unsigned int slot)
 {
     Gate& g = plugbox.report(slot);           //use slot get an interup from the table,
     bool flag = g.prologue();
-    if (flag)
-        guard.relay(& g);                 
+    if(flag){
+        guard.relay(& g); 
+    }          
 }

@@ -2,41 +2,28 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                               R A N D O M                                 */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
+#ifndef __random_include__
+#define __random_include__
 
-#include "object/chain.h"
-
-/* Add your code here */ 
-class Gate : public Chain
-{
+class Random {
 private:
-    /* data */
-    bool queue;
+	Random(const Random &copy); // prevent copying
+
+private:
+	unsigned long r0, r1, r2, r3, r4, r5, r6;
+	unsigned long multiplier, addend, ic_state;
 
 public:
-    Gate() {};
-    ~Gate() {};
+	// CONSTRUCTOR: Initializes the RNG
+	Random(int seed);
 
-    //virtual void trigger() = 0;
-
-    virtual bool prologue() = 0;
-
-    virtual void epilogue() = 0;
-
-    void queued(bool q){
-        queue = q;
-    }
-
-    bool queued() const{//read only
-	    return queue;
-    }
+	// NUMBER: Returns a random number
+	int number();
 };
 
 #endif

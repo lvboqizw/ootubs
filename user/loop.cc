@@ -26,16 +26,17 @@
 extern CGA_Stream kout;
 extern Guarded_Scheduler guarded_scheduler;
 extern Secure secure;
+extern Scheduler scheduler;
 
  
 void Loop::action()
 {
     while(1) {
         Secure secure;
-        kout.setpos(0, 10 + num);
+        kout.setpos(0, 19 + num);
         kout << "in the loop" << num ;
         kout.flush();
-        //scheduler.resume();
+        // scheduler.resume();              // TASK 4
     }
 }
 

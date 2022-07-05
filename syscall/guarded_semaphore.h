@@ -2,41 +2,33 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                                  G A T E                                  */
+/*                   G U A R D E D _ S E M A P H O R E                       */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* Class of objects that handle interrupts.                                  */
+/* The Guarded_Semaphore class implements the system call interface to the   */
+/* Semaphore class.                                                          */
 /*****************************************************************************/
 
-#ifndef __Gate_include__
-#define __Gate_include__
+#ifndef __Guarded_Semaphore_include__
+#define __Guarded_Semaphore_include__
 
-#include "object/chain.h"
+#include "meeting/semaphore.h"
 
-/* Add your code here */ 
-class Gate : public Chain
+class Guarded_Semaphore :public Semaphore
 {
 private:
-    /* data */
-    bool queue;
+	Guarded_Semaphore(const Guarded_Semaphore &copy); // prevent copying
 
 public:
-    Gate() {};
-    ~Gate() {};
+	Guarded_Semaphore(int c): Semaphore(c){};
 
-    //virtual void trigger() = 0;
+	void p();
 
-    virtual bool prologue() = 0;
+	void v();
 
-    virtual void epilogue() = 0;
+	void wait();
 
-    void queued(bool q){
-        queue = q;
-    }
-
-    bool queued() const{//read only
-	    return queue;
-    }
+	void signal();
 };
 
 #endif
