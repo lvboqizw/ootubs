@@ -37,7 +37,5 @@ void guardian (unsigned int slot)
     bool flag = g.prologue();
     if(flag){
         guard.relay(& g); 
-    } else {
-        cpu.enable_int();
-    }               
+    }          
 }

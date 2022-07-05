@@ -55,8 +55,9 @@ void Keyboard::plugin (){
 bool Keyboard::prologue ()
 {
 	// cpu.disable_int();				//  the interrupts are disabled before guardian () is called
-	Key key = this->key_hit();
-	kout << "in pro" << endl;
+	// Key key = this->key_hit();
+	Key key = getkey();
+
 
 	if(key.valid()){
 		//CTRL + ALT + DEL abfragen
@@ -66,8 +67,8 @@ bool Keyboard::prologue ()
 		}else{
 			// if(length != 1023)//buffer is not full
 			// 	buffer[length++] = key;
-			kout<<"in pro valied key" << endl;
-			semaphore.wait();	
+			// kout<<"in pro valied key" << endl;
+			// semaphore.wait();	
 			this->data = (char)key.ascii();
 			return key.valid();
 		}
@@ -82,13 +83,21 @@ void Keyboard::epilogue ()
 	// // while(length > 0)
 	// // 	kout<<(char)buffer[--length].ascii();
 	// kout<<this->data;
-	// kout.flush();	
-	kout << getkey();
-	this->semaphore.signal();
-	kout.flush();
+	// kout.flush();
+
+	// kout << getkey();
+	// this->semaphore.signal();
+	// kout.flush();
+
+	kout << this-> data<<endl;
+	// kout.flush();
 }
 
 Key Keyboard::getkey() {
-	return this->key;
+	Key tmp;
+	semaphore.wait();
+	tmp = this->key_hit();
+	semaphore.signal();
+	return tmp;
 }
 
