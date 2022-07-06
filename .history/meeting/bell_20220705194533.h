@@ -21,7 +21,7 @@ class Bell: public Chain
 private:
 	Bell(const Bell &copy); // prevent copying
 
-	int counter = 0;
+	int counter;
 public:
 	Bell() {}
 
