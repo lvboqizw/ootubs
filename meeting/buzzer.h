@@ -28,10 +28,13 @@ public:
 
 	virtual ~Buzzer(){};
 
-	virtual void ring() = 0;
+	/// Called by the Bellringer when the waiting time has expired. Wakes up sleeping threads if necessary.
+	virtual void ring();
 
+	/// Setting the alarm clock.
 	void set(int ms);
 
+	/// Sleep until the alarm clock rings.
 	void sleep();
 
 };
