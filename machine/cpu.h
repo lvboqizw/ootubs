@@ -12,6 +12,8 @@
 #ifndef __CPU_include__
 #define __CPU_include__
 
+#include "device/cgastr.h"
+
 // These functions are implemented in cpu.asm.
 extern "C" void int_enable ();
 extern "C" void int_disable ();
@@ -21,13 +23,18 @@ extern "C" void cpu_halt ();
 class CPU {
 private:
 	CPU(const CPU &copy); // prevent copying
+	CGA_Stream kout;
 public:
 	CPU() {}
 	// Allow (hardware) interrupts
-	inline void enable_int() { int_enable(); }
+	inline void enable_int() { 
+		// kout << "enable" << endl;
+		int_enable(); }
 
 	// Disallow/ignore interrupts
-	inline void disable_int() { int_disable(); }
+	inline void disable_int() { 
+		// kout << "disable" << endl;
+		int_disable(); }
 
 	// Enable interrupts and halt CPU until the next interrupt occurs
 	inline void idle() { cpu_idle(); }

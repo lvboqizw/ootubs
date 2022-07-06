@@ -12,18 +12,18 @@
 #define __schedule_include__
 
 #include "thread/dispatch.h"
-/* Add your code here */ 
+
 #include "thread/entrant.h"
 #include "thread/coroutine.h"
 #include "object/queue.h"
 #include "machine/cpu.h"
 
 class Scheduler : public Dispatcher
-/* Add your code here */ 
+
 {
 private:
 	Scheduler (const Scheduler &copy); // prevent copying
-/* Add your code here */ 
+
 	Queue list;
 public:
 	Scheduler(){};
@@ -36,12 +36,11 @@ public:
 	void exit();
 	// With this method a process can terminate another one (that).
 	void kill(Entrant &that);
-	 /** This method allows to trigger a context switch without the calling
+	/** This method allows to trigger a context switch without the calling
 	  *  Entrant having to know which other Entrant objects exist in the system, 
 	  * and which of these should be activated. 
 	  * */
 	void resume();
- 
 };
 
 #endif

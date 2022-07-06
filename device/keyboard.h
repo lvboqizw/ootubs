@@ -11,9 +11,10 @@
 #ifndef __Keyboard_include__
 #define __Keyboard_include__
 
-#include "machine/keyctrl.h"
 #include "guard/gate.h"
+#include "machine/keyctrl.h"
 #include "machine/key.h"
+#include "syscall/guarded_semaphore.h"
  
 class Keyboard : public Gate, public Keyboard_Controller
 /* Add your code here */ 
@@ -26,10 +27,13 @@ private:
 	unsigned int length;
 	Key key;
 	char data;
+
+	Guarded_Semaphore semaphore;
+
 public:
 /* Add your code here */ 
  
-    Keyboard(){}
+    Keyboard():semaphore(1){};
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 
@@ -39,7 +43,7 @@ public:
 
 	void epilogue();
 
-/* Add your code here */ 
+	Key getkey();
 
 };
 

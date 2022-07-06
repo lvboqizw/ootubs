@@ -25,13 +25,16 @@ private:
 	bool lock;
 public:
 	Locker() : lock(false) {};
+
+	
 	//a critical section is entered and the locking variable has to be locked
 	inline void enter() {
 		if(lock==true) {
 			kout << "already in the lock" << endl;
 		}
-		// kout << "in lock" << endl;
 		lock = true;};
+
+
 	//a critical section is left and the locking variable can be released
 	inline void retne() {
 		if(lock == false) {
