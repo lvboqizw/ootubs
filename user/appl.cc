@@ -69,12 +69,13 @@ void Application::action()
 
     //---------------------TASK6----------------------//
     Guarded_Buzzer buzzer;
-    buzzer.set(4);
+    buzzer.set(40000000);
     int counter = 0;
-    while(1) {
+    // while(1) {
     kout << "application: " << counter << endl;
     counter ++;
     buzzer.sleep();
-    }
+    kout << "application: " << counter << endl;
+    // }
     //------------------------------------------------//
 }
