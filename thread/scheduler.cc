@@ -39,6 +39,8 @@ void Scheduler::exit(){
 
     if(next){
         this -> dispatch(*next);
+    } else {
+        cpu.idle();
     }
     
 }
@@ -57,6 +59,6 @@ void Scheduler::resume(){
     Entrant *next = static_cast<Entrant *>((this -> list.dequeue()));
 
     if(next){
-       this -> dispatch(*next);
+        this -> dispatch(*next);
     }
 }
