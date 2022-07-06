@@ -16,6 +16,7 @@
 extern Guarded_Organizer guarded_organizer;
 /* Add your code here */ 
 Buzzer::Buzzer(){
+    alarmClock = false;
 }
 
 void Buzzer::set(int ms){
@@ -25,6 +26,7 @@ void Buzzer::set(int ms){
 void Buzzer::sleep(){//放进waitingroom,直到铃响
     Customer *act = (Customer*)(guarded_organizer.active());
     this->enqueue(act);
+    //不需要设置等待时间吗？
         guarded_organizer.block(*act, *this);
 }
 
