@@ -16,28 +16,14 @@ void Bellringer::check() {//遍历BELL列表,查看是否到期，然后每个�
     Bell* bell;
     bell = (Bell*)first();
     if(!bell) return;
-<<<<<<< HEAD
-    if(bell->run_down()) {
-        //dequeue();                  // get the time outed bell out
-        bell->ring();
-=======
     if(!bell->run_down()) {
         return;
->>>>>>> zw
     }
     dequeue();                  // get the time outed bell out
     bell->ring();
 }
 
 void Bellringer::job(Bell* bell, int ticks) {
-<<<<<<< HEAD
-    bell->wait(ticks);
-    // while(!bell->run_down())
-    //     bell->tick();
-    
-    // remove(bell);
-    // bell->ring();
-=======
     if(!ticks) {
         return;
     }
@@ -59,7 +45,6 @@ void Bellringer::job(Bell* bell, int ticks) {
         sum += old->wait();             //sum the ticks together
         tmp = (Bell*) old->next;        //set the tmp as the next one
     }
->>>>>>> zw
 }
 
 void Bellringer::cancel(Bell* bell) {
