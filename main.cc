@@ -45,7 +45,7 @@ unsigned char stack4[STACK_SIZE];
 
 Idle idle(stack4 + STACK_SIZE);
 Guarded_Scheduler guarded_scheduler;
-Watch watch(20000);
+Watch watch(1000);
 
 
 void task3test() {								// question: why without this loop, the keyboard interput will not work?

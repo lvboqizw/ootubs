@@ -23,7 +23,7 @@ void Buzzer::set(int ms){
 void Buzzer::sleep(){//放进waitingroom,直到铃响
     Customer *act = (Customer*)(guarded_organizer.active());
     this->enqueue(act);
-        guarded_organizer.block(*act, *this);
+    guarded_organizer.block(*act, *this);
 }
 
 void Buzzer::ring(){

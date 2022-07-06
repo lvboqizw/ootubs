@@ -10,11 +10,15 @@
 /*****************************************************************************/
 
 #include "organizer.h"
+#include "machine/cgascr.h"
+
+extern CGA_Stream kout;
 
 void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
     waitingroom.enqueue(&customer);         //put the customer in the waitingroom
     customer.waiting_in(&waitingroom);      //setup the waitingroom information of the customer
 
+    kout<<"in block" << endl;
     if (&customer == active()) {             //if the customer now is running
         exit();                             //exit() performs a coroutine swicth from old to the new life pointer
     } else {

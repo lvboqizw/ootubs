@@ -69,7 +69,7 @@ void Application::action()
 
     //---------------------TASK6----------------------//
     Guarded_Buzzer buzzer;
-    buzzer.set(4000);
+    buzzer.set(4);
     int counter = 0;
     while(1) {
     kout << "application: " << counter << endl;
