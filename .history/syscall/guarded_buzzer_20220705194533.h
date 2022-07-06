@@ -2,24 +2,26 @@
 /* Operating-System Construction                                             */
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
-/*                               B U Z Z E R                                 */
+/*                         G U A R D E D _ B U Z Z E R                       */
 /*                                                                           */
 /*---------------------------------------------------------------------------*/
-/* An "alarm clock" is a synchronization object that allows one or more      */
-/* threads to put themselves to sleep for a specified time.                  */
+/* The Guarded_Buzzer class implements the system call interface to the      */
+/* Buzzer class.                                                             */
 /*****************************************************************************/
 
-/* INCLUDES */
-#include "meeting/buzzer.h"
+#ifndef __Guarded_Buzzer_include__
+#define __Guarded_Buzzer_include__
+
 /* Add your code here */ 
-Buzzer::Buzzer(){
-    alarmClock = false;
-}
 
-void Buzzer::set(int ms){
-    this->Bell::wait(ms);
-}
+class Guarded_Buzzer
+/* Add your code here */ 
+{
+private:
+	Guarded_Buzzer(const Guarded_Buzzer &copy); // prevent copying
+public:
+	Guarded_Buzzer() {}
+/* Add your code here */ 
+};
 
-void Buzzer::sleep(){
-    
-}
+#endif

@@ -9,17 +9,17 @@
 /* threads to put themselves to sleep for a specified time.                  */
 /*****************************************************************************/
 
-/* INCLUDES */
-#include "meeting/buzzer.h"
+#ifndef __Buzzer_include__
+#define __Buzzer_include__
+
 /* Add your code here */ 
-Buzzer::Buzzer(){
-    alarmClock = false;
-}
 
-void Buzzer::set(int ms){
-    this->Bell::wait(ms);
-}
+class Buzzer
+/* Add your code here */ 
+{
+private:
+	Buzzer(const Buzzer &copy); // prevent copying
+/* Add your code here */ 
+};
 
-void Buzzer::sleep(){
-    
-}
+#endif

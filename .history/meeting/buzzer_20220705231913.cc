@@ -17,7 +17,7 @@ Buzzer::Buzzer(){
 }
 
 void Buzzer::set(int ms){
-    this->Bell::wait(ms);
+    clock = ms;
 }
 
 void Buzzer::sleep(){

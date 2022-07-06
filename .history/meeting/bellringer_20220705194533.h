@@ -23,16 +23,16 @@ private:
 	Bellringer(const Bellringer &copy); // prevent copying
 
 public:
-	Bellringer() {};
+	Bellringer() {}
 
 	/// Checks whether bells are to be rung and does so if necessary
-	void check(){};
+	void check();
 
 	/// The bell is given to the bell ringer. It should be rung after ticks time units
-	void job (Bell* bell, int ticks){};
+	void job (Bell* bell, int ticks);
 
 	/// The bell should not be rung after all
-	void cancel (Bell* bell){};
+	void cancel (Bell* bell);
 };
 
 #endif

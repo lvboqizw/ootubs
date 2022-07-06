@@ -31,7 +31,6 @@ void Semaphore::p() {
 
 void Semaphore::v() {
     Customer *next =(Customer*) this->dequeue();
-    //when more than one customer are waiting, then don't increase counter, direkt wakeup
     if(!next) {
         counter += 1;
     } else {

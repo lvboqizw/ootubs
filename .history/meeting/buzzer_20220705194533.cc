@@ -10,16 +10,4 @@
 /*****************************************************************************/
 
 /* INCLUDES */
-#include "meeting/buzzer.h"
 /* Add your code here */ 
-Buzzer::Buzzer(){
-    alarmClock = false;
-}
-
-void Buzzer::set(int ms){
-    this->Bell::wait(ms);
-}
-
-void Buzzer::sleep(){
-    
-}
