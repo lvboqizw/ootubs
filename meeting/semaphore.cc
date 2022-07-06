@@ -21,21 +21,20 @@ Semaphore::Semaphore(int c) {
 void Semaphore::p() {
     Customer *act = (Customer*)(guarded_organizer.active());   // Get the actual process;
 
-    if(counter >0) {
-        counter -= 1;
-    } else {
+    if(--counter < 0) {
         this->enqueue(act);
         guarded_organizer.block(*act, *this);
     }
 }
 
 void Semaphore::v() {
-    Customer *next =(Customer*) this->dequeue();
+    Customer *next;
     //when more than one customer are waiting, then don't increase counter, direkt wakeup
-    if(!next) {
-        counter += 1;
-    } else {
-        guarded_organizer.wakeup(*next);
+    if(++ counter <= 0) {
+        next  =(Customer*) this->dequeue();
+        if(next) {
+            guarded_organizer.wakeup(*next);
+        }
     }
 }
 

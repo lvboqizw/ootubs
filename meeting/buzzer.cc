@@ -14,9 +14,7 @@
 #include "syscall/guarded_organizer.h"
 
 extern Guarded_Organizer guarded_organizer;
-/* Add your code here */ 
-Buzzer::Buzzer(){
-}
+
 
 void Buzzer::set(int ms){
     this->Bell::wait(ms);

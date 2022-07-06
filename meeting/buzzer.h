@@ -30,9 +30,9 @@ public:
 
 	virtual void ring() = 0;
 
-	void set(int ms){};
+	void set(int ms);
 
-	void sleep(){};
+	void sleep();
 
 };
 

@@ -24,9 +24,9 @@ public:
 /* Add your code here */ 
 	virtual ~Guarded_Buzzer(){};
 
-	void set(int ms){};
+	void set(int ms);
 
-	void sleep(){};
+	void sleep();
 };
 
 #endif
