@@ -74,18 +74,19 @@ void task5test() {
 
 void task6test() {
 	Application appl(stack1+STACK_SIZE);
-	Loop loop(stack2+STACK_SIZE);
-	guarded_scheduler.ready(appl);
+	// Loop loop(stack2+STACK_SIZE);
+	guarded_organizer.ready(appl);
+	// guarded_organizer.ready(loop);
 	guard.enter();
 	watch.windup();
-	guarded_scheduler.schedule();
+	guarded_organizer.schedule();
 
 }
 
 int main()
 {
 	cpu.enable_int();
-	keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
+	// keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
 	// task3test();
 	// task4test();
 	// task5test();

@@ -20,28 +20,30 @@
 #include "user/loop.h"
 #include "syscall/guarded_scheduler.h"
 #include "syscall/guarded_buzzer.h"
+#include "syscall/guarded_organizer.h"
 
 /* GLOBAL VARIABLES */
 extern CGA_Screen scr;
 extern CGA_Stream kout;
 extern CPU cpu;
 extern Guarded_Scheduler guarded_scheduler;
+extern Guarded_Organizer guarded_organizer;
 extern Scheduler scheduler;
 
 
 
 #define STACK_SIZE 512
 
-// unsigned char stack1[STACK_SIZE];
-// unsigned char stack2[STACK_SIZE];
+unsigned char stack5[STACK_SIZE];
+unsigned char stack6[STACK_SIZE];
 
 void Application::action()
 {
     //--------------------TASK4/5---------------------//
-    // Loop loop1(stack1 + STACK_SIZE);
-    // loop1.set_num(1);
-    // Loop loop2(stack2 + STACK_SIZE);
-    // loop2.set_num(2);
+    Loop loop1(stack5 + STACK_SIZE);
+    loop1.set_num(1);
+    Loop loop2(stack6 + STACK_SIZE);
+    loop2.set_num(2);
     //------------------------------------------------//
 
     //---------------------TASK 4---------------------//
@@ -68,14 +70,12 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
-    Guarded_Buzzer buzzer;
-    buzzer.set(40000000);
-    int counter = 0;
-    // while(1) {
-    kout << "application: " << counter << endl;
-    counter ++;
-    buzzer.sleep();
-    kout << "application: " << counter << endl;
-    // }
+    guarded_organizer.ready(loop1);
+    guarded_organizer.ready(loop2);
+    while(1) {
+        kout.setpos(0, 18);
+        kout << "in application";
+        kout.flush();
+    }
     //------------------------------------------------//
 }
