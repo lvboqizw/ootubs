@@ -72,10 +72,15 @@ void Application::action()
     //---------------------TASK6----------------------//
     guarded_organizer.ready(loop1);
     guarded_organizer.ready(loop2);
+    // Guarded_Buzzer buzzer;
+    // buzzer.set(2000);
+
     while(1) {
+        Secure secure;
         kout.setpos(0, 18);
         kout << "in application";
         kout.flush();
+        // buzzer.sleep();
     }
     //------------------------------------------------//
 }

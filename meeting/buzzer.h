@@ -12,21 +12,20 @@
 #ifndef __Buzzer_include__
 #define __Buzzer_include__
 
-/* Add your code here */ 
 #include "meeting/bell.h"
 #include "meeting/waitingroom.h"
+#include "syscall/thread.h"
 
 class Buzzer : public Waitingroom, public Bell
-/* Add your code here */ 
+
 {
 private:
 	Buzzer(const Buzzer &copy); // prevent copying
-/* Add your code here */ 
 
 public:
 	Buzzer(){}
 
-	virtual ~Buzzer(){};
+	virtual ~Buzzer();
 
 	/// Called by the Bellringer when the waiting time has expired. Wakes up sleeping threads if necessary.
 	virtual void ring();

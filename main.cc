@@ -1,26 +1,28 @@
 /* Add your code here */ 
 
+#include "device/cgastr.h"
+#include "device/keyboard.h"
+#include "device/panic.h"
+#include "device/watch.h"
 #include "machine/cgascr.h"
 #include "machine/keyctrl.h"
 #include "machine/key.h"
 #include "machine/cpu.h"
 #include "machine/plugbox.h"
 #include "machine/pic.h"
-#include "device/cgastr.h"
-#include "device/keyboard.h"
-#include "device/panic.h"
+#include "meeting/bellringer.h"
 #include "object/o_stream.h"
 #include "syscall/guarded_scheduler.h"
 #include "syscall/guarded_organizer.h"
 #include "syscall/guarded_semaphore.h"
 #include "syscall/guarded_keyboard.h"
+#include "syscall/guarded_buzzer.h"
 #include "thread/scheduler.h"
 #include "thread/dispatch.h"
 #include "user/appl.h"
 #include "user/loop.h"
 #include "user/idle.h"
-#include "device/watch.h"
-#include "meeting/bellringer.h"
+
 
 #define STACK_SIZE 512
 
@@ -35,7 +37,7 @@ Guard guard;
 Scheduler scheduler;
 Bellringer bellringer;
 Guarded_Keyboard keyboard;
-Guarded_Organizer guarded_organizer;
+
 
 
 unsigned char stack1[STACK_SIZE];
@@ -45,7 +47,9 @@ unsigned char stack4[STACK_SIZE];
 
 Idle idle(stack4 + STACK_SIZE);
 Guarded_Scheduler guarded_scheduler;
-Watch watch(1000);
+Guarded_Organizer guarded_organizer;
+// Guarded_Buzzer guarded_buzzer;
+Watch watch(3000000);
 
 
 void task3test() {								// question: why without this loop, the keyboard interput will not work?
@@ -74,11 +78,11 @@ void task5test() {
 
 void task6test() {
 	Application appl(stack1+STACK_SIZE);
-	// Loop loop(stack2+STACK_SIZE);
-	guarded_organizer.ready(appl);
+	Loop loop(stack2+STACK_SIZE);
+	// guarded_organizer.ready(appl);
 	// guarded_organizer.ready(loop);
-	guard.enter();
-	watch.windup();
+	// guard.enter();
+	// watch.windup();
 	guarded_organizer.schedule();
 
 }
@@ -86,7 +90,7 @@ void task6test() {
 int main()
 {
 	cpu.enable_int();
-	// keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
+	keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
 	// task3test();
 	// task4test();
 	// task5test();
@@ -101,7 +105,7 @@ int main()
 	// for(int i=0;i < 1000000;i++);
 	// guarded_scheduler.schedule();
 	// scheduler.schedule();
-
+	kout << "return to main" << endl;
 	while(1);
 	return 0;
 }
