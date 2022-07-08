@@ -30,7 +30,7 @@ void Semaphore::p() {
 void Semaphore::v() {
     Customer *next;
     //when more than one customer are waiting, then don't increase counter, direkt wakeup
-    if(++ counter <= 0) {
+    if(++ counter <= 0) {                                      //use a minus counter to varify if there is more than one customer are waiting
         next  =(Customer*) this->dequeue();
         if(next) {
             guarded_organizer.wakeup(*next);

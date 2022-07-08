@@ -32,12 +32,6 @@ void Scheduler::schedule(){
     if(next){
         go(*next);
     } else {
-
-        //-----------------------------------------------------------
-    kout << "ilde" << endl;
-    // kout.flush();
-    //-----------------------------------------------------------
-
         this->dispatch(idle);
     }
 }
@@ -48,7 +42,7 @@ void Scheduler::exit(){
     if(next){
         this -> dispatch(*next);
     } else {
-        this->dispatch(idle);
+        this -> dispatch(idle);
     }
     
 }

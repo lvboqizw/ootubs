@@ -26,65 +26,61 @@
 
 #define STACK_SIZE 512
 
-CGA_Screen scr;
-
-CPU cpu;
-Plugbox plugbox;
-PIC pic;
-Panic panic;
-CGA_Stream kout;
-Guard guard;
-Scheduler scheduler;
-Bellringer bellringer;
-Guarded_Keyboard keyboard;
-
-
-
 unsigned char stack1[STACK_SIZE];
 unsigned char stack2[STACK_SIZE];
 unsigned char stack3[STACK_SIZE];
 unsigned char stack4[STACK_SIZE];
 
+CPU cpu;
+CGA_Screen scr;
+Plugbox plugbox;
+PIC pic;
+Panic panic;
+CGA_Stream kout;
+Guard guard;
+Bellringer bellringer;
 Idle idle(stack4 + STACK_SIZE);
+Guarded_Keyboard keyboard;
 Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
+Guarded_Semaphore guarded_semaphore(1);
+
 // Guarded_Buzzer guarded_buzzer;
-Watch watch(3000000);
+Watch watch(1000);
 
 
-void task3test() {								// question: why without this loop, the keyboard interput will not work?
-	while(1) {									// the cpu is disabled from somewhere?
-		Secure secure;
-		kout.setpos(10, 10);
-		kout << "test taks 3";
-		kout.flush();
-	}
-}
+// void task3test() {								// question: why without this loop, the keyboard interput will not work?
+// 	while(1) {									// the cpu is disabled from somewhere?
+// 		Secure secure;
+// 		kout.setpos(10, 10);
+// 		kout << "test taks 3";
+// 		kout.flush();
+// 	}
+// }
 
-void task4test() {
-	Secure secure;
-	Application appl(stack1+STACK_SIZE);			// the address start at a high address
-	scheduler.ready(appl);
-	scheduler.schedule();								
-}
+// void task4test() {
+// 	Secure secure;
+// 	Application appl(stack1+STACK_SIZE);			// the address start at a high address
+// 	scheduler.ready(appl);
+// 	scheduler.schedule();								
+// }
 
-void task5test() {
-	Application appl(stack1+STACK_SIZE);			// the address start at a high address
-	guarded_scheduler.ready(appl);
-	guard.enter();
-	watch.windup();								// resume (located in watch epilogie should run after the guard Because after the PIT been set, )
-	guarded_scheduler.schedule();
-}
+// void task5test() {
+// 	Application appl(stack1+STACK_SIZE);			// the address start at a high address
+// 	guarded_scheduler.ready(appl);
+// 	guard.enter();
+// 	watch.windup();								// resume (located in watch epilogie should run after the guard Because after the PIT been set, )
+// 	guarded_scheduler.schedule();
+// }
 
 void task6test() {
 	Application appl(stack1+STACK_SIZE);
 	Loop loop(stack2+STACK_SIZE);
-	// guarded_organizer.ready(appl);
-	// guarded_organizer.ready(loop);
-	// guard.enter();
-	// watch.windup();
+	guarded_organizer.ready(appl);
+	guarded_organizer.ready(loop);
+	guard.enter();
+	watch.windup();
 	guarded_organizer.schedule();
-
 }
 
 int main()

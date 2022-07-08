@@ -21,6 +21,7 @@
 #include "syscall/guarded_scheduler.h"
 #include "syscall/guarded_buzzer.h"
 #include "syscall/guarded_organizer.h"
+#include "syscall/guarded_semaphore.h"
 
 /* GLOBAL VARIABLES */
 extern CGA_Screen scr;
@@ -28,6 +29,7 @@ extern CGA_Stream kout;
 extern CPU cpu;
 extern Guarded_Scheduler guarded_scheduler;
 extern Guarded_Organizer guarded_organizer;
+extern Guarded_Semaphore guarded_semaphore;
 extern Scheduler scheduler;
 
 
@@ -40,10 +42,10 @@ unsigned char stack6[STACK_SIZE];
 void Application::action()
 {
     //--------------------TASK4/5---------------------//
-    Loop loop1(stack5 + STACK_SIZE);
-    loop1.set_num(1);
-    Loop loop2(stack6 + STACK_SIZE);
-    loop2.set_num(2);
+    // Loop loop1(stack5 + STACK_SIZE);
+    // loop1.set_num(1);
+    // Loop loop2(stack6 + STACK_SIZE);
+    // loop2.set_num(2);
     //------------------------------------------------//
 
     //---------------------TASK 4---------------------//
@@ -70,17 +72,20 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
-    guarded_organizer.ready(loop1);
-    guarded_organizer.ready(loop2);
-    // Guarded_Buzzer buzzer;
-    // buzzer.set(2000);
+    int wait = 1000;
+    int count = 0;
+    Guarded_Buzzer buzzer;
 
-    while(1) {
-        Secure secure;
-        kout.setpos(0, 18);
-        kout << "in application";
+    while (1){
+        buzzer.set(wait);
+        buzzer.sleep();
+        kout <<"sleep" <<endl;
+        guarded_semaphore.wait();
+        kout <<"wait" <<endl;
+        kout.setpos(0,10);
+        kout << "Appl: Doing important stuff(" << count++ << ")";
         kout.flush();
-        // buzzer.sleep();
+        guarded_semaphore.signal();
     }
     //------------------------------------------------//
 }
