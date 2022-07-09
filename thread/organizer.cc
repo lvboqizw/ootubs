@@ -21,10 +21,13 @@ void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
     // kout<<"in block" << endl;
     if (&customer == active()) {             //if the customer now is running
     //-----------------------------------------------------------
-        kout<<"exit_block" << endl;
+        kout<<"block exit()" << endl;
     //-----------------------------------------------------------
         exit();                             //exit() performs a coroutine swicth from old to the new life pointer
     } else {
+        //-----------------------------------------------------------
+        kout<<"block kill()" << endl;
+    //-----------------------------------------------------------
         kill(customer);                     //terminate the given customer
     }
 }

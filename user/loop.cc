@@ -45,28 +45,28 @@ void Loop::action()
 //-------------------------------------------------------//
 
 //---------------------TASK6-----------------------------//
-int wait = 2000;
+int wait = 100;
     int count = 0;
     Guarded_Buzzer buzzer;
+    unsigned short x, y;
 
     //Endlosschleife
     while(1) {
         buzzer.set(wait);
+        kout <<"loop sleep" <<endl; 
         buzzer.sleep();
+        kout <<"loop wake" <<endl;  
         guarded_semaphore.wait();
-        kout.setpos(0,3);
+        kout.getpos(x, y);
+        kout.setpos(0,19);
         kout << "Loop: Doing stuff("<< count++ << ")";
         kout.flush();
+        kout.setpos(x, y);
         guarded_semaphore.signal();
-
-        //while (wait-- > 0);
-        //wait = 10000;
-        //buzzer.set(2000);
-        //buzzer.sleep();
     }
 //-------------------------------------------------------//
 }
 
-void Loop::set_num(int i) {
-    num = i;
-}
+// void Loop::set_num(int i) {
+//     num = i;
+// }

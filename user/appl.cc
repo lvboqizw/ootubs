@@ -72,19 +72,22 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
-    int wait = 1000;
+    int wait = 50;
     int count = 0;
     Guarded_Buzzer buzzer;
+    unsigned short x, y;
 
     while (1){
         buzzer.set(wait);
+        kout <<"appl sleep" <<endl;
         buzzer.sleep();
-        kout <<"sleep" <<endl;
+        kout <<"appl wake" <<endl;  
         guarded_semaphore.wait();
-        kout <<"wait" <<endl;
-        kout.setpos(0,10);
-        kout << "Appl: Doing important stuff(" << count++ << ")";
+        kout.getpos(x, y);
+        kout.setpos(0,18);
+        kout << "Appl: Doing stuff(" << count++ << ")";
         kout.flush();
+        kout.setpos(x,y);
         guarded_semaphore.signal();
     }
     //------------------------------------------------//

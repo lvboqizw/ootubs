@@ -16,6 +16,7 @@
 
 extern CGA_Stream kout;
 
+
 extern Guarded_Organizer guarded_organizer;
 extern Bellringer bellringer;
 
@@ -38,7 +39,6 @@ void Buzzer::set(int ms){
 void Buzzer::sleep(){//放进waitingroom,直到铃响
     Thread *act = (Thread*)(guarded_organizer.active());
     bellringer.job(this, this->Bell::wait());
-    // this->enqueue(act);                                  // will be done in the next step
     guarded_organizer.block(*act, *this);
 }
 
