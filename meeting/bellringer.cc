@@ -19,50 +19,68 @@ extern CGA_Stream kout;
 extern CPU cpu;
 
 void Bellringer::check() {//遍历BELL列表,查看是否到期，然后每个都调用tick
-    Bell* bell;
-    bell = (Bell*)first();
-    if(!bell) return;
-    if(!bell->run_down()) {
-        bell->tick();
-    //     if(bell->wait() == 0) {
-    //         //-----------------------------------------------------------
-    //     kout<<"tick: "<< bell->wait() << endl;
-    // //-----------------------------------------------------------
-    //         cpu.halt();
-    //     }
-    // //-----------------------------------------------------------
-    //     kout<<"tick: "<< bell->wait() << endl;
-    // //-----------------------------------------------------------
-        return;
-    }
-    //-----------------------------------------------------------
-        kout<<"time out" << endl;
-    //-----------------------------------------------------------
-    bell = (Bell*)dequeue();                  // get the time outed bell out
-    bell->ring();
+    // Bell* bell;
+    // bell = (Bell*)first();
+    // if(!bell) return;
+    // if(!bell->run_down()) {
+    //     bell->tick();
+    //     // if(bell->wait() == 40) {
+    //     // //-----------------------------------------------------------
+    //     //     kout<<"tick: "<< bell->wait() << endl;
+    //     // //-----------------------------------------------------------
+    //     //         cpu.halt();
+    //     //     }
+    // // //-----------------------------------------------------------
+    // //     kout<<"tick: "<< bell->wait() << endl;
+    // // //-----------------------------------------------------------
+    //     return;
+    // }
+    // // //-----------------------------------------------------------
+    // //     kout<<"time out" << endl;
+    // // //-----------------------------------------------------------
+    // bell = (Bell*)dequeue();                  // get the time outed bell out
+    // bell->ring();
+
+
+    Bell* temp = (Bell*) first();
+	Bell* del;	
+	while(temp){
+		temp->tick();
+		if(temp->run_down()){
+			// kout << "RING" << endl;
+			kout.flush();
+			//cpu.halt();			
+			temp->ring();
+			del = temp;
+			temp = (Bell*)temp->next;
+			remove(del);
+		}else{
+			temp = (Bell*)temp->next;
+		}
+	}
 }
 
 void Bellringer::job(Bell* bell, int ticks) {
-    if(!ticks) {
-        return;
-    }
-    int sum = 0;
-    Bell* now = (Bell*)first();
-    if(!now) {                             //if there is no bell yet
-        this->enqueue(bell);
-        return;
-    }
+    bell->wait(ticks);
+	enqueue(bell);
 
-    sum = now->wait();
-    //-----------------------------------------------------------
-        kout<<"fisrt ticks " << sum << endl;
-    //-----------------------------------------------------------
+    // int sum = 0;
+    // Bell* now = (Bell*)first();
+    // if(!now) {                             //if there is no bell yet
+    //     this->enqueue(bell);
+    //     return;
+    // }
 
-    // bell->wait(ticks - sum);
-    //-----------------------------------------------------------
-        kout<<"second ticks" << bell->wait() << endl;
-    //-----------------------------------------------------------
-    insert_after(now, bell);
+    // sum = now->wait();
+    // //-----------------------------------------------------------
+    //     kout<<"fisrt ticks " << sum << endl;
+    // //-----------------------------------------------------------
+
+    // // bell->wait(ticks - sum);
+    // //-----------------------------------------------------------
+    //     kout<<"second ticks" << bell->wait() << endl;
+    // //-----------------------------------------------------------
+    // insert_after(now, bell);
     // while(sum < ticks) {                    //if the ticks bigger than the old one's
     //     Bell* next = (Bell*)now->next;      //the bell which in the list and after 'now' one
     //     if(next) {
