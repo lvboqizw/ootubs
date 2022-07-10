@@ -35,12 +35,11 @@ void Scheduler::ready (Entrant &that){
 void Scheduler::schedule(){
     Entrant *next = static_cast<Entrant*>(list.dequeue());
         //--------------------------------------------
-        kout<<&next<<"has been dequeued"<<endl;
+        kout<<&next<<"has been dequeued and schedule"<<endl;
         kout << "ready list/afer schedule:  " << list.len() << endl;
     if(next){
         go(*next);
     } else {
-        kout<<"has nothing to schedule, went to idle : "<<&idle<<endl;
         this->dispatch(idle);
     }
 }
@@ -73,7 +72,6 @@ void Scheduler::resume(){
     if((Idle *)(this -> active()) != &idle){                    //if the running thread is not the idle, put the running thread back to ready list
         this -> list.enqueue((Entrant *)(this -> active()));
         //--------------------------------------------
-        kout<<"the aktuell customer has been enqueued"<<endl;
         kout << "length of ready list/(in resume): " << list.len() << endl;
     }
     Entrant *next = (Entrant *)(this -> list.dequeue());
@@ -82,7 +80,6 @@ void Scheduler::resume(){
         kout << "resume to next thread: " << &next << endl;
         this -> dispatch(*next);
     } else{
-        kout<<"has nothint to resume, went to idle"<<&idle<<endl;
         this -> dispatch(idle);
     }
 }
