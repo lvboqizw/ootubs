@@ -29,8 +29,45 @@ void Keyboard::plugin (){
 	plugbox.assign(Plugbox::keyboard, *this);
 	//interrupts für tastatur erlauben
 	pic.allow(PIC::keyboard);
-	semaphore.wait();									// Wait for events
+	// semaphore.wait();									// Wait for events
 }
+
+
+bool Keyboard::prologue ()
+{
+	// cpu.disable_int();				//  the interrupts are disabled before guardian () is called
+	Key key = this->key_hit();
+
+	if(key.valid()){
+		//CTRL + ALT + DEL abfragen
+		if((key.ctrl()==true) && (key.alt()==true) && (key.scancode()==0x53))
+		{	
+			this->reboot();
+		}else{
+			last_key = key;
+			return true;
+		}
+	}
+	return key.valid();
+}
+    
+
+void Keyboard::epilogue ()
+{
+    if(tooken) {
+		tooken = false;
+		semaphore.Semaphore::signal();
+	} else {
+		kout << "tooken false" << endl;
+	}
+}
+
+Key Keyboard::getkey() {
+	semaphore.Semaphore::wait();	
+	tooken = true;
+	return this->last_key;
+}
+
 
 // void Keyboard::trigger(){
 // 	kout.setpos(0,0);
@@ -52,51 +89,3 @@ void Keyboard::plugin (){
 // 		}
 // 	}
 // }
-
-bool Keyboard::prologue ()
-{
-	// cpu.disable_int();				//  the interrupts are disabled before guardian () is called
-	// Key key = this->key_hit();
-	Key key = getkey();
-
-
-	if(key.valid()){
-		//CTRL + ALT + DEL abfragen
-		if((key.ctrl()==true) && (key.alt()==true) && (key.scancode()==0x53))
-		{	
-			this->reboot();
-		}else{
-			// if(length != 1023)//buffer is not full
-			// 	buffer[length++] = key;
-			// kout<<"in pro valied key" << endl;
-			// semaphore.wait();	
-			this->data = (char)key.ascii();
-			return key.valid();
-		}
-	}
-	return key.valid();
-}
-    
-
-void Keyboard::epilogue ()
-{
-	// kout.setpos(5,5);
-	// // while(length > 0)
-	// // 	kout<<(char)buffer[--length].ascii();
-	// kout<<this->data;
-	// kout.flush();
-
-	// kout << getkey();
-	// this->semaphore.signal();
-	// kout.flush();
-
-	kout << this-> data<<endl;
-	// kout.flush();
-}
-
-Key Keyboard::getkey() {
-	this->key = this->key_hit();						// Keyborad buffer is fulled
-	semaphore.signal();									// signal the event;
-	return this->key;
-}
-

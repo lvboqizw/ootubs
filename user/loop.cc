@@ -45,7 +45,7 @@ void Loop::action()
 //-------------------------------------------------------//
 
 //---------------------TASK6-----------------------------//
-int wait = 100;
+int wait = 1000;
     int count = 0;
     Guarded_Buzzer buzzer;
     unsigned short x, y;

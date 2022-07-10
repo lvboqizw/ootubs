@@ -22,6 +22,7 @@
 #include "user/appl.h"
 #include "user/loop.h"
 #include "user/idle.h"
+#include "user/write.h"
 
 
 #define STACK_SIZE 512
@@ -40,7 +41,7 @@ CGA_Stream kout;
 Guard guard;
 Bellringer bellringer;
 Idle idle(stack4 + STACK_SIZE);
-Guarded_Keyboard keyboard;
+Guarded_Keyboard guarded_keyboard;
 Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
 Guarded_Semaphore guarded_semaphore(1);
@@ -76,8 +77,11 @@ Watch watch(1000);
 void task6test() {
 	Application appl(stack1+STACK_SIZE);
 	Loop loop(stack2+STACK_SIZE);
-	guarded_organizer.ready(appl);
-	guarded_organizer.ready(loop);
+	Write write(stack3 + STACK_SIZE);
+
+	// guarded_organizer.ready(appl);
+	// guarded_organizer.ready(loop);
+	guarded_organizer.ready(write);
 	guard.enter();
 	watch.windup();
 	guarded_organizer.schedule();
@@ -86,7 +90,7 @@ void task6test() {
 int main()
 {
 	cpu.enable_int();
-	keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
+	guarded_keyboard.plugin();							//after plugin, the keyboard's prologue will be called once and return 0
 	// task3test();
 	// task4test();
 	// task5test();
@@ -101,7 +105,7 @@ int main()
 	// for(int i=0;i < 1000000;i++);
 	// guarded_scheduler.schedule();
 	// scheduler.schedule();
-	kout << "return to main" << endl;
+
 	// guarded_scheduler.ready(idle);
 	// guarded_organizer.schedule();
 	while(1);

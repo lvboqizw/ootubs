@@ -19,12 +19,10 @@ public:
     Idle(void *tos) : Thread(tos){}
 
     inline void action(){
-        kout << "idle" << endl;
-		while(1){
 
+		while(1){
 			cpu.idle();
-			// kout << "idle" << endl;
-			kout.flush();
+
 		}
     }
 };

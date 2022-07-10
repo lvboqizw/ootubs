@@ -72,7 +72,7 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
-    int wait = 200;
+    int wait = 500;
     int count = 0;
     Guarded_Buzzer buzzer;
     unsigned short x, y;

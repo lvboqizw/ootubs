@@ -26,14 +26,16 @@ private:
     Key buffer[1024];
 	unsigned int length;
 	Key key;
+	Key last_key;
 	char data;
 
+	bool tooken = true;
 	Guarded_Semaphore semaphore;
 
 public:
 /* Add your code here */ 
  
-    Keyboard():semaphore(1){};
+    Keyboard():semaphore(0){};
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();
 

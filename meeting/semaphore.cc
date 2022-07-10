@@ -12,6 +12,10 @@
 #include "semaphore.h"
 #include "syscall/guarded_organizer.h"
 
+#include "device/cgastr.h"
+
+extern CGA_Stream kout;
+
 extern Guarded_Organizer guarded_organizer;
 
 Semaphore::Semaphore(int c) {
@@ -20,21 +24,27 @@ Semaphore::Semaphore(int c) {
 
 void Semaphore::p() {
     Customer *act = (Customer*)(guarded_organizer.active());   // Get the actual process;
-
-    if(--counter < 0) {
-        this->enqueue(act);
+    if(counter > 0) {
+        counter -= 1;
+    } else {
+        //this->enqueue(act);
+        //-----------------------------------------
+        kout<< "p wait: " << act << endl;
         guarded_organizer.block(*act, *this);
     }
 }
 
 void Semaphore::v() {
     Customer *next;
-    //when more than one customer are waiting, then don't increase counter, direkt wakeup
-    if(++ counter <= 0) {                                      //use a minus counter to varify if there is more than one customer are waiting
-        next  =(Customer*) this->dequeue();
-        if(next) {
-            guarded_organizer.wakeup(*next);
-        }
+    //when more than one customer are waiting, then don't increase counter, direkt wakeup                            
+    next  =(Customer*) this->dequeue();                 //use a minus counter to varify if there is more than one customer are waitin
+
+    if(next) {
+        //-----------------------------------------
+        kout<< "v: " << next << endl;
+        guarded_organizer.wakeup(*next);
+    } else {
+        counter += 1;
     }
 }
 
