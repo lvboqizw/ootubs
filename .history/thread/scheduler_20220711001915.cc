@@ -40,7 +40,6 @@ void Scheduler::schedule(){
     if(next){
         go(*next);
     } else {
-        //----------------------------------------------9
         kout<<"has nothing to schedule, went to idle : "<<&idle<<endl;
         this->dispatch(idle);
     }
