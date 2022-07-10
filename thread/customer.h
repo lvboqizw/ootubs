@@ -36,9 +36,10 @@ public:
 
 	/// This method is used to note in the Customer that it is currently waiting for an event in the Waitingroom w.
 	void waiting_in (Waitingroom* w) {
-		if(waitingroom != 0) {
+		if(!waitingroom) {
 			kout << "The customer is already in a waitingroom" << endl;
 		} else {
+			kout<< "wlecome" << endl;
 			waitingroom = w;
 		}
 		

@@ -19,9 +19,7 @@ extern CGA_Stream kout;
 void Bellringer::check() {//遍历BELL列表,查看是否到期，然后每个都调用tick
     Bell* bell;
     bell = (Bell*)first();
-    kout << "11" << endl;
     if(!bell) return;
-    kout << "12" << endl;
     if(!bell->run_down()) {
         return;
     }

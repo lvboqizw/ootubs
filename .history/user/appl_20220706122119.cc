@@ -69,15 +69,14 @@ void Application::action()
 
     //---------------------TASK6----------------------//
     Guarded_Buzzer buzzer;
-    buzzer.set(4000);
+    buzzer.set(400);
     int counter = 0;
-    while(1) {
-    kout.setpos(5, 10);
-    kout << "application: " << counter;
-    kout.flush();
+    // while(1) {
+    Secure secure;
+    kout << "application: " << counter << endl;
     counter ++;
     buzzer.sleep();
-    // kout << "application: " << counter << endl;
-    }
+    kout << "application: " << counter << endl;
+    // }
     //------------------------------------------------//
 }

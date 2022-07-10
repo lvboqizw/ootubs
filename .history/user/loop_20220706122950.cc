@@ -19,7 +19,6 @@
 #include "guard/secure.h"
 #include "thread/scheduler.h"
 #include "syscall/guarded_scheduler.h"
-#include "syscall/guarded_organizer.h"
 /* Add your code here */ 
  
 /* GLOBAL VARIABLES */

@@ -45,7 +45,7 @@ unsigned char stack4[STACK_SIZE];
 
 Idle idle(stack4 + STACK_SIZE);
 Guarded_Scheduler guarded_scheduler;
-Watch watch(10000);
+Watch watch(1000);
 
 
 void task3test() {								// question: why without this loop, the keyboard interput will not work?
@@ -75,12 +75,11 @@ void task5test() {
 void task6test() {
 	Application appl(stack1+STACK_SIZE);
 	Loop loop(stack2+STACK_SIZE);
-	guarded_organizer.ready(appl);
 	// guarded_scheduler.ready(appl);
 	// guarded_scheduler.ready(loop);
 	guard.enter();
 	watch.windup();
-	// guarded_organizer.schedule();
+	guarded_organizer.schedule();
 }
 
 int main()
@@ -91,7 +90,7 @@ int main()
 	// task3test();
 	// task4test();
 	// task5test();
-	task6test();   
+	// task6test();   
 	
 	// guarded_scheduler.ready(appl);
 	// scheduler.ready(appl);

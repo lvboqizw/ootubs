@@ -14,11 +14,15 @@
 #include "machine/pic.h"
 #include "syscall/guarded_scheduler.h"
 #include "meeting/bellringer.h"
+//#include "syscall/guarded_organizer.h"
+
  
 extern Plugbox plugbox;
 extern PIC pic;
 extern Guarded_Scheduler guarded_scheduler;
+//extern Guarded_Organizer guarded_organizer;
 extern Bellringer bellringer;
+
 
 void Watch::windup() {
     plugbox.assign(plugbox.timer, *this);

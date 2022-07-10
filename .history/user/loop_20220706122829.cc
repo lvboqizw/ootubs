@@ -19,7 +19,6 @@
 #include "guard/secure.h"
 #include "thread/scheduler.h"
 #include "syscall/guarded_scheduler.h"
-#include "syscall/guarded_organizer.h"
 /* Add your code here */ 
  
 /* GLOBAL VARIABLES */
@@ -32,14 +31,14 @@ extern Scheduler scheduler;
  
 void Loop::action()
 {
-    // unsigned short x, y;
-    // kout.getpos(x, y);
-    // kout << endl;
+    unsigned short x, y;
+    kout.getpos(x, y);
+    kout << endl;
     while(1) {
         Secure secure;
-        kout.setpos(20, 40);
-        kout << "in the loop" ;
-        kout.flush();
+        kout.setpos(x, y);
+        kout << "in the loop" << endl ;
+        // kout.flush();
         // scheduler.resume();              // TASK 4
     }
 }

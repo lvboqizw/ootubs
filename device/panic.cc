@@ -22,7 +22,7 @@ void Panic::trigger() {
 }
 
 bool Panic::prologue () {
-	kout << "panic pro" << endl;
+	// kout << "panic pro" << endl;
 	return false;
 }
 

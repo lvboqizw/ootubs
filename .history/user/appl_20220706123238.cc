@@ -73,8 +73,7 @@ void Application::action()
     int counter = 0;
     while(1) {
     kout.setpos(5, 10);
-    kout << "application: " << counter;
-    kout.flush();
+    kout << "application: " << counter << endl;
     counter ++;
     buzzer.sleep();
     // kout << "application: " << counter << endl;
