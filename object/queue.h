@@ -24,7 +24,7 @@ protected:
 	Chain *head;
 	Chain **tail;
 
-	int counter = 0;
+	unsigned int counter = 0;
 
 public:
 	Queue()

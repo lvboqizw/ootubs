@@ -29,13 +29,13 @@ void Scheduler::ready (Entrant &that){
 
     list.enqueue(&that);
     //--------------------------------------------
-        kout << "ready list:(in ready) " << list.len() << endl;
+        kout << "ready list: " << list.len() << endl;
 }
 
 void Scheduler::schedule(){
     Entrant *next = static_cast<Entrant*>(list.dequeue());
         //--------------------------------------------
-        kout << "ready list/schedule:  " << list.len() << endl;
+        kout << "ready list/schedule: " << list.len() << endl;
     if(next){
         go(*next);
     } else {
@@ -46,15 +46,15 @@ void Scheduler::schedule(){
 void Scheduler::exit(){
     Entrant *next = static_cast<Entrant *>((this -> list.dequeue()));
     //--------------------------------------------
-        kout << " length of ready list/(in exit): " << list.len() << endl;
+        kout << "ready list/exit: " << list.len() << endl;
 
     if(next){
         //-----------------------------
-        kout<<"exit write, went next thread : "<<&next<<endl;
+        kout<<"exit write, has next"<<&next<<endl;
         this -> dispatch(*next);
     } else {
         //-----------------------------
-        kout<<"exit write ,went to idle : "<<&idle<<endl;
+        kout<<"exit write ,has idle"<<&idle<<endl;
         this -> dispatch(idle);
     }
     
@@ -71,12 +71,12 @@ void Scheduler::resume(){
     if((Idle *)(this -> active()) != &idle){                    //if the running thread is not the idle, put the running thread back to ready list
         this -> list.enqueue((Entrant *)(this -> active()));
         //--------------------------------------------
-        kout << "length of ready list/(in resume): " << list.len() << endl;
+        kout << "ready list/resume en: " << list.len() << endl;
     }
     Entrant *next = (Entrant *)(this -> list.dequeue());
     if(next){
         //--------------------------------------------
-        kout << "resume to next thread: " << &next << endl;
+        kout << "scheduler resume: " << &next << endl;
         this -> dispatch(*next);
     } else{
         this -> dispatch(idle);

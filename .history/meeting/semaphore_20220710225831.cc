@@ -23,23 +23,25 @@ Semaphore::Semaphore(int c) {
 }
 
 void Semaphore::p() {
-    Customer *act = static_cast<Customer*>(guarded_organizer.active());   // Get the actual process;
+    Customer *act = (Customer*)(guarded_organizer.active());   // Get the actual process;
     if(counter > 0) {
         counter -= 1;
     } else {
+        //this->enqueue(act);
         //-----------------------------------------
-        kout<< "p wait:block aktulle customer :  " << act << endl;
+        kout<< "p wait: " << act << endl;
         guarded_organizer.block(*act, *this);
     }
 }
 
 void Semaphore::v() {
-    Chain *chain = this->dequeue();                 //use a minus counter to varify if there is more than one customer are waitin
+    Customer *next;                          
+    next  =(Customer*) this->dequeue();                 //use a minus counter to varify if there is more than one customer are waitin
 
-    if(chain) {
+    if(next) {
         //-----------------------------------------
-        kout<< "v:wake up customer : " << chain << endl;
-        guarded_organizer.wakeup(*static_cast<Customer*>(chain));
+        kout<< "v: " << next << endl;
+        guarded_organizer.wakeup(*next);
     } else {
         counter += 1;
     }

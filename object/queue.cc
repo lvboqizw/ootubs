@@ -44,8 +44,10 @@ Chain *Queue::dequeue()
 			tail = &head;  // the tail pointer points to head again.
 		else               // Otherwise, invalidate the pointer
 			item->next = 0;// to this element's successor.
+		
+		counter -= 1;
 	}
-	counter -= 1;
+
 	return item;
 }
 
