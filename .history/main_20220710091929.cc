@@ -45,8 +45,20 @@ Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
 Guarded_Semaphore guarded_semaphore(1);
 
+<<<<<<< HEAD
+
+unsigned char stack1[STACK_SIZE];
+unsigned char stack2[STACK_SIZE];
+unsigned char stack3[STACK_SIZE];
+unsigned char stack4[STACK_SIZE];
+
+Idle idle(stack4 + STACK_SIZE);
+Guarded_Scheduler guarded_scheduler;
+Watch watch(10000);
+=======
 // Guarded_Buzzer guarded_buzzer;
 Watch watch(1000);
+>>>>>>> 9403559e74b30a194ba3de20ae407cfbf728f60e
 
 
 // void task3test() {								// question: why without this loop, the keyboard interput will not work?

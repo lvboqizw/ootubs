@@ -14,14 +14,18 @@
 #include "machine/pic.h"
 #include "syscall/guarded_scheduler.h"
 #include "meeting/bellringer.h"
-//#include "syscall/guarded_organizer.h"
+#include "syscall/guarded_organizer.h"
+
+#include "device/cgastr.h"
 
  
 extern Plugbox plugbox;
 extern PIC pic;
 extern Guarded_Scheduler guarded_scheduler;
-//extern Guarded_Organizer guarded_organizer;
+extern Guarded_Organizer guarded_organizer;
 extern Bellringer bellringer;
+
+extern CGA_Stream kout;
 
 
 void Watch::windup() {
@@ -35,7 +39,8 @@ bool Watch::prologue(){
 
 void Watch::epilogue(){
     bellringer.check();
-    guarded_scheduler.Scheduler::resume();  //can't directly call the resume from guarded_scheduler: if simply call the resume from the guard, it will run the guard.enter() and guard.leave()
-                                            // it will enter the guard twice and leave twice
+    // guarded_organizer.Scheduler::resume();  //can't directly call the resume from guarded_scheduler: if simply call the resume from the guard, it will run the guard.enter() and guard.leave()
+    //                                         // it will enter the guard twice and leave twice
+    guarded_organizer.Organizer::resume();
 }
 

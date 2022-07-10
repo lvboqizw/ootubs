@@ -18,6 +18,7 @@
 extern Guard guard;
 extern CPU cpu;
 extern Idle idle;
+extern CGA_Stream kout;
 
 
 Scheduler::Scheduler(const Scheduler &copy){}
@@ -30,6 +31,8 @@ void Scheduler::schedule(){
     Entrant *next = static_cast<Entrant*>(list.dequeue());
     if(next){
         go(*next);
+    } else {
+        this->dispatch(idle);
     }
 }
 
@@ -39,7 +42,7 @@ void Scheduler::exit(){
     if(next){
         this -> dispatch(*next);
     } else {
-        this->dispatch(idle);
+        this -> dispatch(idle);
     }
     
 }

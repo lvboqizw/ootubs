@@ -22,7 +22,7 @@ class Buzzer : public Waitingroom, public Bell
 private:
 	Buzzer(const Buzzer &copy); // prevent copying
 
-	//int timer;
+	int timer;
 
 public:
 	Buzzer(){}

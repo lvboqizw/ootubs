@@ -15,7 +15,7 @@ void PIT::interval(int us) {
 
     long tmp = this -> us;
 
-   tmp *= 1000; // how many steps are needed to reach us microseconds 
+    tmp *= 1000; // how many steps are needed to reach us microseconds 
 
     tmp /= 838; // intieger division , if the devision before the multiply, tmp may becomes a 0 if the us is less than 838
 

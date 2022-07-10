@@ -34,7 +34,7 @@ Buzzer::~Buzzer() {
 }
 
 void Buzzer::set(int ms){
-    this->Bell::wait(ms);
+    //this->Bell::wait(ms);
     //timer = ms;
 }
 

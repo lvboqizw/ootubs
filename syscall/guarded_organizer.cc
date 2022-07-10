@@ -11,6 +11,10 @@
 
 #include "syscall/guarded_organizer.h"
 
+#include "device/cgastr.h"
+
+
+
 void Guarded_Organizer::ready(Thread& that) {
     {
         Secure secure;
@@ -21,7 +25,7 @@ void Guarded_Organizer::ready(Thread& that) {
 void Guarded_Organizer::exit() {
     {
         Secure secure;
-        Scheduler::exit();
+        Organizer::exit();
     }
 }
 
@@ -35,6 +39,6 @@ void Guarded_Organizer::kill(Thread& that) {
 void Guarded_Organizer::resume() {
     {
         Secure secure;
-        Organizer::resume();
+        this->Scheduler::resume();
     }
 }

@@ -34,8 +34,8 @@ Buzzer::~Buzzer() {
 }
 
 void Buzzer::set(int ms){
-    this->Bell::wait(ms);
-    //timer = ms;
+    //this->Bell::wait(ms);
+    timer = ms;
 }
 
 void Buzzer::sleep(){//放进waitingroom,直到铃响

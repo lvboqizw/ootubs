@@ -12,8 +12,6 @@
 /* Add your code here */ 
 #include "machine/plugbox.h"
 
-#include "device/cgastr.h"
-
 
 Plugbox::Plugbox() {                                        
     for(int i = 0; i < 64; ++ i) {
@@ -22,8 +20,6 @@ Plugbox::Plugbox() {
 }
 
 void Plugbox::assign(unsigned int slot, Gate& gate) {       // check the slot, if the slot is in the range of the capacity
-    CGA_Stream kout;
-    kout << "slot: " << slot << endl;
     if(slot < 64) {
         map[slot] = &gate;
     } else {
