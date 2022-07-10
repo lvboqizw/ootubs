@@ -72,16 +72,16 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
-    int wait = 50;
+    int wait = 200;
     int count = 0;
     Guarded_Buzzer buzzer;
     unsigned short x, y;
 
     while (1){
         buzzer.set(wait);
-        kout <<"appl sleep" <<endl;
+        // kout <<"appl sleep" <<endl;
         buzzer.sleep();
-        kout <<"appl wake" <<endl;  
+        // kout <<"appl wake" <<endl;  
         guarded_semaphore.wait();
         kout.getpos(x, y);
         kout.setpos(0,18);

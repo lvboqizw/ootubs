@@ -45,11 +45,6 @@ void Buzzer::sleep(){//放进waitingroom,直到铃响
 }
 
 void Buzzer::ring(){
-    // //-----------------------------------------------------------
-    // kout << "been ringed";
-    // kout.flush();
-    // //-----------------------------------------------------------
-
     Thread *next =(Thread*) this->dequeue();
     guarded_organizer.wakeup(*next);
 

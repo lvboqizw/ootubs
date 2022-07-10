@@ -43,7 +43,7 @@ Idle idle(stack4 + STACK_SIZE);
 Guarded_Keyboard keyboard;
 Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
-Guarded_Semaphore guarded_semaphore(1);
+Guarded_Semaphore guarded_semaphore(2);
 
 // Guarded_Buzzer guarded_buzzer;
 Watch watch(1000);
@@ -68,7 +68,7 @@ Watch watch(1000);
 // void task5test() {
 // 	Application appl(stack1+STACK_SIZE);			// the address start at a high address
 // 	guarded_scheduler.ready(appl);
-// 	guard.enter();
+// 	guard.enter();									//
 // 	watch.windup();								// resume (located in watch epilogie should run after the guard Because after the PIT been set, )
 // 	guarded_scheduler.schedule();
 // }

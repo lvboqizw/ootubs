@@ -24,7 +24,7 @@ public:
 	Waitingroom() {};
 
 	/// The destructor removes all waiting processes from the list and wakes them up.
-	virtual ~Waitingroom() {};
+	virtual ~Waitingroom();
 
 	/// the specified process customer is removed from the waiting room prematurely
 	virtual void remove(Customer* customer);

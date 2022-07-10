@@ -28,7 +28,7 @@ public:
 
 	virtual ~Buzzer();
 
-	virtual void ring();
+	virtual void ring() = 0;
 
 	void set(int ms);
 
