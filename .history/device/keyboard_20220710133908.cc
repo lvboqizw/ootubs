@@ -98,7 +98,7 @@ void Keyboard::epilogue ()
 
 Key Keyboard::getkey() {
 	this->key = this->key_hit();						// Keyborad buffer is fulled
-	semaphore.p();	
+	semaphore.signal();	
 	this->hasBeenRead = true;								// signal the event;
 	return this->key;
 }

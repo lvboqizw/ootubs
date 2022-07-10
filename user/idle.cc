@@ -1,7 +1,11 @@
-#include "idle.h"
+// #include "idle.h"
+// #include "device/cgastr.h"
 
-void Idle::action(){
-    while (true){
-        cpu.idle();
-    }
-}
+// extern CGA_Stream kout;
+
+// void Idle::action(){
+//     kout << "idle" << endl;
+//     while (true){
+//         cpu.idle();
+//     }
+// }
