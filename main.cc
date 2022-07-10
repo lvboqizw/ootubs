@@ -43,7 +43,7 @@ Idle idle(stack4 + STACK_SIZE);
 Guarded_Keyboard keyboard;
 Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
-Guarded_Semaphore guarded_semaphore(2);
+Guarded_Semaphore guarded_semaphore(1);
 
 // Guarded_Buzzer guarded_buzzer;
 Watch watch(1000);
@@ -102,6 +102,8 @@ int main()
 	// guarded_scheduler.schedule();
 	// scheduler.schedule();
 	kout << "return to main" << endl;
+	// guarded_scheduler.ready(idle);
+	// guarded_organizer.schedule();
 	while(1);
 	return 0;
 }

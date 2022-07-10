@@ -33,7 +33,7 @@ void Dispatcher::dispatch(Coroutine &next){
     // aktuellen Prozess zwischenspeichern
     Coroutine *temp = this -> life_pointer;
 
-    if(!this -> life_pointer) return;
+    // if(!this -> life_pointer) return;
 
     // Pointer neu setzen
     this -> life_pointer = &next;
