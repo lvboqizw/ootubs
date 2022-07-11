@@ -16,16 +16,12 @@
 #include "meeting/bellringer.h"
 #include "syscall/guarded_organizer.h"
 
-#include "device/cgastr.h"
-
  
 extern Plugbox plugbox;
 extern PIC pic;
 extern Guarded_Scheduler guarded_scheduler;
 extern Guarded_Organizer guarded_organizer;
 extern Bellringer bellringer;
-
-extern CGA_Stream kout;
 
 
 void Watch::windup() {

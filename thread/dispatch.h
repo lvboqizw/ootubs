@@ -15,13 +15,11 @@
 #ifndef __dispatch_include__
 #define __dispatch_include__
 
-/* Add your code here */ 
 #include "thread/coroutine.h"
 
 class Dispatcher {
 private:
 	Dispatcher(const Dispatcher &copy); // prevent copying
-/* Add your code here */ 
 	Coroutine *life_pointer;
 
 public:

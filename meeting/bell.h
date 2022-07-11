@@ -16,7 +16,6 @@
 #include "object/chain.h"
 
 class Bell: public Chain
-/* Add your code here */ 
 {
 private:
 	Bell(const Bell &copy); // prevent copying

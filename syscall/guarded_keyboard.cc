@@ -14,5 +14,5 @@
 
 Key Guarded_Keyboard::getkey() {
     Secure secure;
-    Keyboard::getkey();
+    return Keyboard::getkey();
 }

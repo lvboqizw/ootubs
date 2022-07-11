@@ -15,8 +15,6 @@
 #include "syscall/guarded_organizer.h"
 #include "meeting/bellringer.h"
 
-extern CGA_Stream kout;
-
 
 extern Guarded_Organizer guarded_organizer;
 extern Bellringer bellringer;

@@ -44,7 +44,6 @@
 
 class CGA_Screen {
 private:
-/* Add your code here */ 
 	unsigned char attrib;
 	char *pos;
 	

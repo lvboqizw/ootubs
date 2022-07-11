@@ -21,7 +21,6 @@ extern CGA_Stream kout;
 class Locker {
 private:
 	Locker(const Locker &copy); // prevent copying
-/* Add your code here */ 
 	bool lock;
 public:
 	Locker() : lock(false) {};

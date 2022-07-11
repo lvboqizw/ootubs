@@ -14,7 +14,6 @@
 #include "machine/cpu.h"
 #include "guard/guard.h"
 
-#include "device/cgastr.h"
 /* FUNCTIONS */
 
 extern "C" void guardian (unsigned int slot);
@@ -24,9 +23,6 @@ extern Plugbox plugbox;
 extern CPU cpu;
 extern Guard guard;
 
-//for debug
-extern CGA_Stream kout;
-//
 
 /* GUARDIAN: Low-level interrupt handling. We will extend this function at */
 /*           a later point in time.                                        */

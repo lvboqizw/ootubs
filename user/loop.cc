@@ -53,9 +53,7 @@ int wait = 1000;
     //Endlosschleife
     while(1) {
         buzzer.set(wait);
-        // kout <<"loop sleep" <<endl; 
         buzzer.sleep();
-        // kout <<"loop wake" <<endl;  
         guarded_semaphore.wait();
         kout.getpos(x, y);
         kout.setpos(0,19);

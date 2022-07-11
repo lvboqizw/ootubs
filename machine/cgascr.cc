@@ -13,7 +13,6 @@
 #include "machine/cgascr.h"
 #include "machine/io_port.h"
 
-/* Add your code here */ 
 
 // Calculate the address of the cursor
 char* CGA_Screen::get_addr(int x, int y) {
@@ -65,7 +64,7 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
     unsigned short curpos_x;
     unsigned short curpos_y;
     getpos(curpos_x, curpos_y);                                 //here I am right now
-    for (unsigned int i = 0;i<length;i++){
+    for (int i = 0;i<length;i++){
         if(text[i]=='\n'){
             curpos_x=0;
             ++curpos_y;

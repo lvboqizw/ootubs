@@ -7,7 +7,6 @@
 #include "device/cgastr.h"
 
 extern CPU cpu;
-extern CGA_Stream kout;
 
 
 class Idle : public Thread{
@@ -22,7 +21,6 @@ public:
 
 		while(1){
 			cpu.idle();
-
 		}
     }
 };

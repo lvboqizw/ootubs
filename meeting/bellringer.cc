@@ -11,16 +11,7 @@
 /*****************************************************************************/
 
 #include "bellringer.h"
-#include "device/cgastr.h"
 
-#include "machine/cpu.h"
-
-extern CGA_Stream kout;
-extern CPU cpu;
-
-#include "device/cgastr.h"
-
-extern CGA_Stream kout;
 
 void Bellringer::check() {//遍历BELL列表,查看是否到期，然后每个都调用tick
    
@@ -28,10 +19,7 @@ void Bellringer::check() {//遍历BELL列表,查看是否到期，然后每个�
 	Bell* del;	
 	while(temp){
 		temp->tick();
-		if(temp->run_down()){
-			// kout << "RING" << endl;
-			kout.flush();
-			//cpu.halt();			
+		if(temp->run_down()){		
 			temp->ring();
 			del = temp;
 			temp = (Bell*)temp->next;

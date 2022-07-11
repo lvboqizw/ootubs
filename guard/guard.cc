@@ -13,11 +13,9 @@
 /* Add your code here */ 
 #include "guard/guard.h"
 #include "machine/cpu.h"
-#include "device/cgastr.h"
 #include "guard/secure.h"
 
 extern CPU cpu;
-extern CGA_Stream kout;
 
 void Guard::leave() {
     while (true) {

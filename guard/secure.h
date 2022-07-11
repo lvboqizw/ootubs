@@ -16,7 +16,7 @@
 #define __Secure_include__
 
 #include "guard/guard.h"
-/* Add your code here */ 
+
 extern Guard guard;
 
 class Secure {

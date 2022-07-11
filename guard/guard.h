@@ -16,7 +16,6 @@
 #include "guard/gate.h"
 #include "object/queue.h"
 
-/* Add your code here */ 
 
 class Guard : public Locker {
 private:
@@ -26,7 +25,6 @@ private:
 	
 public:
 	Guard () {}
-/* Add your code here */ 
 	//Regular control flow leaves the critical section. Waiting epilohies can be processed
 	void leave();
 

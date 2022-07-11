@@ -20,7 +20,6 @@ extern Panic panic;
 class Plugbox {
 private:
 	Plugbox(const Plugbox &copy); // prevent copying
-/* Add your code here */ 
 
 	Gate* map[64];
 

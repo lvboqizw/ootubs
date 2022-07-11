@@ -16,14 +16,13 @@
 #include "machine/key.h"
 #include "meeting/semaphore.h"
 #include "syscall/guarded_semaphore.h"
- 
+
 class Keyboard : public Gate, public Keyboard_Controller
 /* Add your code here */ 
 //:public Gate, public Keyboard_Controller
 {
 private:
 	Keyboard(const Keyboard &copy); // prevent copying
-/* Add your code here */ 
     Key buffer[1024];
 	unsigned int length;
 
@@ -34,10 +33,9 @@ private:
 	Guarded_Semaphore semaphore;
 
 public:
-/* Add your code here */ 
 	Key key;
 	Key last_key;
- 
+
     Keyboard():semaphore(0){};
 	// PLUGIN: "Plugs in" the keyboard (driver). From now on, keypresses are handled.
 	void plugin();

@@ -16,7 +16,6 @@
 #include "guard/secure.h"
 
 class Guarded_Scheduler : public Scheduler
-/* Add your code here */ 
 {
 private:
 	Guarded_Scheduler(const Guarded_Scheduler &copy); // prevent copying

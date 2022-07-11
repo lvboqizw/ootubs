@@ -22,7 +22,6 @@ extern CGA_Stream kout;
 class Waitingroom;
 
 class Customer : public Entrant
-/* Add your code here */ 
 {
 private:
 	Customer (const Customer &copy); // prevent copying

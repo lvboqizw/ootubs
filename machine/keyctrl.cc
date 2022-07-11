@@ -12,7 +12,6 @@
 
 #include "machine/keyctrl.h"
 #include "machine/cgascr.h"
-#include "device/cgastr.h"
 #include "object/o_stream.h"
 #include "machine/key.h"
 #include "machine/pic.h"
@@ -301,11 +300,7 @@ void Keyboard_Controller::reboot()
 
 void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 {
-/* Add your code here */ 
-
-
 	 // wait, untill the last command was processed.
-	extern CGA_Stream kout;
 	int status;
 
 	bool forbiden = false;

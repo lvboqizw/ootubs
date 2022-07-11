@@ -13,7 +13,6 @@
 
 #include "object/chain.h"
 
-/* Add your code here */ 
 class Gate : public Chain
 {
 private:

@@ -13,7 +13,6 @@
 #ifndef __loop_include__
 #define __loop_include__
 
-/* Add your code here */ 
 
 #include "thread/entrant.h"
 #include "syscall/thread.h"
@@ -25,7 +24,6 @@ private:
 	int num = 0;
 
 public:
-/* Add your code here */ 
 	Loop(void *tos) : Thread(tos) {};
 
 	void action ();

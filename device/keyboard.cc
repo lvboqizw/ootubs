@@ -29,7 +29,6 @@ void Keyboard::plugin (){
 	plugbox.assign(Plugbox::keyboard, *this);
 	//interrupts für tastatur erlauben
 	pic.allow(PIC::keyboard);
-	// semaphore.wait();									// Wait for events
 }
 
 
@@ -45,7 +44,6 @@ bool Keyboard::prologue ()
 			this->reboot();
 		}else{
 			last_key = key;
-			kout << "autput from keyboard prologi last_key: " << last_key.ascii() << endl;
 			data = key.ascii();
 			return true;
 		}
@@ -56,12 +54,7 @@ bool Keyboard::prologue ()
 
 void Keyboard::epilogue ()
 {
-     if(tooken) {
-		tooken = false;
 		semaphore.Semaphore::signal();
-	 } else {
-	 	kout << "tooken false" << endl;
-	 }
 }
 
 Key Keyboard::getkey() {
