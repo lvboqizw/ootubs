@@ -12,8 +12,8 @@
 
 #include "user/appl.h"
 #include "device/cgastr.h"
-#include "machine/cgascr.h"
 #include "machine/cpu.h"
+#include "global.h"
 #include "guard/secure.h"
 #include "thread/scheduler.h"
 #include "thread/dispatch.h"
@@ -25,12 +25,12 @@
 #include "syscall/guarded_keyboard.h"
 
 /* GLOBAL VARIABLES */
-extern CGA_Screen scr;
 extern CGA_Stream kout;
 extern CPU cpu;
 extern Guarded_Scheduler guarded_scheduler;
 extern Guarded_Organizer guarded_organizer;
-extern Guarded_Semaphore guarded_semaphore;
+extern Guarded_Semaphore kout_semaphore;
+extern Guarded_Semaphore process_sem;
 extern Guarded_Keyboard guarded_keyboard;
 extern Scheduler scheduler;
 
@@ -74,22 +74,47 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
+    // int wait = 500;
+    // int count = 0;
+    // Guarded_Buzzer buzzer;
+    // unsigned short x, y;
+
+    // while (1){
+    //     buzzer.set(wait);
+    //     buzzer.sleep(); 
+    //     kout_semaphore.wait();
+    //     kout.getpos(x, y);
+    //     kout.setpos(0,18);
+    //     kout << "Appl: Doing stuff(" << count++ << ")";
+    //     kout.flush();
+    //     kout.setpos(x,y);
+    //     kout_semaphore.signal();
+    // }
+    //------------------------------------------------//
+
+    //---------------------TASK7----------------------//
     int wait = 500;
     int count = 0;
     Guarded_Buzzer buzzer;
     unsigned short x, y;
+    kout.clear();
 
     while (1){
         buzzer.set(wait);
         buzzer.sleep(); 
-        guarded_semaphore.wait();
+        kout_semaphore.wait();
         kout.getpos(x, y);
         kout.setpos(0,18);
         kout << "Appl: Doing stuff(" << count++ << ")";
         kout.flush();
         kout.setpos(x,y);
-        guarded_semaphore.signal();
+        kout_semaphore.signal();
+        if (count == 25) {
+            kout << "about to signal" << endl;
+            process_sem.signal();
+            // guarded_organizer.resume();
+            guarded_organizer.exit();
+        }
     }
-    
     //------------------------------------------------//
 }

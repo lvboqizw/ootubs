@@ -29,7 +29,7 @@ extern CGA_Stream kout;
 extern Secure secure;
 extern Scheduler scheduler;
 extern Guarded_Scheduler guarded_scheduler;
-extern Guarded_Semaphore guarded_semaphore;
+extern Guarded_Semaphore kout_semaphore;
 
  
 void Loop::action()
@@ -54,13 +54,13 @@ int wait = 1000;
     while(1) {
         buzzer.set(wait);
         buzzer.sleep();
-        guarded_semaphore.wait();
+        kout_semaphore.wait();
         kout.getpos(x, y);
         kout.setpos(0,19);
         kout << "Loop: Doing stuff("<< count++ << ")";
         kout.flush();
         kout.setpos(x, y);
-        guarded_semaphore.signal();
+        kout_semaphore.signal();
     }
 //-------------------------------------------------------//
 }

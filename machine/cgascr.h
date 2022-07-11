@@ -99,6 +99,8 @@ public:
 	 * @param blink whether the screen blink or not
 	 */
 	void setcolor(color frontcolor, color backcolor);
+
+	void changOneLineColor(unsigned short y, unsigned char new_attrib);
 };
 
 #endif

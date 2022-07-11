@@ -20,7 +20,6 @@ private:
 	Application (const Application &copy); // prevent copying
 
 public:
-
 	Application(void *tos) : Thread(tos) {};
 
 	void action ();

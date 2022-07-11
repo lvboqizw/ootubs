@@ -85,7 +85,7 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
 }
 
 void CGA_Screen::scroll() {
-    char* pos = (char*) 0xB80A0;            //start in the second line
+    char* pos = (char*) 0xB80A0;            //start from the second line
     for(unsigned int i=0;i<24;i++){         //cycle through lines
         for(unsigned int j=0;j<80;j++){     //cycle thorugh columns
             show(j,i,*pos,*(pos+1));
@@ -112,5 +112,11 @@ void CGA_Screen::clear() {
 
 void CGA_Screen::setcolor(color frontcolor, color backcolor){
     this->attrib = (((backcolor << 4) & 0xf0) | (frontcolor & 0xf));
+}
 
+void CGA_Screen::changOneLineColor(unsigned short y, unsigned char new_attrib) {
+    for(int i = 0; i < 40; i++) {
+        char* tmpad = get_addr(i, y);
+        *(tmpad + 1) = new_attrib;
+    }
 }

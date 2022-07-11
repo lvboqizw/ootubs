@@ -7,7 +7,8 @@
 #include "syscall/thread.h"
 
 extern Guarded_Keyboard guarded_keyboard;
-extern Guarded_Semaphore guarded_semaphore;
+extern Guarded_Semaphore kout_semaphore;
+extern Guarded_Semaphore process_sem;
 
 class Write : public Thread{
 private:

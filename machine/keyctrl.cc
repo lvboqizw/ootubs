@@ -360,11 +360,6 @@ void Keyboard_Controller::set_repeat_rate (int speed, int delay)
 		pic.allow(PIC::keyboard);	
 
 	// pic.allow(PIC::keyboard);	
-
-
-	
-/* Add your code here */ 
- 
 }
 
 // SET_LED: sets or clears the specified LED

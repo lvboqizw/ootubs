@@ -1,5 +1,3 @@
-/* Add your code here */ 
-
 #include "device/cgastr.h"
 #include "device/keyboard.h"
 #include "device/panic.h"
@@ -24,17 +22,14 @@
 #include "user/idle.h"
 #include "user/write.h"
 #include "user/system.h"
+#include "global.h"
 
 
-#define STACK_SIZE 8192
-
-unsigned char stack1[STACK_SIZE];
-unsigned char stack2[STACK_SIZE];
-unsigned char stack3[STACK_SIZE];
-unsigned char stack4[STACK_SIZE];
-unsigned char stack5[STACK_SIZE];
-
-int stack_size = STACK_SIZE;
+unsigned char stack_idle[STACK_SIZE];
+unsigned char stack_sys[STACK_SIZE];
+unsigned char stack_appl[STACK_SIZE];
+unsigned char stack_loop[STACK_SIZE];
+unsigned char stack_write[STACK_SIZE];
 
 CPU cpu;
 CGA_Screen scr;
@@ -44,11 +39,12 @@ Panic panic;
 CGA_Stream kout;
 Guard guard;
 Bellringer bellringer;
-Idle idle(stack5 + STACK_SIZE);
+Idle idle(stack_idle + STACK_SIZE);
 Guarded_Keyboard guarded_keyboard;
 Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
-Guarded_Semaphore guarded_semaphore(1);
+Guarded_Semaphore kout_semaphore(1);
+Guarded_Semaphore process_sem(0);
 
 
 // Guarded_Buzzer guarded_buzzer;
@@ -66,13 +62,13 @@ Watch watch(1000);
 
 // void task4test() {
 // 	Secure secure;
-// 	Application appl(stack1+STACK_SIZE);			// the address start at a high address
+// 	Application appl(stack_appl+STACK_SIZE);			// the address start at a high address
 // 	scheduler.ready(appl);
 // 	scheduler.schedule();								
 // }
 
 // void task5test() {
-// 	Application appl(stack1+STACK_SIZE);			// the address start at a high address
+// 	Application appl(stack_appl+STACK_SIZE);			// the address start at a high address
 // 	guarded_scheduler.ready(appl);
 // 	guard.enter();									//
 // 	watch.windup();								// resume (located in watch epilogie should run after the guard Because after the PIT been set, )
@@ -80,9 +76,9 @@ Watch watch(1000);
 // }
 
 // void task6test() {
-// 	Application appl(stack1+STACK_SIZE);
-// 	Loop loop(stack2+STACK_SIZE);
-// 	Write write(stack3 + STACK_SIZE);
+// 	Application appl(stack_appl+STACK_SIZE);
+// 	Loop loop(stack_loop+STACK_SIZE);
+// 	Write write(stack_write + STACK_SIZE);
 
 // 	guarded_organizer.ready(appl);
 // 	guarded_organizer.ready(loop);
@@ -93,8 +89,7 @@ Watch watch(1000);
 // }
 
 void task7test() {
-	System sys(stack4 + STACK_SIZE);
-
+	System sys(stack_sys + STACK_SIZE);
 	guarded_organizer.ready(sys);
 	guard.enter();
 	watch.windup();
