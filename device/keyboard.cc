@@ -64,7 +64,6 @@ void Keyboard::epilogue ()
 
 Key Keyboard::getkey() {
 	semaphore.Semaphore::wait();
-	// kout << "keyboard after wait" << endl;	
 	tooken = true;
 	return this->last_key;
 }
