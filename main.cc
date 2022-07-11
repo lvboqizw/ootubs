@@ -25,7 +25,7 @@
 #include "user/write.h"
 
 
-#define STACK_SIZE 512
+#define STACK_SIZE 8192
 
 unsigned char stack1[STACK_SIZE];
 unsigned char stack2[STACK_SIZE];
@@ -97,18 +97,6 @@ int main()
 	// task5test();
 	task6test();   
 	
-	// guarded_scheduler.ready(appl);
-	// scheduler.ready(appl);
-	
-	// watch.windup(); 
-	// guard.enter();				 
-	// watch.windup();               
-	// for(int i=0;i < 1000000;i++);
-	// guarded_scheduler.schedule();
-	// scheduler.schedule();
-
-	// guarded_scheduler.ready(idle);
-	// guarded_organizer.schedule();
 	while(1);
 	return 0;
 }

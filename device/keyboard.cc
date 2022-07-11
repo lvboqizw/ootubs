@@ -64,7 +64,7 @@ void Keyboard::epilogue ()
 }
 
 Key Keyboard::getkey() {
-	semaphore.Semaphore::wait();	
+	semaphore.Semaphore::wait();
 	tooken = true;
 	return this->last_key;
 }
