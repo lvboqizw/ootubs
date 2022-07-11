@@ -17,8 +17,8 @@ extern CGA_Stream kout;
 void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
     waitingroom.enqueue(&customer);         //put the customer in the waitingroom
     customer.waiting_in(&waitingroom);
-    //-----------------------------------------
-        kout<< "organize block the customer: " << &customer << endl;
+    // //-----------------------------------------
+    //     kout<< "organize block the customer: " << &customer << endl;
 
     if (&customer == active()) {             //if the customer now is running
         exit();                             //exit() performs a coroutine swicth from old to the new life pointer
@@ -28,13 +28,13 @@ void Organizer::block(Customer& customer, Waitingroom& waitingroom) {
 }
 
 void Organizer::wakeup(Customer& customer) {
-    //-----------------------------------------
-        kout<< "organize wake up the customer: " << &customer << endl;
+    // //-----------------------------------------
+    //     kout<< "organize wake up the customer: " << &customer << endl;
     Waitingroom* w = customer.waiting_in();
     w->remove(&customer);
     customer.waiting_in(0);
-    //-----------------------------------------
-        kout<< "organize has woke up the customer, and put it in the readylist: " << &customer << endl;
+    // //-----------------------------------------
+    //     kout<< "organize has woke up the customer, and put it in the readylist: " << &customer << endl;
     Scheduler::ready(customer);
 }
 

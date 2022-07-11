@@ -74,28 +74,21 @@ void Application::action()
     //------------------------------------------------//
 
     //---------------------TASK6----------------------//
-    // int wait = 500;
-    // int count = 0;
-    // Guarded_Buzzer buzzer;
-    // unsigned short x, y;
+    int wait = 500;
+    int count = 0;
+    Guarded_Buzzer buzzer;
+    unsigned short x, y;
 
-    // while (1){
-    //     buzzer.set(wait);
-    //     // kout <<"appl sleep" <<endl;
-    //     buzzer.sleep();
-    //     // kout <<"appl wake" <<endl;  
-    //     guarded_semaphore.wait();
-    //     kout.getpos(x, y);
-    //     kout.setpos(0,18);
-    //     kout << "Appl: Doing stuff(" << count++ << ")";
-    //     kout.flush();
-    //     kout.setpos(x,y);
-    //     guarded_semaphore.signal();
-    for(;;){
-    Key key = guarded_keyboard.getkey();
-    guarded_semaphore.p();
-    kout<<key<<endl;
-    guarded_semaphore.v();
+    while (1){
+        buzzer.set(wait);
+        buzzer.sleep(); 
+        guarded_semaphore.wait();
+        kout.getpos(x, y);
+        kout.setpos(0,18);
+        kout << "Appl: Doing stuff(" << count++ << ")";
+        kout.flush();
+        kout.setpos(x,y);
+        guarded_semaphore.signal();
     }
     
     //------------------------------------------------//
