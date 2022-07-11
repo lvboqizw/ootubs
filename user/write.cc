@@ -9,9 +9,9 @@ void Write::action() {
     while(1){
         Key key =  guarded_keyboard.getkey();
         guarded_semaphore.wait();
-        kout.setpos(5, 5);
-        kout << key ;
-        kout.flush();
+        // kout.setpos(5, 5);
+        kout <<"output from write action: "<<  key.ascii() << endl;
+        // kout.flush();
         guarded_semaphore.signal();
     }
 }

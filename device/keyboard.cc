@@ -45,6 +45,8 @@ bool Keyboard::prologue ()
 			this->reboot();
 		}else{
 			last_key = key;
+			kout << "autput from keyboard prologi last_key: " << last_key.ascii() << endl;
+			data = key.ascii();
 			return true;
 		}
 	}
@@ -54,17 +56,17 @@ bool Keyboard::prologue ()
 
 void Keyboard::epilogue ()
 {
-    if(tooken) {
+    // if(tooken) {
 		tooken = false;
 		semaphore.Semaphore::signal();
-	} else {
-		kout << "tooken false" << endl;
-	}
+	// } else {
+	// 	kout << "tooken false" << endl;
+	// }
 }
 
 Key Keyboard::getkey() {
 	semaphore.Semaphore::wait();
-	tooken = true;
+	// tooken = true;
 	return this->last_key;
 }
 

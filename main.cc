@@ -80,8 +80,8 @@ void task6test() {
 	Loop loop(stack2+STACK_SIZE);
 	Write write(stack3 + STACK_SIZE);
 
-	// guarded_organizer.ready(appl);
-	// guarded_organizer.ready(loop);
+	guarded_organizer.ready(appl);
+	guarded_organizer.ready(loop);
 	guarded_organizer.ready(write);
 	guard.enter();
 	watch.windup();
