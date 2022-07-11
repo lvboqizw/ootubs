@@ -23,6 +23,7 @@
 #include "user/loop.h"
 #include "user/idle.h"
 #include "user/write.h"
+#include "user/system.h"
 
 
 #define STACK_SIZE 8192
@@ -31,6 +32,9 @@ unsigned char stack1[STACK_SIZE];
 unsigned char stack2[STACK_SIZE];
 unsigned char stack3[STACK_SIZE];
 unsigned char stack4[STACK_SIZE];
+unsigned char stack5[STACK_SIZE];
+
+int stack_size = STACK_SIZE;
 
 CPU cpu;
 CGA_Screen scr;
@@ -40,7 +44,7 @@ Panic panic;
 CGA_Stream kout;
 Guard guard;
 Bellringer bellringer;
-Idle idle(stack4 + STACK_SIZE);
+Idle idle(stack5 + STACK_SIZE);
 Guarded_Keyboard guarded_keyboard;
 Guarded_Scheduler guarded_scheduler;
 Guarded_Organizer guarded_organizer;
@@ -75,14 +79,23 @@ Watch watch(1000);
 // 	guarded_scheduler.schedule();
 // }
 
-void task6test() {
-	Application appl(stack1+STACK_SIZE);
-	Loop loop(stack2+STACK_SIZE);
-	Write write(stack3 + STACK_SIZE);
+// void task6test() {
+// 	Application appl(stack1+STACK_SIZE);
+// 	Loop loop(stack2+STACK_SIZE);
+// 	Write write(stack3 + STACK_SIZE);
 
-	guarded_organizer.ready(appl);
-	guarded_organizer.ready(loop);
-	guarded_organizer.ready(write);
+// 	guarded_organizer.ready(appl);
+// 	guarded_organizer.ready(loop);
+// 	guarded_organizer.ready(write);
+// 	guard.enter();
+// 	watch.windup();
+// 	guarded_organizer.schedule();
+// }
+
+void task7test() {
+	System sys(stack4 + STACK_SIZE);
+
+	guarded_organizer.ready(sys);
 	guard.enter();
 	watch.windup();
 	guarded_organizer.schedule();
@@ -95,8 +108,9 @@ int main()
 	// task3test();
 	// task4test();
 	// task5test();
-	task6test();   
+	// task6test();  
+	task7test();
 	
-	while(1);
+	// while(1);
 	return 0;
 }

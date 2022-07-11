@@ -16,6 +16,6 @@
 CGA_Stream::CGA_Stream() {}
 
 void CGA_Stream::flush() {
-	print(buffer, used_capacity, WHITE);
+	print(buffer, used_capacity, this->attrib);
 	used_capacity = 0;
 }

@@ -36,10 +36,10 @@ extern Scheduler scheduler;
 
 
 
-#define STACK_SIZE 512
+#define STACK_SIZE 8192
 
-unsigned char stack5[STACK_SIZE];
-unsigned char stack6[STACK_SIZE];
+// unsigned char stack5[STACK_SIZE];
+// unsigned char stack6[STACK_SIZE];
 
 void Application::action()
 {

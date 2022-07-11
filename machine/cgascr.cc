@@ -69,7 +69,7 @@ void CGA_Screen::print(char* text, int length, unsigned char attrib) {
             curpos_x=0;
             ++curpos_y;
         } else {
-            show(curpos_x, curpos_y, text[i], this->attrib);   //each char for it's own
+            show(curpos_x, curpos_y, text[i], attrib);   //each char for it's own
             ++curpos_x;
         }
         if(curpos_x>=79){                                       //don't go over the edge
@@ -99,7 +99,6 @@ void CGA_Screen::scroll() {
     setpos(0,24);
 }
 
-
 void CGA_Screen::clear() {
     char* CGA = (char*) 0xb8000;
     char att = this->attrib;
@@ -109,4 +108,9 @@ void CGA_Screen::clear() {
         CGA[i]=att;                 //set attribute
     }
     setpos(0,0);                    //start from the beginning
+}
+
+void CGA_Screen::setcolor(color frontcolor, color backcolor){
+    this->attrib = (((backcolor << 4) & 0xf0) | (frontcolor & 0xf));
+
 }

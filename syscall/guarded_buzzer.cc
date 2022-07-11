@@ -13,7 +13,7 @@
 
 #include "syscall/guarded_buzzer.h"
 #include "guard/secure.h"
-/* Add your code here */ 
+
 void Guarded_Buzzer::set(int ms){
     Secure secure;
     this->Buzzer::set(ms);
