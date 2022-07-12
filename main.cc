@@ -105,21 +105,8 @@ int main()
 	// task4test();
 	// task5test();
 	// task6test();  
-	// task7test();
-	Guarded_Buzzer buzzer;
-	buzzer.wait(3000);
-	Speaker speaker(1);
-	speaker.interval(440);
-	kout << "before speak" << endl;
-	speaker.speak();
-	kout << "speaking" << endl;
-	while(1);
-	speaker.stop();
-	kout << "after speaking" << endl;
+	task7test();
 
-
-
-	
 	// while(1);
 	return 0;
 }

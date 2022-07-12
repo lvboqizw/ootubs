@@ -14,8 +14,6 @@ void System::select() {
             kout << "press 'w', 's' and 'enter' to select: "<< endl;
             kout << "   Application" << endl;
             kout << "   Speaker" << endl;
-            kout << "   Loop" << endl;
-            kout << "   Application 4" << endl;
 
             kout.getpos(x, applnum);                            // get the counts of the applications
             kout.setpos(0, 1);                                  // reset the cursor at the beginning

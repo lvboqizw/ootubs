@@ -98,8 +98,10 @@ void Application::action()
     Guarded_Buzzer buzzer;
     unsigned short x, y;
     kout.clear();
-
+    kout << "this is for the task 6, add this is also used to show the thread selet of the task7" << endl;
+    kout << "the process will auto exit after the counter count to the 25(will only show 24)" << endl;
     while (1){
+        
         buzzer.set(wait);
         buzzer.sleep(); 
         kout_semaphore.wait();
@@ -110,9 +112,7 @@ void Application::action()
         kout.setpos(x,y);
         kout_semaphore.signal();
         if (count == 25) {
-            kout << "about to signal" << endl;
             process_sem.signal();
-            // guarded_organizer.resume();
             guarded_organizer.exit();
         }
     }

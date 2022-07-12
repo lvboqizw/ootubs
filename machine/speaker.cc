@@ -3,8 +3,10 @@
 void Speaker::interval(int fq) {
     this -> fq = fq;
 
-    // int div = 1193180 / fq;
-    int div = fq;
+    int div = 1193180 / fq;
+    unsigned short steps = (unsigned short) div;
+
+
 
     /** Set up the control register:
      * 6-7 -> 10 : Counter 2 for speaker signal
@@ -15,8 +17,8 @@ void Speaker::interval(int fq) {
     */
     this -> crtl_register.outb(0xb6);
 
-    this -> counter.outb((char)div);
-    this -> counter.outb((char)(div >> 8)); 
+    this -> counter.outb((char)steps);
+    this -> counter.outb((char)(steps >> 8)); 
 }
 
 void Speaker::speak() {

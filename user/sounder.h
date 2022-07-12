@@ -3,6 +3,7 @@
 
 #include "device/bee.h"
 #include "syscall/thread.h"
+#include "syscall/guarded_buzzer.h"
 #include "syscall/guarded_keyboard.h"
 #include "syscall/guarded_semaphore.h"
 #include "syscall/guarded_organizer.h"
@@ -17,11 +18,12 @@ private:
     Sounder (const Sounder &copy); 
     Bee bee;
     Key key;
+    Guarded_Buzzer buzzer;
 
     enum piano {
-        A = 220, //000,
-        B_ = 233, //082,
-        B = 246, //942,
+        A = 440, //000,
+        B_ = 466, //164,
+        B = 493, //833,
         C = 261, //626,
         C_ = 277, //183,
         D = 293, //665,
