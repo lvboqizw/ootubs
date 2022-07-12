@@ -6,6 +6,7 @@
 #include "syscall/guarded_organizer.h"
 #include "user/appl.h"
 #include "user/loop.h"
+#include "user/sounder.h"
 
 
 extern CGA_Stream kout;
@@ -24,6 +25,7 @@ private:
     unsigned char ORIGIN_COLOR = (((BLACK << 4) & 0xf0) | (WHITE & 0xf));
 
     unsigned char stack1[STACK_SIZE];
+    unsigned char stack2[STACK_SIZE];
     bool from_other = true;
 
     void select();

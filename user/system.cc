@@ -13,8 +13,8 @@ void System::select() {
             kout.clear();
             kout << "press 'w', 's' and 'enter' to select: "<< endl;
             kout << "   Application" << endl;
+            kout << "   Speaker" << endl;
             kout << "   Loop" << endl;
-            kout << "   Application 3" << endl;
             kout << "   Application 4" << endl;
 
             kout.getpos(x, applnum);                            // get the counts of the applications
@@ -60,7 +60,15 @@ void System::select() {
                     from_other = true;
                 }
                 break;
-            
+            case  2:
+                {
+                    Sounder sounder(stack2 + STACK_SIZE);
+                    guarded_organizer.ready(sounder);
+                    process_sem.wait();
+                    from_other = true;
+                }
+                break;
+                
             default:
                 from_other = false;
                 break;

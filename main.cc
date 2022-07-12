@@ -7,6 +7,7 @@
 #include "machine/key.h"
 #include "machine/cpu.h"
 #include "machine/plugbox.h"
+#include "machine/speaker.h"
 #include "machine/pic.h"
 #include "meeting/bellringer.h"
 #include "object/o_stream.h"
@@ -104,7 +105,20 @@ int main()
 	// task4test();
 	// task5test();
 	// task6test();  
-	task7test();
+	// task7test();
+	Guarded_Buzzer buzzer;
+	buzzer.wait(3000);
+	Speaker speaker(1);
+	speaker.interval(440);
+	kout << "before speak" << endl;
+	speaker.speak();
+	kout << "speaking" << endl;
+	while(1);
+	speaker.stop();
+	kout << "after speaking" << endl;
+
+
+
 	
 	// while(1);
 	return 0;
